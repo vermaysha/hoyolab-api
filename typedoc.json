@@ -2,8 +2,9 @@
   "entryPoints": ["src/index.ts"],
   "out": "docs",
   "excludePrivate": true,
-  "excludeProtected": true,
-  "excludeExternals": true,
-  "includeVersion": false,
-  "plugin": []
+  "excludeProtected": false,
+  "excludeExternals": false,
+  "includeVersion": true,
+  "githubPages": true,
+  "searchInComments": true
 }
