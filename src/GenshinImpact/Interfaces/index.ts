@@ -15,3 +15,4 @@ export type {
   SpiralAbyssResponse,
   SpiralAbyssRank,
 } from './SpiralAbyssResponse'
+export type { RedeemResponse } from './RedeemResponse'

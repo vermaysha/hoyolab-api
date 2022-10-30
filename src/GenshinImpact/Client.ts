@@ -13,6 +13,7 @@ import {
   DailyInfoResponse,
   DiaryResponse,
   SpiralAbyssResponse,
+  RedeemResponse,
 } from './Interfaces'
 
 export class Client {
@@ -304,5 +305,30 @@ export class Client {
     }
 
     return response.data
+  }
+
+  /**
+   * Redeem code
+   *
+   * @param code - string
+   * @returns Promise<RedeemResponse>
+   */
+  public async redeem(code: string): Promise<RedeemResponse> {
+    const response = await this.http.get(
+      'https://sg-hk4e-api.hoyolab.com/common/apicdkey/api/webExchangeCdkey',
+      {
+        cookie: this.cookie.getCookie(),
+        userAgent: this.userAgent,
+        params: {
+          uid: this.uid,
+          region: getRegionByUid(this.uid),
+          game_biz: 'hk4e_global',
+          cdkey: code,
+          lang: 'en',
+        },
+      },
+    )
+
+    return response
   }
 }
