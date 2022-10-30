@@ -1,0 +1,39 @@
+{
+  "name": "@vermaysha/hoyolab-api",
+  "version": "1.0.0",
+  "description": "Unonfficial Hoyolab API Wrapper",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vermaysha/hoyolab-api.git"
+  },
+  "keywords": [
+    "hoyolab",
+    "hoyolab-api",
+    "genshin",
+    "genshin-api",
+    "honkai",
+    "honkai-api"
+  ],
+  "author": {
+    "email": "vermaysha@gmail.com",
+    "url": "https://vermaysha.com",
+    "name": "Ashary Vermaysha"
+  },
+  "license": "LGPL-2.1-only",
+  "bugs": {
+    "url": "https://github.com/vermaysha/hoyolab-api/issues",
+    "email": "vermaysha@gmail.com"
+  },
+  "homepage": "https://github.com/vermaysha/hoyolab-api#readme",
+  "engines": {
+    "node": "^16.17.1"
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}
