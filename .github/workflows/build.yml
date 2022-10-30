@@ -30,4 +30,9 @@ jobs:
         run: npm run format
 
       - name: Build
-        run: npm run build:tsc
+        run: npm run build
+
+      - name: Deploy Documentation
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: docs # The folder the action should deploy.
