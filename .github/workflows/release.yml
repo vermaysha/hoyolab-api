@@ -39,6 +39,13 @@ jobs:
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
+      # Commit changes
+      - name: Commit CHANGELOG.md and package.json changes and create tag
+        run: |
+          git add "package.json"
+          git commit -m "chore: release ${{ env.NEW_VERSION }}"
+          git tag ${{ env.NEW_VERSION }}
+
       # Publish version to public repository
       - name: Publish
         run: npm publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
