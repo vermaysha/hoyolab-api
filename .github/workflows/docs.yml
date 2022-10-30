@@ -1,4 +1,4 @@
-name: Publish static content to Pages
+name: Publish Docs
 
 on:
   push:
