@@ -9,6 +9,7 @@
     "build:docs": "typedoc",
     "build": "npm run build:tsc && npm run build:docs",
     "prepare": "husky install",
+    "publish": "npm publish --access public",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --ignore-path .gitignore --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint ./src --fix --ext .js,.ts,.jsx,.tsx",
