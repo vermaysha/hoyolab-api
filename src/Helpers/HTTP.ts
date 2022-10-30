@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios'
 import md5 from 'md5'
 
@@ -12,7 +13,7 @@ type Options = {
 interface Response {
   retcode: number
   message: string
-  data?: object
+  data: any
 }
 
 /**
@@ -79,14 +80,17 @@ export class HTTP {
       options.withDs ?? false,
     )
 
-    const { data } = await axios(url, {
-      method,
-      data: body,
-      headers,
-      params,
-    })
-
-    return data
+    try {
+      const { data } = await axios(url, {
+        method,
+        data: body,
+        headers,
+        params,
+      })
+      return data
+    } catch (error) {
+      throw new Error(error as any)
+    }
   }
 
   /**
