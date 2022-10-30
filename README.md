@@ -1,6 +1,6 @@
-# Genshin API - TypeScript/JavaScript Genshin Impact API
+# HoYoLab API - TypeScript/JavaScript HoYoLab API
 
-Its unofficial Genshin Impact API Wrapper for getting some in-game data.
+Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.
 
 ## Install
 
