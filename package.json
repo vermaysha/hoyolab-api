@@ -28,7 +28,7 @@
     "url": "https://vermaysha.com",
     "name": "Ashary Vermaysha"
   },
-  "license": "LGPL-2.1-only",
+  "license": "LGPL-2.1",
   "bugs": {
     "url": "https://github.com/vermaysha/hoyolab-api/issues",
     "email": "vermaysha@gmail.com"
@@ -54,6 +54,7 @@
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
   }
 }
