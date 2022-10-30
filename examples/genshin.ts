@@ -20,4 +20,8 @@ const client = new GenshinImpact({
 
   const diary = await client.getDiary()
   console.log(diary)
+
+  const redeem = await client.redeem('GENSHINGIFT')
+
+  console.log(redeem)
 })()
