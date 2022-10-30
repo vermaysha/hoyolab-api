@@ -48,7 +48,7 @@ jobs:
           echo "NEW_VERSION=$(npm --no-git-tag-version --preid=beta version $RELEASE_TYPE
           echo "RELEASE_TAG=beta" >> $GITHUB_ENV
         env:
-          RELEASE_TYPE: ${{ github.event.inputs.release-type }
+          RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
       # Commit changes
       - name: Commit package.json changes and create tag
