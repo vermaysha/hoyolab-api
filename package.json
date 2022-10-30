@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --ignore-path .gitignore --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint ./src --fix --ext .js,.ts,.jsx,.tsx",
@@ -39,6 +40,10 @@
   "files": [
     "dist/**/*"
   ],
+  "lint-staged": {
+    "*.{ts,js}": "npm run lint",
+    "*.{ts,js,json}": "npm run format"
+  },
   "devDependencies": {
     "@types/eslint": "^8.4.9",
     "@types/node": "^14.18.33",
@@ -47,6 +52,8 @@
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"
   }
 }
