@@ -37,9 +37,6 @@
     "email": "vermaysha@gmail.com"
   },
   "homepage": "https://github.com/vermaysha/hoyolab-api#readme",
-  "engines": {
-    "node": "^16.17.1"
-  },
   "files": [
     "dist/**/*"
   ],
