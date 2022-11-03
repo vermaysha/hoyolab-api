@@ -1,18 +1,32 @@
 export class Cookie {
   private cookie: string
-  public readonly ltoken: string
-  public readonly ltuid: number
-  public readonly cookie_token: string
-  public readonly account_id: string
-  public readonly lang: string | null
+  public ltoken: string | null
+  public ltuid: string | null
+  public cookie_token: string | null
+  public account_id: string | null
+  public lang: string | null
 
   constructor(cookie: string) {
     this.cookie = cookie
-    this.ltuid = Number.parseInt(this.getValue('ltuid') ?? '0')
-    this.ltoken = this.getValue('ltoken') ?? ''
-    this.cookie_token = this.getValue('cookie_token') ?? ''
-    this.account_id = this.getValue('account_id') ?? ''
-    this.lang = this.getValue('mi18nLang', false)
+    this.ltuid = this.getValue('ltuid')
+    this.ltoken = this.getValue('ltoken')
+    this.cookie_token = this.getValue('cookie_token')
+    this.account_id = this.getValue('account_id')
+    this.lang = this.getValue('mi18nLang')
+  }
+
+  /**
+   * Check cookie
+   *
+   * @returns boolean
+   */
+  public isValid(): boolean {
+    return (
+      this.ltuid !== null &&
+      this.ltoken !== null &&
+      this.account_id !== null &&
+      this.cookie_token !== null
+    )
   }
 
   /**
@@ -21,6 +35,10 @@ export class Cookie {
    * @returns string
    */
   public getCookie(): string {
+    if (this.isValid() === false) {
+      throw new Error(`Cookie not valid`)
+    }
+
     return (
       `ltoken=${this.ltoken}; ltuid=${this.ltuid}; cookie_token=${this.cookie_token}; account_id=${this.account_id}` +
       (this.lang != null ? `; mi18nLang=${this.lang}` : ``)
@@ -40,17 +58,11 @@ export class Cookie {
    * Get cookie value
    *
    * @param key string
-   * @param required boolean
    * @returns string
    */
-  private getValue(key: string, required?: boolean): string | null {
-    required = required == null ? true : required
+  private getValue(key: string): string | null {
     const regex = new RegExp(`${key}=([^;]+)`, 'im')
     const cookies = this.cookie.match(regex)
-
-    if (required && cookies == null) {
-      throw new Error(`Cookie: ${key} not exist, please retry ..`)
-    }
 
     return cookies ? cookies[1] : null
   }
