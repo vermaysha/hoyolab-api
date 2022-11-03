@@ -1,6 +1,10 @@
 import { Cookie } from '../Cookie'
 import { HTTP } from '../Helpers'
-import { HoyolabOptions, RecordCardResponse } from './Interfaces'
+import {
+  GameListResponse,
+  HoyolabOptions,
+  RecordCardResponse,
+} from './Interfaces'
 
 export class Client {
   private http: HTTP
@@ -33,6 +37,34 @@ export class Client {
 
     if (response.retcode != 0) {
       throw new Error(`Failed to retrive record: ${response.message}`)
+    }
+
+    return response.data
+  }
+
+  /**
+   *
+   * @param games string - gi | hi3
+   * @returns
+   */
+  public async getGames(games?: 'gi' | 'hi3'): Promise<GameListResponse> {
+    const gameBiz =
+      games == 'hi3' ? 'bh3_global' : games == 'gi' ? 'hk4e_global' : ''
+
+    const response = await this.http.get(
+      'https://api-os-takumi.hoyoverse.com/binding/api/getUserGameRolesByCookie',
+      {
+        cookie: this.cookie.getCookie(),
+        params: {
+          game_biz: gameBiz,
+        },
+        userAgent: this.userAgent,
+        withDs: false,
+      },
+    )
+
+    if (response.retcode != 0) {
+      throw new Error(`Failed to retrive game list: ${response.message}`)
     }
 
     return response.data
