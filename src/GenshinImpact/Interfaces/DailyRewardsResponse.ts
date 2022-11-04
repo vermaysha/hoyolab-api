@@ -14,7 +14,7 @@ export interface DailyRewardResponse {
 export interface DailyClaimResponse {
   status: string
   code: number
-  rewards: DailyRewardResponse | null
+  reward: DailyRewardResponse | null
 }
 
 export interface DailyInfoResponse {

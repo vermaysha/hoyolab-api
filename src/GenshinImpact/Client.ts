@@ -222,30 +222,33 @@ export class Client {
         },
       },
     )
+    const info = await this.getDailyInfo()
+    const today = info.today.split('-')[2]
+    const reward = await this.getDailyReward(parseInt(today || '1'))
 
     if (response.retcode === -5003) {
       return {
         status: "Traveller, you've already checked in today",
         code: -5003,
-        rewards: null,
+        reward,
       }
     }
 
-    if (response.data.code === 'ok' && response.retcode === 0) {
-      const info = await this.getDailyInfo()
-      const today = info.today.split('-')[2]
-      const reward = await this.getDailyReward(parseInt(today || '1'))
+    if (
+      String(response.data.code).toLocaleLowerCase() === 'ok' &&
+      response.retcode === 0
+    ) {
       return {
-        status: 'OK',
+        status: response.message,
         code: 0,
-        rewards: reward,
+        reward,
       }
     }
 
     return {
-      status: 'error',
+      status: response.message,
       code: response.retcode,
-      rewards: null,
+      reward: null,
     }
   }
 
