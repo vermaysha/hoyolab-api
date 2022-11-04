@@ -22,6 +22,8 @@ const client = new GenshinImpact({
   console.log(diary)
 
   const redeem = await client.redeem('GENSHINGIFT')
-
   console.log(redeem)
+
+  const daily = await client.claimDaily()
+  console.log(daily)
 })()
