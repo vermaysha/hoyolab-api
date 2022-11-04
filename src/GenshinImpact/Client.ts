@@ -225,7 +225,7 @@ export class Client {
 
     if (response.retcode === -5003) {
       return {
-        status: 'Already claimed',
+        status: "Traveller, you've already checked in today",
         code: -5003,
         rewards: null,
       }
