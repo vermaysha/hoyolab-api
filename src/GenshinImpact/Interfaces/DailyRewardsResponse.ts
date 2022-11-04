@@ -8,7 +8,7 @@ export interface DailyRewardsResponse {
 export interface DailyRewardResponse {
   icon: string
   name: string
-  count: number
+  cnt: number
 }
 
 export interface DailyClaimResponse {
