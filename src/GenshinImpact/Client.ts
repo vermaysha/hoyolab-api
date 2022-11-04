@@ -236,7 +236,7 @@ export class Client {
       const today = info.today.split('-')[2]
       const reward = await this.getDailyReward(parseInt(today || '1'))
       return {
-        status: 'success',
+        status: 'OK',
         code: 0,
         rewards: reward,
       }
