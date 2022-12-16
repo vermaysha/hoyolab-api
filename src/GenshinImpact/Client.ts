@@ -231,6 +231,7 @@ export class Client {
         status: "Traveller, you've already checked in today",
         code: -5003,
         reward,
+        info,
       }
     }
 
@@ -242,6 +243,7 @@ export class Client {
         status: response.message,
         code: 0,
         reward,
+        info,
       }
     }
 
@@ -249,6 +251,7 @@ export class Client {
       status: response.message,
       code: response.retcode,
       reward: null,
+      info,
     }
   }
 

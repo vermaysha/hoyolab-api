@@ -15,6 +15,7 @@ export interface DailyClaimResponse {
   status: string
   code: number
   reward: DailyRewardResponse | null
+  info: DailyInfoResponse
 }
 
 export interface DailyInfoResponse {
