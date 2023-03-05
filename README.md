@@ -29,7 +29,7 @@ for more example you can view here [Examples](examples)
 
 ## How to obtain HoYoLab Cookie
 
-1. To begin, login with your [HoYoLab](http://https://www.hoyolab.com/home) Account.
+1. To begin, login with your [HoYoLab](https://www.hoyolab.com/home) Account.
 2. Type `java` in the address bar followed by the script down below.
 3. ```
    script:check = document.cookie.includes('ltoken') && document.cookie.includes('ltuid') || alert('Please logout and log back in before trying again, cookie is currently expired/invalid!'); cookie = document.cookie; check && document.write(`<p>${cookie}</p><br><button onclick="navigator.clipboard.writeText('${cookie}')">Click here to copy!</button><br>`)
