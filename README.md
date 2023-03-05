@@ -1,4 +1,25 @@
-# HoYoLab API - TypeScript/JavaScript HoYoLab API
+<div align="center">
+  <h1>HoYoLab API - TypeScript/JavaScript HoYoLab API</h1>
+  
+  <p>
+        <a href="https://packagist.org/packages/vermaysha/hoyolab-api">
+            <img src="https://img.shields.io/npm/v/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Latest Version on Packagist">
+        </a>
+        <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/build.yml">
+            <img src="https://img.shields.io/github/actions/workflow/status/vermaysha/hoyolab-api/build.yml?branch=master&amp;label=build&amp;style=flat-square" alt="GitHub Build Action Status">
+        </a>
+        <a href="https://www.npmjs.com/package/@vermaysha/hoyolab-api">
+            <img src="https://img.shields.io/npm/dt/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Total Downloads">
+        </a>
+        <a href="LICENSE.md">
+            <img src="https://img.shields.io/github/license/vermaysha/hoyolab-api?style=flat-square" alt="LICENSE">
+        </a>
+        <a href="https://github.com/vermaysha/hoyolab-api/releases/latest">
+            <img src="https://img.shields.io/github/release-date/vermaysha/hoyolab-api?style=flat-square" alt="GitHub Release Date - Published_At">
+        </a>
+    </p>
+
+</div>
 
 Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.
 
