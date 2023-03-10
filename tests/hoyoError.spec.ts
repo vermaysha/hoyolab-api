@@ -1,4 +1,4 @@
-import { HoyoError } from './../src/HoyoError'
+import { HoyoError } from '../src'
 import { Hoyolab } from '../src'
 import { describe, it, expect } from '@jest/globals'
 
