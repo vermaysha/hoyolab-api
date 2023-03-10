@@ -1,5 +1,9 @@
 import md5 from 'md5'
 
+/**
+ * @category Private
+ * @internal
+ */
 export class DynamicSecurity {
   static SALT = '6cqshh5dhw73bzxn20oexa9k516chk7s'
 
