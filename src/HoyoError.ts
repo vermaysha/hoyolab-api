@@ -1,3 +1,7 @@
+/**
+ *
+ * @category Error Handling
+ * */
 export class HoyoError extends Error {
   readonly retmessage: string | null
   readonly retcode: number | null
