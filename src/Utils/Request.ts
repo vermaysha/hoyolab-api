@@ -1,7 +1,6 @@
 import { HoyoError } from './../HoyoError'
 import axios, { AxiosRequestConfig } from 'axios'
-import type { Response } from '../Interfaces/Request/Response'
-import { Body, Headers, Params } from '../Interfaces/Request/Data'
+import type { Body, Headers, Params, Response } from '../Interfaces'
 import { DynamicSecurity } from './DynamicSecurity'
 
 export class Request {
