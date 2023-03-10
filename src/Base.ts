@@ -1,7 +1,7 @@
 import { Options } from './Interfaces'
 import { Request } from './Utils'
 
-export class Base {
+export abstract class Base {
   protected cookie
   protected request
 
