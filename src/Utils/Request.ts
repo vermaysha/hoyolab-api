@@ -3,6 +3,14 @@ import axios, { AxiosRequestConfig } from 'axios'
 import type { Body, Headers, Params, Response } from '../Interfaces'
 import { DynamicSecurity } from './DynamicSecurity'
 
+/**
+ * Request Class for making request to HoYoLab API.
+ *
+ * There are several additions such as headers, cookies, User Agent and also DS.
+ *
+ * @category Private
+ * @internal
+ */
 export class Request {
   private headers: Headers
   private params: Params = {}
@@ -20,6 +28,12 @@ export class Request {
     }
   }
 
+  /**
+   * Set Referer for current request
+   *
+   * @param url string - Referer Host with http or https prefix
+   * @returns this
+   */
   public setReferer(url: string): Request {
     const location = new URL(url)
 
@@ -29,18 +43,41 @@ export class Request {
     return this
   }
 
+  /**
+   * Set Query Parameter.
+   * Will be sent using either the GET or POST method.
+   *
+   * @param params Params - Query paramater for current request
+   * @returns this
+   */
   public setParams(params: Params): Request {
     this.params = { ...this.params, ...params }
 
     return this
   }
 
+  /**
+   * Set Body Parameter.
+   *
+   * Will be sent if using the POST method, otherwise it will be ignored.
+   *
+   * @param body Body - Body parameter for current request
+   * @returns this
+   */
   public setBody(body: Body): Request {
     this.body = { ...this.body, ...body }
 
     return this
   }
 
+  /**
+   * Added DS headers on current request.
+   *
+   * Not all requests will ask for DS headers, only some will.
+   *
+   * @param status Boolean
+   * @returns this
+   */
   public withDS(status = true): Request {
     if (status) {
       this.headers['DS'] = DynamicSecurity.generate()
@@ -50,6 +87,15 @@ export class Request {
     return this
   }
 
+  /**
+   * Send request and reset query params and body for next request
+   *
+   * @param url string - API Endpoint located at GameRoutes
+   * @param method get | post - HTTP Method
+   * @returns Promise<Response>
+   * @throws {@link HoyoError} - If the request error caused by this library
+   * @throws {@link [AxiosError](https://github.com/axios/axios/blob/v1.x/lib/core/AxiosError.js)} - If the error is caused by the server
+   */
   public async send(
     url: string,
     method: 'get' | 'post' = 'get'
