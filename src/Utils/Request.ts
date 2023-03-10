@@ -64,10 +64,10 @@ export class Request {
     }
 
     if (method.toLowerCase() === 'get') {
-      config['params'] = this.params ?? null
+      config['params'] = this.params
     } else {
-      config['params'] = this.params ?? null
-      config['data'] = this.body ?? null
+      config['params'] = this.params
+      config['data'] = this.body
     }
 
     const response = await axios(config)
