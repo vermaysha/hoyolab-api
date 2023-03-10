@@ -3,8 +3,19 @@
  * @category Error Handling
  * */
 export class HoyoError extends Error {
+  /**
+   * Return message from current request
+   */
   readonly retmessage: string | null
+
+  /**
+   * Return code from current request
+   */
   readonly retcode: number | null
+
+  /**
+   * Error Message
+   */
   readonly message: string
 
   constructor(
