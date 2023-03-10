@@ -1,12 +1,15 @@
 import { HoyoError } from './HoyoError'
 import { RecordCardResponse, GameListResponse } from './Interfaces/Hoyolab'
 import { Base } from './Base'
-import { Routes } from './Utils'
+import { GameRoutes } from './Utils'
 
+/**
+ * @category Main
+ */
 export class Hoyolab extends Base {
   public async getGames(): Promise<GameListResponse> {
     const response = await this.request.send(
-      Routes.takumiUrl + '/binding/api/getUserGameRolesByCookie'
+      GameRoutes.takumiUrl + '/binding/api/getUserGameRolesByCookie'
     )
 
     return response.data
@@ -25,7 +28,7 @@ export class Hoyolab extends Base {
     this.request.withDS()
 
     const response = await this.request.send(
-      Routes.bbsUrl + '/game_record/card/wapi/getGameRecordCard'
+      GameRoutes.bbsUrl + '/game_record/card/wapi/getGameRecordCard'
     )
 
     return response.data
