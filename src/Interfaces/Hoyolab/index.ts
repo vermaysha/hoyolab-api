@@ -1,2 +1,6 @@
 export type { GameListResponse } from './GameListResponse'
-export type { RecordCardResponse } from './RecordCardResponse'
+export type {
+  RecordCardResponse,
+  RecordCardData,
+  RecordCardListItem,
+} from './RecordCardResponse'
