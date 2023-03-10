@@ -1,5 +1,5 @@
-import { RecordCardData } from './Interfaces/Hoyolab/RecordCardResponse'
-import { GameListResponse } from './Interfaces/Hoyolab/GameListResponse'
+import { HoyoError } from './HoyoError'
+import { RecordCardResponse, GameListResponse } from './Interfaces/Hoyolab'
 import { Base } from './Base'
 import { Routes } from './Utils'
 
@@ -12,9 +12,15 @@ export class Hoyolab extends Base {
     return response.data
   }
 
-  public async getRecords(): Promise<RecordCardData> {
+  public async getRecords(): Promise<RecordCardResponse> {
+    if (!this.cookie.accountId) {
+      throw new HoyoError(
+        'getRecords() function requires cookie.accountId to be filled !'
+      )
+    }
+
     this.request.setParams({
-      uid: this.cookie.ltuid,
+      uid: this.cookie.accountId,
     })
     this.request.withDS()
 
