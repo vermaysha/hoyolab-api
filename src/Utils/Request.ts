@@ -1,5 +1,5 @@
 import { HoyoError } from './../HoyoError'
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import type { Response } from '../Interfaces/Request/Response'
 import { Body, Headers, Params } from '../Interfaces/Request/Data'
 import { DynamicSecurity } from './DynamicSecurity'
@@ -55,18 +55,22 @@ export class Request {
     url: string,
     method: 'get' | 'post' = 'get'
   ): Promise<Response> {
-    this.body = {}
-    this.params = {}
-
     const cleanUrl = url.replace(/([^:]\/)\/+/g, '$1')
-    const response = await axios({
+    const config: AxiosRequestConfig = {
       url: cleanUrl,
       headers: this.headers,
       decompress: true,
       method: method.toLowerCase(),
-      params: this.params ?? null,
-      data: this.body ?? null,
-    })
+    }
+
+    if (method.toLowerCase() === 'get') {
+      config['params'] = this.params ?? null
+    } else {
+      config['params'] = this.params ?? null
+      config['data'] = this.body ?? null
+    }
+
+    const response = await axios(config)
 
     if (response.data?.retcode !== 0) {
       throw new HoyoError(
@@ -74,6 +78,10 @@ export class Request {
         response?.data
       )
     }
+
+    // Reset Body & Params for next request
+    this.body = {}
+    this.params = {}
 
     return response.data
   }
