@@ -1,4 +1,4 @@
-class GameRoutes {
+export class GameRoutes {
   readonly webStaticUrl = 'https://webstatic-sea.hoyoverse.com/'
   readonly accountUrl = 'https://api-account-os.hoyolab.com/account/auth/api'
   readonly bbsUrl = 'https://bbs-api-os.hoyolab.com/'
