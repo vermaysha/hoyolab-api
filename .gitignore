@@ -10,3 +10,4 @@ dist
 .env
 coverage
 vermaysha-hoyolab-api-*.tgz
+docs
