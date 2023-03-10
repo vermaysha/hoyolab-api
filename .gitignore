@@ -1,0 +1,9 @@
+.history
+.lock-wscript
+node_modules
+.wafpickle-N
+.*.swp
+.DS_Store
+npm-debug.log
+*.orig
+dist
