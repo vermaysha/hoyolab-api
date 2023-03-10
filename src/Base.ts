@@ -1,4 +1,4 @@
-import { Options } from './Interfaces/Options'
+import { Options } from './Interfaces'
 import { Request } from './Utils'
 
 export class Base {
