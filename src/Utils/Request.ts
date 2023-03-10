@@ -12,8 +12,19 @@ import { DynamicSecurity } from './DynamicSecurity'
  * @internal
  */
 export class Request {
+  /**
+   * Headers List
+   */
   private headers: Headers
+
+  /**
+   * Parameter (Query Param) List
+   */
   private params: Params = {}
+
+  /**
+   * Body data list
+   */
   private body: Body = {}
 
   constructor(cookie: string) {
@@ -32,7 +43,6 @@ export class Request {
    * Set Referer for current request
    *
    * @param url string - Referer Host with http or https prefix
-   * @returns this
    */
   public setReferer(url: string): Request {
     const location = new URL(url)
@@ -48,7 +58,6 @@ export class Request {
    * Will be sent using either the GET or POST method.
    *
    * @param params Params - Query paramater for current request
-   * @returns this
    */
   public setParams(params: Params): Request {
     this.params = { ...this.params, ...params }
@@ -62,7 +71,6 @@ export class Request {
    * Will be sent if using the POST method, otherwise it will be ignored.
    *
    * @param body Body - Body parameter for current request
-   * @returns this
    */
   public setBody(body: Body): Request {
     this.body = { ...this.body, ...body }
@@ -76,7 +84,6 @@ export class Request {
    * Not all requests will ask for DS headers, only some will.
    *
    * @param status Boolean
-   * @returns this
    */
   public withDS(status = true): Request {
     if (status) {
@@ -92,7 +99,6 @@ export class Request {
    *
    * @param url string - API Endpoint located at GameRoutes
    * @param method get | post - HTTP Method
-   * @returns Promise<Response>
    * @throws {@link HoyoError} - If the request error caused by this library
    * @throws {@link [AxiosError](https://github.com/axios/axios/blob/v1.x/lib/core/AxiosError.js)} - If the error is caused by the server
    */

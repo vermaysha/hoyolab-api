@@ -4,9 +4,17 @@ import { Base } from './Base'
 import { GameRoutes } from './Utils'
 
 /**
+ * Get data from Hoyolab API
+ *
  * @category Main
  */
 export class Hoyolab extends Base {
+  /**
+   * Displays a list of game accounts from mihoyo that are registered on user accounts
+   *
+   * @throws {@link HoyoError} - If the request error caused by this library
+   * @throws {@link [AxiosError](https://github.com/axios/axios/blob/v1.x/lib/core/AxiosError.js)} - If the error is caused by the server
+   */
   public async getGames(): Promise<GameListResponse> {
     const response = await this.request.send(
       GameRoutes.takumiUrl + '/binding/api/getUserGameRolesByCookie'
@@ -15,6 +23,12 @@ export class Hoyolab extends Base {
     return response.data
   }
 
+  /**
+   * Displays the Game Record for each registered game
+   *
+   * @throws {@link HoyoError} - If the request error caused by this library
+   * @throws {@link [AxiosError](https://github.com/axios/axios/blob/v1.x/lib/core/AxiosError.js)} - If the error is caused by the server
+   */
   public async getRecords(): Promise<RecordCardResponse> {
     if (!this.cookie.accountId) {
       throw new HoyoError(

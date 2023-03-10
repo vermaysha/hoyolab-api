@@ -16,8 +16,6 @@ export class DynamicSecurity {
 
   /**
    * Generate Digital Signature for API Requst
-   *
-   * @returns string - Generated DS
    */
   static generate(): string {
     const date = new Date()
