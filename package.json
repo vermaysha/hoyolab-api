@@ -9,7 +9,7 @@
     "build": "rimraf dist/ && tsc -b -f",
     "format": "prettier src/**/* -w",
     "lint": "npx eslint src/**/* --fix",
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "prepare": "husky install"
   },
   "repository": {
@@ -35,12 +35,15 @@
     "dist/**/*.js"
   ],
   "devDependencies": {
+    "@jest/globals": "^29.5.0",
+    "@types/jest": "^29.4.0",
     "@types/md5": "^2.3.2",
     "@types/node": "^18.14.6",
     "@types/prettier": "^2.7.2",
     "@types/standard-version": "^7.0.1",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
+    "dotenv": "^16.0.3",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.7.0",
     "husky": "^8.0.3",
@@ -48,6 +51,7 @@
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
     "rimraf": "^4.3.1",
+    "ts-jest": "^29.0.5",
     "tsx": "^3.12.3",
     "typescript": "^4.9.5"
   },
