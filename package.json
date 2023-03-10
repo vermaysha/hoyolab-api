@@ -1,0 +1,66 @@
+{
+  "name": "@vermaysha/hoyolab-api",
+  "version": "2.0.1",
+  "description": "Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist/ && tsc -b -f",
+    "format": "prettier src/**/* -w",
+    "lint": "npx eslint src/**/* --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vermaysha/hoyolab-api.git"
+  },
+  "keywords": [
+    "hoyolab-api",
+    "hoyolab",
+    "hoyoverse",
+    "api"
+  ],
+  "author": {
+    "name": "Ashary Vermaysha",
+    "email": "vermaysha@gmail.com"
+  },
+  "license": "LGPL-2.1-only",
+  "bugs": {
+    "url": "https://github.com/vermaysha/hoyolab-api/issues"
+  },
+  "homepage": "https://github.com/vermaysha/hoyolab-api#readme",
+  "files": [
+    "dist/**/*.js"
+  ],
+  "devDependencies": {
+    "@types/md5": "^2.3.2",
+    "@types/node": "^18.14.6",
+    "@types/prettier": "^2.7.2",
+    "@types/standard-version": "^7.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.7.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4",
+    "rimraf": "^4.3.1",
+    "tsx": "^3.12.3",
+    "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "axios": "^1.3.4",
+    "md5": "^2.3.0"
+  },
+  "lint-staged": {
+    "**/*.ts": [
+      "npm run lint",
+      "npm run format"
+    ]
+  }
+}
