@@ -1,6 +1,6 @@
 export interface RecordCardData {
   name: string
-  interface: number
+  type: number
   value: string
 }
 
@@ -20,5 +20,5 @@ export interface RecordCardListItem {
 
 export interface RecordCardResponse {
   list: RecordCardListItem[]
-  currecnt: RecordCardListItem
+  currecnt?: RecordCardListItem
 }
