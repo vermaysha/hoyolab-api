@@ -28,6 +28,11 @@ export abstract class Base {
    */
   constructor(options: Options) {
     this.cookie = options.cookie
+
+    if (!options.cookie.accountId) {
+      this.cookie.accountId = options.cookie.ltuid
+    }
+
     this.request = new Request(this.cookieString())
   }
 
