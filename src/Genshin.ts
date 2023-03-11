@@ -27,11 +27,7 @@ export class Genshin extends Base {
     super(options)
 
     this.uid = options.uid
-    if (options.region) {
-      this.region = options.region
-    } else {
-      this.region = ServerRegion.determineRegion(options.uid)
-    }
+    this.region = ServerRegion.determineRegion(options.uid)
   }
 
   public async getDailyInfo(): Promise<Interface.DailyInfoResponse> {
