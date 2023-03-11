@@ -45,6 +45,13 @@ export abstract class Base {
     const cookies: Array<string> = []
     Object.entries(this.cookie).forEach(([key, value]) => {
       if (value) {
+        if (['cookieToken', 'accountId'].includes(key)) {
+          key = key
+            .replace(/([A-Z])/g, ' $1')
+            .split(' ')
+            .join('_')
+            .toLowerCase()
+        }
         cookies.push(`${key}=${value}`)
       }
     })
