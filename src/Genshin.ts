@@ -2,7 +2,7 @@ import { HoyoError } from './HoyoError'
 import { Base } from './Base'
 import * as Interface from './Interfaces/Genshin'
 import * as Types from './Types'
-import { GenshinRoutes, ServerRegion } from './Utils'
+import { GenshinRoutes, HoyolabRoutes, ServerRegion } from './Utils'
 import { GenshinOption, Options } from './Interfaces'
 import { DiaryMonth, DiaryType, ScheduleType } from './Enum'
 
@@ -248,5 +248,20 @@ export class Genshin extends Base {
     const response = await this.request.send(GenshinRoutes.spiralAbyss)
 
     return response.data
+  }
+
+  public async redeemCode(code: string): Promise<Interface.RedeemResponse> {
+    this.request.setParams({
+      uid: this.uid.toString().replace(/\uFFFD/g, ''),
+      region: this.region.replace(/\uFFFD/g, ''),
+      game_biz: 'hk4e_global',
+      cdkey: code.replace(/\uFFFD/g, ''),
+      lang: 'en',
+      sLangKey: 'en-us',
+    })
+
+    const response = await this.request.send(HoyolabRoutes.redeem)
+
+    return response
   }
 }
