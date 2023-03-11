@@ -71,4 +71,18 @@ describe('Request Test', () => {
       await request.send('http://localhost.dev', 'post')
     }).rejects.toThrow(HoyoError)
   })
+
+  it('Request should be return error if retcode === -100', async () => {
+    const request = new Request('')
+    ;(axios as unknown as jest.Mock).mockResolvedValueOnce({
+      data: {
+        retcode: -100,
+        message: 'error',
+      },
+    })
+
+    await expect(async () => {
+      await request.send('http://localhost.dev', 'post')
+    }).rejects.toThrow(HoyoError)
+  })
 })
