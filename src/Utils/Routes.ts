@@ -25,10 +25,14 @@ export class HoyolabRoutes {
 export class GenshinRoutes {
   static readonly dailyInfo =
     BaseURL.sgHke4Url + '/event/sol/info?act_id=e202102251931481&lang=en-us'
-
   static readonly dailyRewards =
     BaseURL.sgHke4Url + '/event/sol/home?act_id=e202102251931481&lang=en-us'
-
   static readonly dailyClaim =
     BaseURL.sgHke4Url + '/event/sol/sign?act_id=e202102251931481&lang=en-us'
+
+  static readonly characters =
+    BaseURL.bbsUrl + '/game_record/genshin/api/character'
+
+  static readonly charactersInfo =
+    BaseURL.bbsUrl + '/game_record/genshin/api/avatarBasicInfo'
 }
