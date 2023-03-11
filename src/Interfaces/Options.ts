@@ -1,3 +1,5 @@
+import { Region } from '../Types'
+
 export interface Options {
   cookie: OptionCookie
 }
@@ -7,4 +9,9 @@ export interface OptionCookie {
   ltuid: number
   cookieToken?: string | null
   accountId?: number | null
+}
+
+export interface GenshinOption {
+  uid: string | number
+  region?: Region
 }
