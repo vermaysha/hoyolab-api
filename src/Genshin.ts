@@ -153,7 +153,7 @@ export class Genshin extends Base {
     if (Object.values(DiaryMonth).includes(month) === false) {
       throw new HoyoError('The given month parameter is invalid !')
     }
-    /* c8 ignore end */
+    /* c8 ignore stop */
 
     this.request.setParams({
       region: this.region,
@@ -179,7 +179,7 @@ export class Genshin extends Base {
     if (Object.values(DiaryType).includes(type) === false) {
       throw new HoyoError('The given type parameter is invalid !')
     }
-    /* c8 ignore end */
+    /* c8 ignore stop */
 
     const responses: Array<Interface.DiaryDetailResponse> = []
     let page = 1
