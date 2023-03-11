@@ -6,7 +6,7 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build:docs": "typedoc",
+    "build:docs": "rimraf docs/ && typedoc",
     "build:tsc": "rimraf dist/ && tsc -b -f",
     "build": "npm run build:tsc && npm run build:docs",
     "format": "prettier src/**/* -w",
