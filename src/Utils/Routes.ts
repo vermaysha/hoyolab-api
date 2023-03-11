@@ -35,6 +35,9 @@ export class GenshinRoutes {
   static readonly characters =
     BaseURL.bbsUrl + '/game_record/genshin/api/character'
 
+  static readonly spiralAbyss =
+    BaseURL.bbsUrl + '/game_record/genshin/api/spiralAbyss'
+
   static readonly charactersInfo =
     BaseURL.bbsUrl + '/game_record/genshin/api/avatarBasicInfo'
 
