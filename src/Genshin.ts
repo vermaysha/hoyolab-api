@@ -1,15 +1,39 @@
+import { ServerRegion } from './Utils/ServerRegion'
 import { HoyoError } from './HoyoError'
 import { Base } from './Base'
 import * as Interface from './Interfaces/Genshin'
-import { NumericRange } from './Types'
+import * as Types from './Types'
 import { GenshinRoutes } from './Utils'
+import { GenshinOption, Options } from './Interfaces'
 
 /**
  * Get data from Hoyolab API
  *
+ * @throws {@link HoyoError} - if given UID is invalid
  * @category Main
  */
 export class Genshin extends Base {
+  /**
+   * Genshin Impact UID
+   */
+  protected readonly uid: string | number
+
+  /**
+   * Genshin Impact Region
+   */
+  protected readonly region: Types.Region
+
+  constructor(options: Options & GenshinOption) {
+    super(options)
+
+    this.uid = options.uid
+    if (options.region) {
+      this.region = options.region
+    } else {
+      this.region = ServerRegion.determineRegion(options.uid)
+    }
+  }
+
   public async getDailyInfo(): Promise<Interface.DailyInfoResponse> {
     const response = await this.request.send(GenshinRoutes.dailyInfo)
 
@@ -23,14 +47,14 @@ export class Genshin extends Base {
   }
 
   public async getDailyReward(
-    day: NumericRange<0, 30> | null = null
+    day: Types.NumericRange<0, 30> | null = null
   ): Promise<Interface.DailyRewardResponse> {
     const response = await this.getDailyRewards()
 
     let currentDate = 0
     if (day === null) {
       const now = new Date(Number(response.now) * 1000)
-      currentDate = (now.getDate() - 1) as NumericRange<0, 30>
+      currentDate = (now.getDate() - 1) as Types.NumericRange<0, 30>
     }
 
     /* c8 ignore start */
@@ -84,5 +108,35 @@ export class Genshin extends Base {
       reward: null,
       info,
     }
+  }
+
+  public async getCharacters(): Promise<Interface.CharacterResponse> {
+    this.request.withDS()
+    this.request.setBody({
+      role_id: this.uid,
+      server: this.region,
+    })
+
+    const response = await this.request.send(GenshinRoutes.characters, 'post')
+
+    return response.data
+  }
+
+  public async getCharactersInfo(
+    characterIds: number[]
+  ): Promise<Interface.CharacterInfoResponse> {
+    this.request.withDS()
+    this.request.setBody({
+      character_ids: characterIds,
+      role_id: this.uid,
+      server: this.region,
+    })
+
+    const response = await this.request.send(
+      GenshinRoutes.charactersInfo,
+      'post'
+    )
+
+    return response.data
   }
 }
