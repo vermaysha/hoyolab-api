@@ -104,7 +104,8 @@ export class Request {
    */
   public async send(
     url: string,
-    method: 'get' | 'post' = 'get'
+    method: 'get' | 'post' = 'get',
+    _retries = 1
   ): Promise<Response> {
     const cleanUrl = url.replace(/([^:]\/)\/+/g, '$1')
     const config: AxiosRequestConfig = {
@@ -123,9 +124,15 @@ export class Request {
     const response = await axios(config)
 
     /* c8 ignore start */
-    if (response.data.retcode === -2016) {
+    const maxRetries = 60
+    if (response.status === 429 && _retries <= maxRetries) {
       await Utils.delay(0.5)
-      return this.send(url, method)
+      return this.send(url, method, _retries++)
+    }
+
+    if (response.data.retcode === -2016 && _retries <= maxRetries) {
+      await Utils.delay(0.5)
+      return this.send(url, method, _retries++)
     }
     /* c8 ignore stop */
 
