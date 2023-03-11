@@ -214,6 +214,16 @@ export class Genshin extends Base {
       })
     }
 
+    // Sort by date
+    response.list.sort((a, b) => {
+      const keyA = new Date(a.time),
+        keyB = new Date(b.time)
+      // Compare the 2 dates
+      if (keyA < keyB) return -1
+      if (keyA > keyB) return 1
+      return 0
+    })
+
     return response
   }
 }
