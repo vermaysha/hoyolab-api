@@ -1,3 +1,4 @@
 export * from './Options'
-export * from './Hoyolab'
 export * from './Request'
+export * from './Hoyolab'
+export * from './Genshin'
