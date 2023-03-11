@@ -1,4 +1,5 @@
 export * from './HoyoError'
-export * from './Hoyolab'
 export * from './Interfaces'
 export * from './Utils'
+export * from './Hoyolab'
+export * from './Genshin'
