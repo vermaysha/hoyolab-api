@@ -122,10 +122,12 @@ export class Request {
 
     const response = await axios(config)
 
+    /* c8 ignore start */
     if (response.data.retcode === -2016) {
       await Utils.delay(0.5)
       return this.send(url, method)
     }
+    /* c8 ignore stop */
 
     if (response.data?.retcode === -100) {
       throw new HoyoError(
