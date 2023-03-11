@@ -9,5 +9,13 @@
   "githubPages": true,
   "searchInComments": true,
   "theme": "default",
-  "plugin": ["typedoc-plugin-versions"]
+  "plugin": [
+    "typedoc-plugin-versions",
+    "typedoc-plugin-extras",
+    "typedoc-plugin-mdn-links"
+  ],
+  "customTitle": "HoYoLab API",
+  "customDescription": "An unofficial HoYoLab API Wrapper for getting Hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.",
+  "footerTypedocVersion": true,
+  "footerLastModified": true
 }
