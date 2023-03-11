@@ -53,7 +53,6 @@ export class Genshin extends Base {
       currentDate = (now.getDate() - 1) as Types.NumericRange<0, 30>
     }
 
-    /* c8 ignore start */
     if (typeof response.awards[day ?? currentDate] !== undefined) {
       return {
         month: response.month,
@@ -62,9 +61,8 @@ export class Genshin extends Base {
         award: response.awards[day ?? currentDate],
       }
     }
-
+    /* c8 ignore next 2 */
     throw new HoyoError('The selected day was not found !')
-    /* c8 ignore end */
   }
 
   public async claimDaily(): Promise<Interface.DailyClaimResponse> {
@@ -81,8 +79,8 @@ export class Genshin extends Base {
         info,
       }
     }
-
     /* c8 ignore start */
+
     if (
       String(
         (response.data as Interface.DailyClaimResponse).code
@@ -96,7 +94,6 @@ export class Genshin extends Base {
         info,
       }
     }
-    /* c8 ignore end */
 
     return {
       status: response.message,
@@ -105,6 +102,7 @@ export class Genshin extends Base {
       info,
     }
   }
+  /* c8 ignore stop */
 
   public async getCharacters(): Promise<Interface.CharacterResponse> {
     this.request.withDS()
@@ -151,9 +149,11 @@ export class Genshin extends Base {
   public async getDiaryInfo(
     month: DiaryMonth = DiaryMonth.CURRENT
   ): Promise<Interface.DiaryInfoResponse> {
+    /* c8 ignore start */
     if (Object.values(DiaryMonth).includes(month) === false) {
       month = DiaryMonth.CURRENT
     }
+    /* c8 ignore stop */
 
     this.request.setParams({
       region: this.region,
