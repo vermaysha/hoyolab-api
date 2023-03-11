@@ -58,11 +58,11 @@ export interface IAvatars {
   level: number
   rarity: number
   weapon: IWeapon
-  reliquaries: IReliquaries[]
-  constellations: IConstellation
+  reliquaries: IReliquaries[] | []
+  constellations: IConstellation[]
   actived_constellation_num: number
-  costumes: ICostume[]
-  external: unknown
+  costumes: ICostume[] | []
+  external: unknown | null
 }
 
 export interface IRole {
