@@ -1,10 +1,7 @@
-export interface DiaryInfoResponse {
-  uid: number
-  region: string
-  nickname: string
-  optional_month: number[]
+import { IDiary } from './IDiary'
+
+export interface DiaryInfoResponse extends IDiary {
   month: number
-  data_month: number
   month_data: {
     current_primogems: number
     current_mora: number
