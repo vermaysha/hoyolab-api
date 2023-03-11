@@ -29,6 +29,8 @@ export class GenshinRoutes {
     BaseURL.sgHke4Url + '/event/sol/home?act_id=e202102251931481&lang=en-us'
   static readonly dailyClaim =
     BaseURL.sgHke4Url + '/event/sol/sign?act_id=e202102251931481&lang=en-us'
+  static readonly dailyNotes =
+    BaseURL.bbsUrl + '/game_record/genshin/api/dailyNote'
 
   static readonly characters =
     BaseURL.bbsUrl + '/game_record/genshin/api/character'
