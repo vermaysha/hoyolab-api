@@ -123,7 +123,15 @@ export class Request {
 
     const response = await axios(config)
 
-    if (response.data?.retcode !== 0) {
+    if (response.data?.retcode === -100) {
+      throw new HoyoError(
+        'Unable to authenticate user, make sure the cookie provided is correct!',
+        response.data
+      )
+    }
+
+    const allowedRetCode = [0, -5003]
+    if (allowedRetCode.includes(response.data?.retcode) === false) {
       throw new HoyoError(
         `Failed to retrive data: [${response.data?.retcode}] - ${response.data?.message}`,
         response?.data
