@@ -37,4 +37,8 @@ export class GenshinRoutes {
 
   static readonly charactersInfo =
     BaseURL.bbsUrl + '/game_record/genshin/api/avatarBasicInfo'
+
+  static readonly diaryInfo = BaseURL.sgHke4Url + '/event/ysledgeros/month_info'
+  static readonly diaryDetail =
+    BaseURL.sgHke4Url + '/event/ysledgeros/month_detail'
 }
