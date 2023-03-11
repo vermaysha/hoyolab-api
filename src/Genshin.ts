@@ -135,4 +135,16 @@ export class Genshin extends Base {
 
     return response.data
   }
+
+  public async getDailyNotes(): Promise<Interface.DailyNotesResponse> {
+    this.request.setParams({
+      server: this.region,
+      role_id: this.uid,
+    })
+    this.request.withDS()
+
+    const response = await this.request.send(GenshinRoutes.dailyNotes)
+
+    return response.data
+  }
 }
