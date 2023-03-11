@@ -1,2 +1,5 @@
 export * from './DailyInfoResponse'
+export * from './AwardItem'
 export * from './DailyRewardsResponse'
+export * from './DailyRewardResponse'
+export * from './DailyClaimResponse'
