@@ -23,14 +23,14 @@ export class Genshin extends Base {
   }
 
   public async getDailyReward(
-    day: NumericRange<0, 31> | null = null
+    day: NumericRange<0, 30> | null = null
   ): Promise<Interface.DailyRewardResponse> {
     const response = await this.getDailyRewards()
 
     let currentDate = 0
     if (day === null) {
       const now = new Date(Number(response.now) * 1000)
-      currentDate = (now.getDate() - 1) as NumericRange<0, 31>
+      currentDate = (now.getDate() - 1) as NumericRange<0, 30>
     }
 
     if (typeof response.awards[day ?? currentDate] !== undefined) {
