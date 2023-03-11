@@ -9,6 +9,7 @@ describe('Test Genshin Daily', () => {
       ltoken: process.env.LTOKEN ?? '',
       ltuid: Number(process.env.LTUID ?? ''),
     },
+    uid: process.env.UID ?? '',
   })
 
   it('getDailyInfo must be have valid response', async () => {
