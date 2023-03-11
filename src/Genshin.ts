@@ -4,7 +4,7 @@ import * as Interface from './Interfaces/Genshin'
 import * as Types from './Types'
 import { GenshinRoutes, ServerRegion } from './Utils'
 import { GenshinOption, Options } from './Interfaces'
-import { DiaryMonth, DiaryType } from './Enum'
+import { DiaryMonth, DiaryType, ScheduleType } from './Enum'
 
 /**
  * Get data from Hoyolab API
@@ -225,5 +225,20 @@ export class Genshin extends Base {
     })
 
     return response
+  }
+
+  public async getSpiralAbyss(
+    scheduleType: ScheduleType = ScheduleType.CURRENT
+  ): Promise<Interface.SpiralAbyssResponse> {
+    this.request.setParams({
+      server: this.region,
+      role_id: this.uid,
+      schedule_type: scheduleType,
+    })
+    this.request.withDS()
+
+    const response = await this.request.send(GenshinRoutes.spiralAbyss)
+
+    return response.data
   }
 }
