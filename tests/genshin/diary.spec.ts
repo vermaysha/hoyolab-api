@@ -39,4 +39,23 @@ describe('Test Genshin Impact Diary Functionality', () => {
     expect(diary).toHaveProperty('day_data.current_primogems')
     expect(diary).toHaveProperty('day_data.current_mora')
   })
+
+  it('getDiaryDetail should to return valid response', async () => {
+    const diary = await genshin.getDiaryDetail(1)
+
+    expect(diary).toHaveProperty('uid')
+    expect(diary).toHaveProperty('region')
+    expect(diary).toHaveProperty('nickname')
+    expect(diary).toHaveProperty('optional_month')
+    expect(diary).toHaveProperty('data_month')
+    expect(diary).toHaveProperty('current_page')
+    expect(diary).toHaveProperty('list')
+
+    diary.list.forEach((item) => {
+      expect(item).toHaveProperty('action_id')
+      expect(item).toHaveProperty('action')
+      expect(item).toHaveProperty('time')
+      expect(item).toHaveProperty('num')
+    })
+  })
 })
