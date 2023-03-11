@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals'
-import { Request } from '../src'
+import { Request } from '../src/Utils'
 import axios from 'axios'
 import { HoyoError } from '../src'
 
