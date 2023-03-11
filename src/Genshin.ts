@@ -4,7 +4,7 @@ import * as Interface from './Interfaces/Genshin'
 import * as Types from './Types'
 import { GenshinRoutes, ServerRegion } from './Utils'
 import { GenshinOption, Options } from './Interfaces'
-import { DiaryMonth } from './Enum'
+import { DiaryMonth, DiaryType } from './Enum'
 
 /**
  * Get data from Hoyolab API
@@ -151,9 +151,9 @@ export class Genshin extends Base {
   ): Promise<Interface.DiaryInfoResponse> {
     /* c8 ignore start */
     if (Object.values(DiaryMonth).includes(month) === false) {
-      month = DiaryMonth.CURRENT
+      throw new HoyoError('The given month parameter is invalid !')
     }
-    /* c8 ignore stop */
+    /* c8 ignore end */
 
     this.request.setParams({
       region: this.region,
@@ -165,5 +165,55 @@ export class Genshin extends Base {
     const response = await this.request.send(GenshinRoutes.diaryInfo)
 
     return response.data
+  }
+
+  public async getDiaryDetail(
+    type: DiaryType,
+    month: DiaryMonth = DiaryMonth.CURRENT
+  ): Promise<Interface.DiaryDetailResponse> {
+    /* c8 ignore start */
+    if (Object.values(DiaryMonth).includes(month) === false) {
+      throw new HoyoError('The given month parameter is invalid !')
+    }
+
+    if (Object.values(DiaryType).includes(type) === false) {
+      throw new HoyoError('The given type parameter is invalid !')
+    }
+    /* c8 ignore end */
+
+    const responses: Array<Interface.DiaryDetailResponse> = []
+    let page = 1
+    do {
+      this.request.setParams({
+        region: this.region,
+        uid: this.uid,
+        month: month,
+        type: type,
+        current_page: page,
+        page_size: 100,
+      })
+      this.request.withDS()
+
+      const response = await this.request.send(GenshinRoutes.diaryDetail)
+      responses.push(response.data)
+      page++
+    } while (responses[responses.length - 1].list.length > 0)
+
+    const response = responses[0]
+    if (responses.length > 1) {
+      responses.forEach((item, i) => {
+        if (i < 1) return
+
+        response.current_page = item.current_page
+        response.data_month = item.data_month
+        response.list = [...response.list, ...item.list]
+        response.nickname = item.nickname
+        response.optional_month = item.optional_month
+        response.region = item.region
+        response.uid = item.uid
+      })
+    }
+
+    return response
   }
 }
