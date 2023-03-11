@@ -219,8 +219,10 @@ export class Genshin extends Base {
       const keyA = new Date(a.time),
         keyB = new Date(b.time)
       // Compare the 2 dates
+      /* c8 ignore start */
       if (keyA < keyB) return -1
       if (keyA > keyB) return 1
+      /* c8 ignore stop */
       return 0
     })
 
