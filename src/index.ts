@@ -1,6 +1,6 @@
 export * from './HoyoError'
 export * as Interface from './Interfaces'
-export * as Utils from './Utils'
+export * from './Utils'
 export * as Types from './Types'
 export * from './Hoyolab'
 export * from './Genshin'
