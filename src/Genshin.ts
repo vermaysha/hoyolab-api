@@ -1,10 +1,10 @@
-import { ServerRegion } from './Utils/ServerRegion'
 import { HoyoError } from './HoyoError'
 import { Base } from './Base'
 import * as Interface from './Interfaces/Genshin'
 import * as Types from './Types'
-import { GenshinRoutes } from './Utils'
+import { GenshinRoutes, ServerRegion } from './Utils'
 import { GenshinOption, Options } from './Interfaces'
+import { DiaryMonth } from './Enum'
 
 /**
  * Get data from Hoyolab API
@@ -144,6 +144,25 @@ export class Genshin extends Base {
     this.request.withDS()
 
     const response = await this.request.send(GenshinRoutes.dailyNotes)
+
+    return response.data
+  }
+
+  public async getDiaryInfo(
+    month: DiaryMonth = DiaryMonth.CURRENT
+  ): Promise<Interface.DiaryInfoResponse> {
+    if (Object.values(DiaryMonth).includes(month) === false) {
+      month = DiaryMonth.CURRENT
+    }
+
+    this.request.setParams({
+      region: this.region,
+      uid: this.uid,
+      month: month,
+    })
+    this.request.withDS()
+
+    const response = await this.request.send(GenshinRoutes.diaryInfo)
 
     return response.data
   }
