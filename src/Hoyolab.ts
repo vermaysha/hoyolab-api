@@ -1,7 +1,7 @@
 import { HoyoError } from './HoyoError'
 import { RecordCardResponse, GameListResponse } from './Interfaces/Hoyolab'
 import { Base } from './Base'
-import { GameRoutes } from './Utils'
+import { HoyolabRoutes } from './Utils'
 
 /**
  * Get data from Hoyolab API
@@ -16,9 +16,7 @@ export class Hoyolab extends Base {
    * @throws {@link [AxiosError](https://github.com/axios/axios/blob/v1.x/lib/core/AxiosError.js)} - If the error is caused by the server
    */
   public async getGames(): Promise<GameListResponse> {
-    const response = await this.request.send(
-      GameRoutes.takumiUrl + '/binding/api/getUserGameRolesByCookie'
-    )
+    const response = await this.request.send(HoyolabRoutes.gamesList)
 
     return response.data
   }
@@ -41,9 +39,7 @@ export class Hoyolab extends Base {
     })
     this.request.withDS()
 
-    const response = await this.request.send(
-      GameRoutes.bbsUrl + '/game_record/card/wapi/getGameRecordCard'
-    )
+    const response = await this.request.send(HoyolabRoutes.recordsList)
 
     return response.data
   }
