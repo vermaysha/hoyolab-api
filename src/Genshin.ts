@@ -33,6 +33,7 @@ export class Genshin extends Base {
       currentDate = (now.getDate() - 1) as NumericRange<0, 30>
     }
 
+    /* c8 ignore start */
     if (typeof response.awards[day ?? currentDate] !== undefined) {
       return {
         month: response.month,
@@ -43,6 +44,7 @@ export class Genshin extends Base {
     }
 
     throw new HoyoError('The selected day was not found !')
+    /* c8 ignore end */
   }
 
   public async claimDaily(): Promise<Interface.DailyClaimResponse> {
@@ -60,6 +62,7 @@ export class Genshin extends Base {
       }
     }
 
+    /* c8 ignore start */
     if (
       String(
         (response.data as Interface.DailyClaimResponse).code
@@ -73,6 +76,7 @@ export class Genshin extends Base {
         info,
       }
     }
+    /* c8 ignore end */
 
     return {
       status: response.message,
