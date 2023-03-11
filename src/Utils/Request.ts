@@ -1,7 +1,7 @@
 import { HoyoError } from './../HoyoError'
 import axios, { AxiosRequestConfig } from 'axios'
 import type { Body, Headers, Params, Response } from '../Interfaces'
-import { DynamicSecurity } from './DynamicSecurity'
+import { Utils } from '..'
 
 /**
  * Request Class for making request to HoYoLab API.
@@ -87,7 +87,7 @@ export class Request {
    */
   public withDS(status = true): Request {
     if (status) {
-      this.headers['DS'] = DynamicSecurity.generate()
+      this.headers['DS'] = Utils.DynamicSecurity.generate()
     } else {
       this.headers['DS'] = null
     }
@@ -110,7 +110,6 @@ export class Request {
     const config: AxiosRequestConfig = {
       url: cleanUrl,
       headers: this.headers,
-      decompress: true,
       method: method.toLowerCase(),
     }
 
@@ -123,6 +122,11 @@ export class Request {
 
     const response = await axios(config)
 
+    if (response.data.retcode === -2016) {
+      await Utils.delay(0.5)
+      return this.send(url, method)
+    }
+
     if (response.data?.retcode === -100) {
       throw new HoyoError(
         'Unable to authenticate user, make sure the cookie provided is correct!',
@@ -130,7 +134,7 @@ export class Request {
       )
     }
 
-    const allowedRetCode = [0, -5003]
+    const allowedRetCode = [0, -5003, -2020, -2017]
     if (allowedRetCode.includes(response.data?.retcode) === false) {
       throw new HoyoError(
         `Failed to retrive data: [${response.data?.retcode}] - ${response.data?.message}`,
