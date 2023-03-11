@@ -1,8 +1,8 @@
 import { AwardItem } from './AwardItem'
 
-export interface DailyRewardsResponse {
+export interface DailyRewardResponse {
   month: number
   resign: boolean
   now: string
-  awards: AwardItem[]
+  award: AwardItem
 }
