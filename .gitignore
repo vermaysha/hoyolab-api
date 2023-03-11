@@ -11,3 +11,4 @@ dist
 coverage
 vermaysha-hoyolab-api-*.tgz
 docs
+*.ignore.ts
