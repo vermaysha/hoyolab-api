@@ -28,4 +28,7 @@ export class GenshinRoutes {
 
   static readonly dailyRewards =
     BaseURL.sgHke4Url + '/event/sol/home?act_id=e202102251931481&lang=en-us'
+
+  static readonly dailyClaim =
+    BaseURL.sgHke4Url + '/event/sol/sign?act_id=e202102251931481&lang=en-us'
 }
