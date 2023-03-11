@@ -21,3 +21,11 @@ export class HoyolabRoutes {
   static readonly recordsList =
     BaseURL.bbsUrl + '/game_record/card/wapi/getGameRecordCard'
 }
+
+export class GenshinRoutes {
+  static readonly dailyInfo =
+    BaseURL.sgHke4Url + '/event/sol/info?act_id=e202102251931481&lang=en-us'
+
+  static readonly dailyRewards =
+    BaseURL.sgHke4Url + '/event/sol/home?act_id=e202102251931481&lang=en-us'
+}
