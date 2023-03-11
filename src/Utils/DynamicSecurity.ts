@@ -12,7 +12,7 @@ export class DynamicSecurity {
   /**
    * Cypher Salt
    */
-  static SALT = '6cqshh5dhw73bzxn20oexa9k516chk7s'
+  static SALT = '6s25p5ox5y14umn1p61aqyyvbvvl3lrt'
 
   /**
    * Generate Digital Signature for API Requst
