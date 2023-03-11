@@ -230,6 +230,12 @@ export class Genshin extends Base {
   public async getSpiralAbyss(
     scheduleType: ScheduleType = ScheduleType.CURRENT
   ): Promise<Interface.SpiralAbyssResponse> {
+    /* c8 ignore start */
+    if (Object.values(ScheduleType).includes(scheduleType) === false) {
+      throw new HoyoError('The given scheduleType parameter is invalid !')
+    }
+    /* c8 ignore stop */
+
     this.request.setParams({
       server: this.region,
       role_id: this.uid,
