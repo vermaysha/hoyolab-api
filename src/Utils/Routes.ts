@@ -20,6 +20,9 @@ export class HoyolabRoutes {
     BaseURL.takumiUrl + '/binding/api/getUserGameRolesByCookie'
   static readonly recordsList =
     BaseURL.bbsUrl + '/game_record/card/wapi/getGameRecordCard'
+
+  static readonly redeem =
+    BaseURL.sgHke4Url + '/common/apicdkey/api/webExchangeCdkey'
 }
 
 export class GenshinRoutes {
