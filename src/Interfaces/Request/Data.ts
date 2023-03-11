@@ -1,9 +1,9 @@
 export interface Params {
-  [key: string | number]: string | number | null
+  [key: string | number]: string | number | null | number[] | string[]
 }
 
 export interface Body {
-  [key: string | number]: string | number | null
+  [key: string | number]: string | number | null | number[] | string[]
 }
 
 export interface Headers {
