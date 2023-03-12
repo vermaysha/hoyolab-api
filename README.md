@@ -49,12 +49,23 @@ For Yarn <br>
 
 ## Documentation
 
-<div align="center">
-
 [![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](/docs/ 'Go to project documentation')
-
-</div>
 
 ## License
 
-Released under [LGPL-2.1](/LICENSE) by [@vermaysha](https://github.com/vermaysha).
+@vermaysha/hoyolab-api
+Copyright (C) 2022 Ashary Vermaysha
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
