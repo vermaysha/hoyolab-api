@@ -3,6 +3,7 @@ name: test-package
 on:
   push:
     branches: [master]
+  pull_request:
 
 concurrency:
   group: 'build'
