@@ -3,7 +3,6 @@ name: build-package
 on:
   workflow_run:
     workflows: ['test-package']
-    branches: [master]
     types:
       - completed
 
