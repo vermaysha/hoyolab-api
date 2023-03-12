@@ -8,6 +8,9 @@
         <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/test.yml">
             <img src="https://img.shields.io/github/actions/workflow/status/vermaysha/hoyolab-api/test.yml?branch=master&amp;label=test&amp;style=flat-square" alt="GitHub Test Action Status">
         </a>
+        <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/test.yml">
+            <img src="https://raw.githubusercontent.com/vermaysha/hoyolab-api/gh-pages/badges.svg" alt="Coverage">
+        </a>
         <a href="https://www.npmjs.com/package/@vermaysha/hoyolab-api">
             <img src="https://img.shields.io/npm/dt/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Total Downloads">
         </a>
