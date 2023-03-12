@@ -6,7 +6,7 @@ on:
   pull_request:
 
 concurrency:
-  group: 'build'
+  group: 'test'
   cancel-in-progress: false
 
 jobs:
