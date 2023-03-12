@@ -2,11 +2,11 @@
   <h1>HoYoLab API - TypeScript/JavaScript HoYoLab API</h1>
 
   <p>
-        <a href="https://packagist.org/packages/vermaysha/hoyolab-api">
-            <img src="https://img.shields.io/npm/v/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Latest Version on Packagist">
-        </a>
         <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/build.yml">
             <img src="https://img.shields.io/github/actions/workflow/status/vermaysha/hoyolab-api/build.yml?branch=master&amp;label=build&amp;style=flat-square" alt="GitHub Build Action Status">
+        </a>
+        <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/test.yml">
+            <img src="https://img.shields.io/github/actions/workflow/status/vermaysha/hoyolab-api/test.yml?branch=master&amp;label=test&amp;style=flat-square" alt="GitHub Test Action Status">
         </a>
         <a href="https://www.npmjs.com/package/@vermaysha/hoyolab-api">
             <img src="https://img.shields.io/npm/dt/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Total Downloads">
@@ -14,11 +14,17 @@
         <a href="LICENSE.md">
             <img src="https://img.shields.io/github/license/vermaysha/hoyolab-api?style=flat-square" alt="LICENSE">
         </a>
-        <a href="https://github.com/vermaysha/hoyolab-api/releases/latest">
-            <img src="https://img.shields.io/github/release-date/vermaysha/hoyolab-api?style=flat-square" alt="GitHub Release Date - Published_At">
-        </a>
     </p>
-
+    <p>
+      <a href="https://packagist.org/packages/vermaysha/hoyolab-api">
+          <img src="https://img.shields.io/npm/v/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Latest Version on Packagist">
+      </a>
+      <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/vermaysha/hoyolab-api?label=github">
+      <a href="https://github.com/vermaysha/hoyolab-api/releases/latest">
+          <img src="https://img.shields.io/github/release-date/vermaysha/hoyolab-api?style=flat-square" alt="GitHub Release Date - Published_At">
+      </a>
+      <img alt="node-current" src="https://img.shields.io/node/v/@vermaysha/hoyolab-api?style=flat-square">
+    </p>
 </div>
 
 Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.
@@ -40,3 +46,15 @@ For Yarn <br>
    ```
 4. Once you've successfully ran the script, click the Click here to copy! button to copy the cookie.
 5. Finally, you can copy your cookie
+
+## Documentation
+
+<div align="center">
+
+[![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](/docs/ 'Go to project documentation')
+
+</div>
+
+## License
+
+Released under [LGPL-2.1](/LICENSE) by [@vermaysha](https://github.com/vermaysha).
