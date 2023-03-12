@@ -3,16 +3,23 @@ name: test-package
 on:
   push:
     branches: [master]
-  pull_request:
+  pull_request_target:
+    branches:
+      - master
 
 concurrency:
   group: 'test'
   cancel-in-progress: false
 
 jobs:
-  build:
+  test:
     name: Test Package
     runs-on: ubuntu-latest
+
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -43,4 +50,9 @@ jobs:
         run: npm run format
 
       - name: Running Test
-        run: npm test
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          coverage-file: report.json
+          base-coverage-file: report.json
+          test-script: npm test
+          skip-step: install
