@@ -52,7 +52,5 @@ jobs:
       - name: Running Test
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          coverage-file: report.json
-          base-coverage-file: report.json
           test-script: npm test
           skip-step: install
