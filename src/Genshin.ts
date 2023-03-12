@@ -9,7 +9,6 @@ import { DiaryMonth, DiaryType, ScheduleType } from './Enum'
 /**
  * Get data from Hoyolab API
  *
- * @throws {@link HoyoError} - if given UID is invalid
  * @category Main
  */
 export class Genshin extends Base {
@@ -23,6 +22,12 @@ export class Genshin extends Base {
    */
   protected readonly region: Types.Region
 
+  /**
+   * Get Genshin Impact some in-game data through HoYoLab API.
+   *
+   * @param options Options & GenshinOption
+   * @throws {@link   HoyoError} - if given UID or Cookie is invalid
+   */
   constructor(options: Options & GenshinOption) {
     super(options)
 
@@ -30,18 +35,34 @@ export class Genshin extends Base {
     this.region = ServerRegion.determineRegion(options.uid)
   }
 
+  /**
+   * Get daily check-in event information.
+   *
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getDailyInfo(): Promise<Interface.DailyInfoResponse> {
     const response = await this.request.send(GenshinRoutes.dailyInfo)
 
     return response.data
   }
 
+  /**
+   * Get daily check-in event all rewards.
+   *
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getDailyRewards(): Promise<Interface.DailyRewardsResponse> {
     const response = await this.request.send(GenshinRoutes.dailyRewards)
 
     return response.data
   }
 
+  /**
+   * Get daily check-in event single rewards.
+   *
+   * @param day Types.NumericRange<0, 30>
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getDailyReward(
     day: Types.NumericRange<0, 30> | null = null
   ): Promise<Interface.DailyRewardResponse> {
@@ -65,6 +86,11 @@ export class Genshin extends Base {
     throw new HoyoError('The selected day was not found !')
   }
 
+  /**
+   * Claim daily check-in event.
+   *
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async claimDaily(): Promise<Interface.DailyClaimResponse> {
     const response = await this.request.send(GenshinRoutes.dailyClaim, 'post')
 
@@ -104,6 +130,12 @@ export class Genshin extends Base {
   }
   /* c8 ignore stop */
 
+  /**
+   * Get all the characters owned by the user with complete information,
+   * such as: constellation, artefact, weapon, and skin.
+   *
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getCharacters(): Promise<Interface.CharacterResponse> {
     this.request.withDS()
     this.request.setBody({
@@ -116,6 +148,12 @@ export class Genshin extends Base {
     return response.data
   }
 
+  /**
+   * Displays a summary about the selected character.
+   *
+   * @param characterIds number[]
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getCharactersInfo(
     characterIds: number[]
   ): Promise<Interface.CharacterInfoResponse> {
@@ -134,6 +172,12 @@ export class Genshin extends Base {
     return response.data
   }
 
+  /**
+   * Get daily notes from character,
+   * such as: resins, expeditions, transformers recovery time.
+   *
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getDailyNotes(): Promise<Interface.DailyNotesResponse> {
     this.request.setParams({
       server: this.region,
@@ -146,6 +190,13 @@ export class Genshin extends Base {
     return response.data
   }
 
+  /**
+   * Get diary summary information,
+   * such as: current month obtained mora or primogems
+   *
+   * @param month DiaryMonth
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getDiaryInfo(
     month: DiaryMonth = DiaryMonth.CURRENT
   ): Promise<Interface.DiaryInfoResponse> {
@@ -167,6 +218,14 @@ export class Genshin extends Base {
     return response.data
   }
 
+  /**
+   * Get detailed diary information,
+   * such as: primogems history and mora history.
+   *
+   * @param type DiaryType
+   * @param month DiaryMonth
+   * @throws {@link HoyoError} - If an error occurs
+   */
   public async getDiaryDetail(
     type: DiaryType,
     month: DiaryMonth = DiaryMonth.CURRENT
@@ -229,6 +288,12 @@ export class Genshin extends Base {
     return response
   }
 
+  /**
+   * Get detailed spiral abyss information,
+   * such as: characters, max floor, total star, timestamp, etc.
+   *
+   * @param scheduleType ScheduleType
+   */
   public async getSpiralAbyss(
     scheduleType: ScheduleType = ScheduleType.CURRENT
   ): Promise<Interface.SpiralAbyssResponse> {
