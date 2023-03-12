@@ -1,6 +1,6 @@
 {
   "name": "@vermaysha/hoyolab-api",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.",
   "main": "dist/index.js",
   "module": "dist/index.js",
