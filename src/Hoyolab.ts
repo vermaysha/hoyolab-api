@@ -2,6 +2,7 @@ import { HoyoError } from './HoyoError'
 import { RecordCardResponse, GameListResponse } from './Interfaces/Hoyolab'
 import { Base } from './Base'
 import { HoyolabRoutes } from './Utils'
+import { Games } from './Enum'
 
 /**
  * Get data from Hoyolab API
@@ -15,7 +16,19 @@ export class Hoyolab extends Base {
    * @throws {@link HoyoError} - If the request error caused by this library
    * @throws {@link [AxiosError](https://github.com/axios/axios/blob/v1.x/lib/core/AxiosError.js)} - If the error is caused by the server
    */
-  public async getGames(): Promise<GameListResponse> {
+  public async getGames(games: Games = Games.ALL): Promise<GameListResponse> {
+    /* c8 ignore start */
+    if (Object.values(Games).includes(games) === false) {
+      throw new HoyoError('The given games parameter is invalid !')
+    }
+
+    if (games !== Games.ALL) {
+      this.request.setParams({
+        region: games,
+      })
+    }
+    /* c8 ignore stop */
+
     const response = await this.request.send(HoyolabRoutes.gamesList)
 
     return response.data
