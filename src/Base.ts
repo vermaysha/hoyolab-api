@@ -1,5 +1,5 @@
-import { OptionCookie, Options } from './Interfaces'
-import { Request } from './Utils'
+import { ICookie, Options } from './Interfaces'
+import { Cookie, Request } from './Utils'
 
 /**
  * This is the main class which contains built-in properties and methods.
@@ -13,7 +13,7 @@ export abstract class Base {
    *
    * @protected
    */
-  protected cookie: OptionCookie
+  protected cookie: ICookie
 
   /**
    * Request object
@@ -33,29 +33,6 @@ export abstract class Base {
       this.cookie.accountId = options.cookie.ltuid
     }
 
-    this.request = new Request(this.cookieString())
-  }
-
-  /**
-   * Generate Cookie string
-   *
-   * @returns string - Generated Cookie String
-   */
-  protected cookieString(): string {
-    const cookies: Array<string> = []
-    Object.entries(this.cookie).forEach(([key, value]) => {
-      if (value) {
-        if (['cookieToken', 'accountId'].includes(key)) {
-          key = key
-            .replace(/([A-Z])/g, ' $1')
-            .split(' ')
-            .join('_')
-            .toLowerCase()
-        }
-        cookies.push(`${key}=${value}`)
-      }
-    })
-
-    return cookies.join('; ')
+    this.request = new Request(Cookie.parseToString(options.cookie))
   }
 }
