@@ -17,6 +17,8 @@ jobs:
       # Checkout project repository
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.BUILD_TOKEN }}
 
       # Setup Node.js environment
       - name: Setup Node.js
@@ -48,7 +50,7 @@ jobs:
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
-          # Bump package pre-release version
+      # Bump package pre-release version
       # Use tag beta for pre-release versions
       - name: Bump pre-release version
         if: startsWith(github.event.inputs.release-type, 'pre')
