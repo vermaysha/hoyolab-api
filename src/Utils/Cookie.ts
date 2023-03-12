@@ -3,6 +3,12 @@ import { ICookie } from '../Interfaces'
 import { camel2Snake } from './String'
 
 export class Cookie {
+  /**
+   * Parse document.cookie string to acceptable object
+   *
+   * @param cookieString string
+   * @throws {@link HoyoError} - If an error occurs
+   */
   static parseFromString(cookieString: string): ICookie {
     const cookies = cookieString.match(/([^;\s?]+)=([^;]+)/gim)
 
@@ -59,6 +65,11 @@ export class Cookie {
     return cookie
   }
 
+  /**
+   * Parse Cookie object to cookie string
+   *
+   * @param cookie ICookie
+   */
   static parseToString(cookie: ICookie): string {
     if (!cookie.accountId) {
       cookie.accountId = cookie.ltuid
