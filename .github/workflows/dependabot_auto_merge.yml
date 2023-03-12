@@ -7,7 +7,7 @@ permissions:
 
 concurrency:
   group: 'depependabot-auto-merge'
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   dependabot:
