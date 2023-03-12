@@ -52,7 +52,7 @@ For Yarn <br>
 
 ## Documentation
 
-[![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](/docs/ 'Go to project documentation')
+[![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](https://vermaysha.github.io/hoyolab-api/stable/ 'Go to project documentation')
 
 ## License
 
