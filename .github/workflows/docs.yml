@@ -2,8 +2,7 @@ name: Publish Docs
 
 on:
   workflow_run:
-    workflows: ['build-package']
-    branches: [master]
+    workflows: ['Release package']
     types:
       - completed
 
