@@ -1,11 +1,8 @@
-name: build-package
+name: test-package
 
 on:
-  workflow_run:
-    workflows: ['test-package']
+  push:
     branches: [master]
-    types:
-      - completed
 
 concurrency:
   group: 'build'
@@ -34,5 +31,5 @@ jobs:
       - name: Format
         run: npm run format
 
-      - name: Build
-        run: npm run build:tsc
+      - name: Test package
+        run: npm test
