@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1678624629497" clover="3.2.0">
-  <project timestamp="1678624629498" name="All files">
-    <metrics statements="1188" coveredstatements="1188" conditionals="99" coveredconditionals="99" methods="36" coveredmethods="36" elements="1323" coveredelements="1323" complexity="0" loc="1188" ncloc="1188" packages="14" files="44" classes="44"/>
+<coverage generated="1678624691269" clover="3.2.0">
+  <project timestamp="1678624691269" name="All files">
+    <metrics statements="1207" coveredstatements="1207" conditionals="102" coveredconditionals="102" methods="36" coveredmethods="36" elements="1345" coveredelements="1345" complexity="0" loc="1207" ncloc="1207" packages="14" files="45" classes="45"/>
     <package name="src">
-      <metrics statements="458" coveredstatements="458" conditionals="39" coveredconditionals="39" methods="19" coveredmethods="19"/>
+      <metrics statements="471" coveredstatements="471" conditionals="41" coveredconditionals="41" methods="19" coveredmethods="19"/>
       <file name="Base.ts" path="/home/runner/work/hoyolab-api/hoyolab-api/src/Base.ts">
         <metrics statements="38" coveredstatements="38" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
@@ -419,7 +419,7 @@
         <line num="35" count="1" type="stmt"/>
       </file>
       <file name="Hoyolab.ts" path="/home/runner/work/hoyolab-api/hoyolab-api/src/Hoyolab.ts">
-        <metrics statements="46" coveredstatements="46" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <metrics statements="59" coveredstatements="59" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -437,22 +437,22 @@
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="20" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="22" count="1" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
+        <line num="25" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="26" count="1" type="stmt"/>
         <line num="27" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
-        <line num="30" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="31" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="34" count="1" type="stmt"/>
         <line num="35" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
@@ -462,10 +462,23 @@
         <line num="40" count="1" type="stmt"/>
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
-        <line num="43" count="1" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="55" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
       </file>
       <file name="index.ts" path="/home/runner/work/hoyolab-api/hoyolab-api/src/index.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -479,7 +492,7 @@
       </file>
     </package>
     <package name="src.Enum">
-      <metrics statements="16" coveredstatements="16" conditionals="3" coveredconditionals="3" methods="0" coveredmethods="0"/>
+      <metrics statements="22" coveredstatements="22" conditionals="4" coveredconditionals="4" methods="0" coveredmethods="0"/>
       <file name="DiaryMonth.ts" path="/home/runner/work/hoyolab-api/hoyolab-api/src/Enum/DiaryMonth.ts">
         <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="10" type="cond" truecount="1" falsecount="0"/>
@@ -495,6 +508,14 @@
         <line num="3" count="10" type="stmt"/>
         <line num="4" count="10" type="stmt"/>
       </file>
+      <file name="Games.ts" path="/home/runner/work/hoyolab-api/hoyolab-api/src/Enum/Games.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
+        <line num="1" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="2" count="10" type="stmt"/>
+        <line num="3" count="10" type="stmt"/>
+        <line num="4" count="10" type="stmt"/>
+        <line num="5" count="10" type="stmt"/>
+      </file>
       <file name="ScheduleType.ts" path="/home/runner/work/hoyolab-api/hoyolab-api/src/Enum/ScheduleType.ts">
         <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="10" type="cond" truecount="1" falsecount="0"/>
@@ -503,10 +524,11 @@
         <line num="4" count="10" type="stmt"/>
       </file>
       <file name="index.ts" path="/home/runner/work/hoyolab-api/hoyolab-api/src/Enum/index.ts">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.Interfaces">
