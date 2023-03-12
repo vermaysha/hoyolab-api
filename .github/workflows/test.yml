@@ -53,4 +53,3 @@ jobs:
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           test-script: npm test
-          skip-step: install
