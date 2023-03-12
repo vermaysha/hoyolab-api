@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals'
-import { Request } from '../src/Utils'
+import { Request } from '../../src/Utils'
 import axios from 'axios'
-import { HoyoError } from '../src'
+import { HoyoError } from '../../src'
 
 jest.mock('axios', () => jest.fn())
 
