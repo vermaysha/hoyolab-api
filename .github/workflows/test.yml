@@ -1,0 +1,46 @@
+name: test-package
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: 'build'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Test Package
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DEBUG: true
+          envkey_LTOKEN: ${{ secrets.LTOKEN }}
+          envkey_LTUID: ${{ secrets.LTUID }}
+          envkey_ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          envkey_COOKIE_TOKEN: ${{ secrets.COOKIE_TOKEN }}
+          envkey_UID: ${{ secrets.UID }}
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Format
+        run: npm run format
+
+      - name: Running Test
+        run: npm test
