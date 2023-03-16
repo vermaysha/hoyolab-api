@@ -315,7 +315,18 @@ export class Genshin extends Base {
     return response.data
   }
 
+  /**
+   *
+   * @param code String
+   * @throws {@link   HoyoError} - Error when accountId and cookieToken parameter is nullable
+   */
   public async redeemCode(code: string): Promise<Interface.RedeemResponse> {
+    if (!this.cookie.accountId || !this.cookie.cookieToken) {
+      throw new HoyoError(
+        'RedeemCode required accountId and cookieToken parameter!'
+      )
+    }
+
     this.request.setParams({
       uid: this.uid.toString().replace(/\uFFFD/g, ''),
       region: this.region.replace(/\uFFFD/g, ''),
