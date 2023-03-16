@@ -35,6 +35,18 @@ export class Genshin extends Base {
     this.region = ServerRegion.determineRegion(options.uid)
   }
 
+  public async getAccountInfo(): Promise<Interface.AccountResponse> {
+    this.request.withDS()
+    this.request.setParams({
+      role_id: this.uid,
+      server: this.region,
+    })
+
+    const response = await this.request.send(GenshinRoutes.accountInfo)
+
+    return response.data
+  }
+
   /**
    * Get daily check-in event information.
    *
