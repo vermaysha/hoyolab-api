@@ -52,9 +52,9 @@ export class Cookie {
         }
       })
 
-    if (cookie.ltoken === '' || cookie.ltoken === '') {
+    if (cookie.ltoken === '' || cookie.ltuid === '') {
       throw new HoyoError(
-        'The given cookieString paramter is not Hoyolab Cookie !'
+        'The given cookieString parameter is not Hoyolab Cookie !'
       )
     }
 
