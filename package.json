@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build:docs": "typedoc",
-    "build:tsc": "rimraf dist/ && tsc -b -f",
+    "build:tsc": "node ./script/build.js && npx tsc --emitDeclarationOnly",
     "build": "npm run build:tsc && npm run build:docs",
     "format": "prettier src/**/* -w",
     "lint": "npx eslint src/**/* --fix",
