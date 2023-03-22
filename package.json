@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/vermaysha/hoyolab-api#readme",
   "files": [
-    "dist/**/*.js"
+    "dist/**/*"
   ],
   "devDependencies": {
     "@jest/globals": "^29.5.0",
