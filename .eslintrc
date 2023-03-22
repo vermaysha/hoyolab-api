@@ -13,5 +13,6 @@
     "ecmaVersion": "latest"
   },
   "plugins": ["@typescript-eslint", "eslint-plugin-tsdoc"],
-  "root": true
+  "root": true,
+  "ignorePatterns": ["**/*.js"]
 }
