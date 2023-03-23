@@ -6,6 +6,8 @@ export class BaseURL {
   static readonly bbsReferrerUrl = 'https://www.hoyolab.com/'
   static readonly takumiUrl = 'https://api-os-takumi.hoyolab.com/'
   static readonly sgHke4Url = 'https://sg-hk4e-api.hoyolab.com/'
+  static readonly wikiUrl =
+    'https://sg-wiki-api.hoyolab.com/hoyowiki/genshin/wapi/'
 }
 
 /**
@@ -16,8 +18,7 @@ export class BaseURL {
  * @internal
  */
 export class HoyolabRoutes {
-  static readonly gamesList =
-    BaseURL.takumiUrl + '/binding/api/getUserGameRolesByCookie'
+  static readonly gamesList = `${BaseURL.takumiUrl}/binding/api/getUserGameRolesByCookie`
   static readonly recordsList =
     BaseURL.bbsUrl + '/game_record/card/wapi/getGameRecordCard'
 
@@ -50,4 +51,8 @@ export class GenshinRoutes {
   static readonly diaryInfo = BaseURL.sgHke4Url + '/event/ysledgeros/month_info'
   static readonly diaryDetail =
     BaseURL.sgHke4Url + '/event/ysledgeros/month_detail'
+}
+
+export class WikiRoutes {
+  static characters = BaseURL.wikiUrl + '/get_entry_page_list'
 }

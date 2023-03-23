@@ -41,10 +41,7 @@ export class Wiki {
       this.request.setReferer('https://wiki.hoyolab.com')
       this.request.setBody(body)
       this.request.withDS()
-      const res = await this.request.send(
-        'https://sg-wiki-api.hoyolab.com/hoyowiki/genshin/wapi/get_entry_page_list',
-        'post'
-      )
+      const res = await this.request.send('', 'post')
 
       responses.push(res.data)
       page++
