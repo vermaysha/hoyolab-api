@@ -7,7 +7,7 @@ export class BaseURL {
   static readonly takumiUrl = 'https://api-os-takumi.hoyolab.com/'
   static readonly sgHke4Url = 'https://sg-hk4e-api.hoyolab.com/'
   static readonly wikiUrl =
-    'https://sg-wiki-api.hoyolab.com/hoyowiki/genshin/wapi/'
+    'https://sg-wiki-api.hoyolab.com/hoyowiki/genshin/wapi/get_entry_page_list'
 
   static wikiRefererUrl = 'https://wiki.hoyolab.com'
 }
@@ -53,8 +53,4 @@ export class GenshinRoutes {
   static readonly diaryInfo = BaseURL.sgHke4Url + '/event/ysledgeros/month_info'
   static readonly diaryDetail =
     BaseURL.sgHke4Url + '/event/ysledgeros/month_detail'
-}
-
-export class WikiRoutes {
-  static characters = BaseURL.wikiUrl + '/get_entry_page_list'
 }
