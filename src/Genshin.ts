@@ -109,6 +109,7 @@ export class Genshin extends Base {
     const info = await this.getDailyInfo()
     const reward = await this.getDailyReward()
 
+    /* c8 ignore start */
     if (response.retcode === -5003) {
       return {
         status: "Traveller, you've already checked in today",
@@ -117,7 +118,6 @@ export class Genshin extends Base {
         info,
       }
     }
-    /* c8 ignore start */
 
     if (
       String(
