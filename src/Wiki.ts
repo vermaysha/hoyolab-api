@@ -1,9 +1,6 @@
 import { Body } from './Interfaces/Request/Data'
-import type {
-  WikiCharactersResponse,
-  WikiCharacterFilter,
-} from './Interfaces/Wiki'
-import { Request, WikiRoutes, BaseURL } from './Utils'
+import * as Interface from './Interfaces/Wiki'
+import { Request, BaseURL } from './Utils'
 
 export class Wiki {
   /**
@@ -20,17 +17,41 @@ export class Wiki {
   /**
    * Get list of all characters
    *
-   * @param filter WikiCharacterFilter
+   * @param filter Interface.WikiCharacterFilter | null
    */
   async getCharacters(
-    filter: WikiCharacterFilter | null = null
-  ): Promise<WikiCharactersResponse> {
-    const responses: Array<WikiCharactersResponse> = []
+    filter: Interface.WikiCharacterFilter | null = null
+  ): Promise<Interface.WikiCharactersResponse> {
+    return (await this.getData(filter, 2)) as Interface.WikiCharactersResponse
+  }
+
+  /**
+   * Get list of all weapons
+   *
+   * @param filter Interface.WikiWeaponFilter | null
+   */
+  async getWeapons(
+    filter: Interface.WikiWeaponFilter | null = null
+  ): Promise<Interface.WikiWeaponResponse> {
+    return (await this.getData(filter, 4)) as Interface.WikiWeaponResponse
+  }
+
+  /**
+   * Get data from HoyoWiki API
+   *
+   * @param filter object | null
+   * @param menu_id number
+   */
+  private async getData(filter: object | null, menu_id: number) {
+    const responses: {
+      list: object[]
+      total: string
+    }[] = []
     let page = 1
 
     do {
       const body: Body = {
-        menu_id: 2,
+        menu_id,
         use_es: true,
         page_size: 30,
         page_num: page,
@@ -41,7 +62,7 @@ export class Wiki {
       this.request.setReferer(BaseURL.wikiRefererUrl)
       this.request.setBody(body)
       this.request.withDS()
-      const res = await this.request.send(WikiRoutes.characters, 'post')
+      const res = await this.request.send(BaseURL.wikiUrl, 'post')
 
       responses.push(res.data)
       page++
