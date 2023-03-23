@@ -19,7 +19,7 @@
         </a>
     </p>
     <p>
-      <a href="https://packagist.org/packages/vermaysha/hoyolab-api">
+      <a href="https://www.npmjs.com/package/@vermaysha/hoyolab-api">
           <img src="https://img.shields.io/npm/v/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Latest Version on Packagist">
       </a>
       <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/vermaysha/hoyolab-api?label=github">
@@ -39,6 +39,35 @@ For NPM <br>
 
 For Yarn <br>
 `yarn install @vermaysha/hoyolab-api`
+
+## Features
+
+### HoYoLab API
+| Features                                                                                                    | Status                 |
+| ----------------------------------------------------------------------------------------------------------- | ---------------------- |
+| Displays a list of owned HoYoVerse game accounts                                                            |     :heavy_check_mark: |
+| Displays the exploration history of the HoYoVerse game account that is owned according to the selected game |     :heavy_check_mark: |
+
+### Genshin Impact API
+
+| Features                                                                                                                            | Status             |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| Get detailed information of the selected account, including character, statistics and exploration history                           | :heavy_check_mark: |
+| Get daily login information on the hoyolab page                                                                                     | :heavy_check_mark: |
+| Get prize list information for daily login                                                                                          | :heavy_check_mark: |
+| Make claims on daily login rewards                                                                                                  | :heavy_check_mark: |
+| Gets a full list of acquired characters, including weapons and artifacts used and constellations that have been acquired            | :heavy_check_mark: |
+| Get a list of daily resources including the daily resin that has been obtained, the status of transformation tools and teapot coins | :heavy_check_mark: |
+| Get the history of obtaining primogems and mora through the Diary feature                                                           | :heavy_check_mark: |
+| Obtain a complete history of the results of the current and previous Spiral Abyss challenge                                         | :heavy_check_mark: |
+| Claim the redeem code provided                                                                                                      | :heavy_check_mark: |
+
+### HoyoWiki (Genshin Impact)
+
+| Features                                               | Status             |
+| ------------------------------------------------------ | ------------------ |
+| Get complete data for all characters in genshin impact | :heavy_check_mark: |
+| Obtain complete data on all weapons in genshin impact  | :heavy_check_mark: |
 
 ## How to obtain HoYoLab Cookie
 
