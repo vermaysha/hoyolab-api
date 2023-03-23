@@ -1,10 +1,9 @@
-import { BaseURL } from './Utils/Routes'
 import { Body } from './Interfaces/Request/Data'
 import type {
   WikiCharactersResponse,
   WikiCharacterFilter,
 } from './Interfaces/Wiki'
-import { Request, WikiRoutes } from './Utils'
+import { Request, WikiRoutes, BaseURL } from './Utils'
 
 export class Wiki {
   /**
