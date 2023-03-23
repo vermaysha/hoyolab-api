@@ -4,7 +4,7 @@ import {
   WikiCharRarity,
   WikiCharRegion,
   WikiCharWeapon,
-} from '../../Enum/Wiki'
+} from '../../Enum/Wiki/Character'
 
 export interface WikiCharacterFilter {
   ascencion?: WikiCharAscencion
