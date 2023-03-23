@@ -27,7 +27,7 @@ export class Request {
    */
   private body: Body = {}
 
-  constructor(cookie: string) {
+  constructor(cookie: string | null = null) {
     this.headers = {
       'Content-Type': 'application/json',
       'User-Agent':
@@ -35,7 +35,10 @@ export class Request {
       'x-rpc-app_version': '1.5.0',
       'x-rpc-client_type': 5,
       'x-rpc-language': 'en-us',
-      Cookie: cookie,
+    }
+
+    if (cookie) {
+      this.headers.Cookie = cookie
     }
   }
 
