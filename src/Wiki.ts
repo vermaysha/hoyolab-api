@@ -1,9 +1,10 @@
+import { BaseURL } from './Utils/Routes'
 import { Body } from './Interfaces/Request/Data'
 import type {
   WikiCharactersResponse,
   WikiCharacterFilter,
 } from './Interfaces/Wiki'
-import { Request } from './Utils'
+import { Request, WikiRoutes } from './Utils'
 
 export class Wiki {
   /**
@@ -38,10 +39,10 @@ export class Wiki {
           filter && Object.keys(filter).length > 0 ? Object.values(filter) : [],
       }
 
-      this.request.setReferer('https://wiki.hoyolab.com')
+      this.request.setReferer(BaseURL.wikiRefererUrl)
       this.request.setBody(body)
       this.request.withDS()
-      const res = await this.request.send('', 'post')
+      const res = await this.request.send(WikiRoutes.characters, 'post')
 
       responses.push(res.data)
       page++
