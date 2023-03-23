@@ -1,5 +1,5 @@
 export * from './WikiCharAscencion'
 export * from './WikiCharRarity'
 export * from './WikiCharWeapon'
-export * from './WikiElemental'
-export * from './WikiRegion'
+export * from './WikiCharElemental'
+export * from './WikiCharRegion'
