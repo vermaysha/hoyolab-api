@@ -1,0 +1,39 @@
+{
+  "name": "@vermaysha/hoyolab-api",
+  "version": "3.0.0-beta",
+  "description": "Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vermaysha/hoyolab-api.git"
+  },
+  "keywords": [
+    "hoyolab-api",
+    "hoyolab",
+    "hoyoverse",
+    "api",
+    "hoyowiki",
+    "typescript",
+    "genshin-impact",
+    "genshin-api",
+    "honkai-api"
+  ],
+  "author": {
+    "name": "Ashary Vermaysha",
+    "email": "vermaysha@gmail.com"
+  },
+  "license": "LGPL-2.1-only",
+  "bugs": {
+    "url": "https://github.com/vermaysha/hoyolab-api/issues"
+  },
+  "homepage": "https://github.com/vermaysha/hoyolab-api#readme",
+  "files": [
+    "dist/**/*"
+  ],
+  "engines": {
+    "node": ">=14"
+  }
+}
