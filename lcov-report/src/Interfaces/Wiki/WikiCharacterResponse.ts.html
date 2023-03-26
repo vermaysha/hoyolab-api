@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/Interfaces/Genshin/SpiralAbyss/SpiralAbyssResponse.ts</title>
+    <title>Code coverage report for src/Interfaces/Wiki/WikiCharacterResponse.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../../prettify.css" />
-    <link rel="stylesheet" href="../../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">src/Interfaces/Genshin/SpiralAbyss</a> SpiralAbyssResponse.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/Interfaces/Wiki</a> WikiCharacterResponse.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>54/54</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>54/54</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
@@ -109,15 +109,7 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -163,67 +155,51 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export interface ISpiralRank {
-  avatar_id: number
-  avatar_icon: string
-  value: number
-  rarity: number
-}
-&nbsp;
-export interface ISpiralAvatar {
-  id: number
-  icon: string
-  level: number
-  rarity: number
-}
-&nbsp;
-export interface ISpiralBattle {
-  index: number
-  timestamp: string
-  avatars: ISpiralAvatar[]
-}
-&nbsp;
-export interface ISpiralLevel {
-  index: number
-  star: number
-  max_star: number
-  battles: ISpiralBattle[]
-}
-&nbsp;
-export interface ISpiralFloor {
-  index: number
-  icon: string
-  is_unlock: boolean
-  settle_time: string
-  star: number
-  max_star: number
-  levels: ISpiralLevel[]
-}
-&nbsp;
-export interface SpiralAbyssResponse {
-  schedule_id: number
-  start_time: string
-  end_time: string
-  total_battle_times: number
-  total_win_times: number
-  max_floor: string
-  reveal_rank: ISpiralRank[]
-  defeat_rank: ISpiralRank[]
-  damage_rank: ISpiralRank[]
-  take_damage_rank: ISpiralRank[]
-  normal_skill_rank: ISpiralRank[]
-  energy_skill_rank: ISpiralRank[]
-  floors: ISpiralFloor[]
-  total_star: number
-  is_unlock: boolean
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export interface WikiCharacterResponse {
+  id: string
+  name: string
+  desc: string
+  icon_url: string
+  header_img_url: string
+  modules: {
+    name: string
+    is_poped: boolean
+    components: {
+      component_id: string
+      layout: string
+      data: string
+      style: string
+    }[]
+    id: string
+    is_customize_name: boolean
+    is_abstract: boolean
+  }[]
+  filter_values: {
+    character_weapon?: {
+      values: string[]
+      value_types: { id: string; value: string }[]
+    }
+    character_rarity?: {
+      values: string[]
+      value_types: { id: string; value: string }[]
+    }
+    character_property?: {
+      values: string[]
+      value_types: { id: string; value: string }[]
+    }
+    character_vision?: {
+      values: string[]
+      value_types: { id: string; value: string }[]
+    }
+    character_region?: {
+      values: string
+      value_types: { id: string; value: string }[]
+    }
+  }
+  menu_id: string
+  menu_name: string
+  version: string
+  langs: [unknown]
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -232,16 +208,16 @@ export interface SpiralAbyssResponse {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-26T01:48:26.293Z
+                at 2023-03-26T01:47:58.723Z
             </div>
-        <script src="../../../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../../sorter.js"></script>
-        <script src="../../../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     
