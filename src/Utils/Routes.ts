@@ -8,7 +8,8 @@ export class BaseURL {
   static readonly sgHke4Url = 'https://sg-hk4e-api.hoyolab.com/'
   static readonly wikiUrl =
     'https://sg-wiki-api.hoyolab.com/hoyowiki/genshin/wapi/get_entry_page_list'
-
+  static readonly wikiEntryUrl =
+    'https://sg-wiki-api.hoyolab.com/hoyowiki/genshin/wapi/entry_page'
   static wikiRefererUrl = 'https://wiki.hoyolab.com'
 }
 
