@@ -26,6 +26,18 @@ export class Wiki {
   }
 
   /**
+   * Get character detailed data
+   *
+   * @param entry_id number
+   */
+  async getCharacter(
+    entry_id: number
+  ): Promise<Interface.WikiCharacterResponse> {
+    return (await this.getEntry(entry_id))
+      .page as Interface.WikiCharacterResponse
+  }
+
+  /**
    * Get list of all weapons
    *
    * @param filter Interface.WikiWeaponFilter | null
@@ -77,5 +89,22 @@ export class Wiki {
     })
 
     return response
+  }
+
+  /**
+   * Get entry data
+   *
+   * @param entry_id number
+   */
+  private async getEntry(entry_id: number) {
+    this.request.setReferer(BaseURL.wikiRefererUrl)
+    this.request.setParams({
+      entry_page_id: entry_id,
+    })
+    this.request.withDS()
+
+    const res = await this.request.send(BaseURL.wikiEntryUrl)
+
+    return res.data as { page: unknown }
   }
 }
