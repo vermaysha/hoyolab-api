@@ -1,4 +1,6 @@
 export * from './WikiCharactersResponse'
+export * from './WikiCharacterResponse'
 export * from './WikiCharacterFilter'
 export * from './WikiWeaponFilter'
 export * from './WikiWeaponResponse'
+export * from './WikiDetailWeaponResponse'
