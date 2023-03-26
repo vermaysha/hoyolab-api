@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+npm-debug.log
+*.orig
+dist
+.env
+coverage
+*.tgz
+docs
+*.ignore.ts
