@@ -32,4 +32,20 @@ describe('HoyoWiki API Test', () => {
       expect(game).toHaveProperty('filter_values')
     })
   })
+
+  it('Should be return detailed data', async () => {
+    const character = await client.getCharacter(3609)
+
+    expect(character).toHaveProperty('id')
+    expect(character).toHaveProperty('name')
+    expect(character).toHaveProperty('desc')
+    expect(character).toHaveProperty('icon_url')
+    expect(character).toHaveProperty('header_img_url')
+    expect(character).toHaveProperty('modules')
+    expect(character).toHaveProperty('filter_values')
+    expect(character).toHaveProperty('menu_id')
+    expect(character).toHaveProperty('menu_name')
+    expect(character).toHaveProperty('version')
+    expect(character).toHaveProperty('langs')
+  })
 })
