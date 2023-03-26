@@ -4,8 +4,7 @@
   "description": "Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vermaysha/hoyolab-api.git"
@@ -35,5 +34,15 @@
   ],
   "engines": {
     "node": ">=14"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.21.3",
+    "@types/prettier": "^2.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.6",
+    "typescript": "^5.0.2"
   }
 }
