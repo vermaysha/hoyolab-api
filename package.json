@@ -8,7 +8,9 @@
   "scripts": {
     "format": "prettier src/**/* -w",
     "lint": "npx eslint src/**/* --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:ts": "rimraf dist/ && tsc --build --listEmittedFiles",
+    "build": "npm run build:ts"
   },
   "repository": {
     "type": "git",
