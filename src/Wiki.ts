@@ -49,6 +49,18 @@ export class Wiki {
   }
 
   /**
+   * Get detailed weapon
+   *
+   * @param entry_id number
+   */
+  async getWeapon(
+    entry_id: number
+  ): Promise<Interface.WikiDetailWeaponResponse> {
+    return (await this.getEntry(entry_id))
+      .page as Interface.WikiDetailWeaponResponse
+  }
+
+  /**
    * Get data from HoyoWiki API
    *
    * @param filter object | null
