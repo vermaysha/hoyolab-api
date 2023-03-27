@@ -1,0 +1,1 @@
+export { Hoyolab } from './Hoyolab'
