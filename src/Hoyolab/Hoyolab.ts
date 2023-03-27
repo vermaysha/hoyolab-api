@@ -2,6 +2,7 @@ import { Cookie } from '../Cookie'
 import { ICookie, LanguageEnum } from '../Interfaces'
 import * as Interface from '../Interfaces/Hoyolab'
 import { Request } from '../Request'
+import { GAMES_ACCOUNT } from '../Routes'
 
 export class Hoyolab {
   private cookie: ICookie
@@ -18,6 +19,12 @@ export class Hoyolab {
     this.request.setLang(this.cookie.mi18nLang)
   }
 
+  /**
+   * Get games available accounts
+   *
+   * @param game {GamesEnum} Selected Game
+   * @returns Promise<Interface.IGame[]>
+   */
   public async getGamesList(
     game?: Interface.GamesEnum,
   ): Promise<Interface.IGame[]> {
@@ -31,9 +38,7 @@ export class Hoyolab {
       uid: this.cookie.ltuid,
       sLangKey: this.cookie.mi18nLang,
     })
-    const res = await this.request.send(
-      'https://api-account-os.hoyoverse.com/account/binding/api/getUserGameRolesByCookieToken',
-    )
+    const res = await this.request.send(GAMES_ACCOUNT)
     const data = res.data as Interface.IGamesList
 
     if (!res.data || !data.list) {
@@ -43,6 +48,12 @@ export class Hoyolab {
     return data.list as Interface.IGame[]
   }
 
+  /**
+   * Select one of highest level game account
+   *
+   * @param game {GameEnum} Selected Game
+   * @returns Promise<Interface.IGame>
+   */
   public async getGameAccount(
     game: Interface.GamesEnum,
   ): Promise<Interface.IGame> {
