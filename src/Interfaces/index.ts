@@ -1,3 +1,4 @@
-export { IResponse } from './IResponse'
-export { BodyType } from './BodyType'
-export { LanguageEnum } from './LanguageEnum'
+export type * from './IResponse'
+export type * from './ICookie'
+export type * from './BodyType'
+export * from './LanguageEnum'
