@@ -1,6 +1,8 @@
 export * from './helpers'
 export * from './Request'
+export { Cache } from './Cache'
 export * from './Interfaces'
 export { Hoyolab } from './Hoyolab'
+export { Genshin } from './Genshin'
 export * from './Cookie'
 export * as Route from './routes'

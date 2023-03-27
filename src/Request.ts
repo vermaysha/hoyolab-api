@@ -2,12 +2,13 @@ import got from 'got'
 import crypto from 'crypto'
 import { Headers, HTTPError, SearchParameters } from 'got'
 import { BodyType, IResponse, LanguageEnum } from './Interfaces'
+import Cache from './Cache'
 
 export class Request {
   private headers: Headers
   private body: BodyType
   private params: SearchParameters
-  private cache: Map<string, string>
+  private cache: typeof Cache
   private ds: boolean
 
   constructor(cookies: string | null = null) {
@@ -21,7 +22,7 @@ export class Request {
     }
     this.body = {}
     this.params = {}
-    this.cache = new Map()
+    this.cache = Cache
     this.ds = false
 
     if (cookies) this.headers.Cookie = cookies
