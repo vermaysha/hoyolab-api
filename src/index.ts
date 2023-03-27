@@ -1,6 +1,6 @@
 export * from './helpers'
 export * from './Request'
 export * from './Interfaces'
-export * from './Hoyolab'
+export { Hoyolab } from './Hoyolab'
 export * from './Cookie'
 export * as Route from './routes'

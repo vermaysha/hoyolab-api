@@ -1,8 +1,8 @@
-import { Cookie } from '../Cookie'
-import { ICookie, LanguageEnum } from '../Interfaces'
-import * as Interface from '../Interfaces/Hoyolab'
-import { Request } from '../Request'
-import { GAMES_ACCOUNT } from '../routes'
+import { Cookie } from './Cookie'
+import { ICookie, LanguageEnum } from './Interfaces'
+import * as Interface from './Interfaces/Hoyolab'
+import { Request } from './Request'
+import { GAMES_ACCOUNT } from './routes'
 
 export class Hoyolab {
   private cookie: ICookie
