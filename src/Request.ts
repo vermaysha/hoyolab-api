@@ -156,19 +156,21 @@ export class Request {
   private generateDS(): string {
     const salt = '6s25p5ox5y14umn1p61aqyyvbvvl3lrt'
     const date = new Date()
-    const t = Math.floor(date.getTime() / 1000)
+    const time = Math.floor(date.getTime() / 1000)
 
-    let r = ''
-    const char = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    let random = ''
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     for (let i = 0; i < 6; i++) {
-      r += char.charAt(Math.floor(Math.random() * char.length))
+      const randomIndex = Math.floor(Math.random() * characters.length)
+      const randomChar = characters.charAt(randomIndex)
+      random += randomChar
     }
 
-    const h = crypto
+    const hash = crypto
       .createHash('md5')
-      .update(`salt=${salt}&t=${t}&r=${r}`)
+      .update(`salt=${salt}&t=${time}&r=${random}`)
       .digest('hex')
 
-    return `${t},${r},${h}`
+    return `${time},${random},${hash}`
   }
 }
