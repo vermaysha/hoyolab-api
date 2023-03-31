@@ -1,3 +1,5 @@
+import { HoyolabError } from './HoyolabError'
+
 /**
  * Convert given string to camelCase
  *
@@ -24,4 +26,27 @@ export function toSnakeCase(text: string): string {
     .split(' ')
     .join('_')
     .toLowerCase()
+}
+
+/**
+ * Get Server Region by UID
+ *
+ * @param uid {number} Genshin UID
+ * @returns {string}
+ */
+export function genshinRegion(uid: number): string {
+  const server_region = Number(uid.toString().trim().slice(0, 1))
+
+  switch (server_region) {
+    case 6:
+      return 'os_usa'
+    case 7:
+      return 'os_euro'
+    case 8:
+      return 'os_asia'
+    case 9:
+      return 'os_cht'
+    default:
+      throw new HoyolabError(`Given UID ${uid} is invalid !`)
+  }
 }
