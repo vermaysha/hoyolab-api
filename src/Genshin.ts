@@ -3,9 +3,13 @@ import { Hoyolab } from './Hoyolab'
 import { HoyolabError } from './HoyolabError'
 import { GamesEnum, ICookie, LanguageEnum } from './Interfaces'
 import {
+  DiaryEnum,
+  DiaryMonthEnum,
   IGenshinCharacterSummary,
   IGenshinCharacters,
   IGenshinDailyNote,
+  IGenshinDiaryDetail,
+  IGenshinDiaryInfo,
   IGenshinOptions,
   IGenshinRecord,
   IGenshinSpiralAbyss,
@@ -185,5 +189,114 @@ export class Genshin {
     const res = (await this.request.send(Route.GENSHIN_DAILY_NOTE)).data
 
     return res as IGenshinDailyNote
+  }
+
+  /**
+   * Fetch genshin impact diary data
+   *
+   * @param month
+   * @returns {Promise<IGenshinDiaryInfo>}
+   */
+  async diaries(
+    month: DiaryMonthEnum = DiaryMonthEnum.CURRENT,
+  ): Promise<IGenshinDiaryInfo> {
+    if (!this.region || !this.uid) {
+      throw new HoyolabError('UID parameter is missing or failed to be filled')
+    }
+
+    /* c8 ignore start */
+    if (Object.values(DiaryMonthEnum).includes(month) === false) {
+      throw new HoyolabError('The given month parameter is invalid !')
+    }
+    /* c8 ignore stop */
+
+    this.request
+      .setParams({
+        region: this.region,
+        uid: this.uid,
+        month,
+      })
+      .setDs()
+
+    const res = (await this.request.send(Route.GENSHIN_DIARY)).data
+
+    return res as IGenshinDiaryInfo
+  }
+
+  /**
+   * Fetch history of received resources (primogems and mora) from diary
+   *
+   * @param type DiaryEnum
+   * @param month DiaryMonthEnum
+   * @returns {IGenshinDiaryDetail}
+   */
+  async diaryDetail(
+    type: DiaryEnum,
+    month: DiaryMonthEnum = DiaryMonthEnum.CURRENT,
+  ): Promise<IGenshinDiaryDetail> {
+    if (!this.region || !this.uid) {
+      throw new HoyolabError('UID parameter is missing or failed to be filled')
+    }
+
+    /* c8 ignore start */
+    if (Object.values(DiaryMonthEnum).includes(month) === false) {
+      throw new HoyolabError('The given month parameter is invalid !')
+    }
+
+    if (Object.values(DiaryEnum).includes(type) === false) {
+      throw new HoyolabError('The given type parameter is invalid !')
+    }
+    /* c8 ignore stop */
+
+    const responses: Partial<IGenshinDiaryDetail> = {}
+
+    let page = 1
+    let next = true
+    do {
+      this.request
+        .setParams({
+          region: this.region,
+          uid: this.uid,
+          month,
+          type,
+          current_page: page,
+          page_size: 100,
+        })
+        .setDs()
+
+      const res = (await (
+        await this.request.send(Route.GENSHIN_DIARY_DETAIL)
+      ).data) as IGenshinDiaryDetail
+
+      responses.uid = res.uid
+      responses.region = res.region
+      responses.optional_month = res.optional_month
+      responses.nickname = res.nickname
+      responses.data_month = res.data_month
+      responses.current_page = res.current_page
+      responses.list = [...(responses.list ?? []), ...res.list]
+
+      if (res.list.length < 1) {
+        next = false
+      }
+
+      page++
+    } while (next)
+
+    // Sort by date
+    responses.list.sort((a, b) => {
+      const keyA = new Date(a.time)
+      const keyB = new Date(b.time)
+
+      /* c8 ignore start */
+      // Compare the 2 dates
+      if (keyA < keyB) return -1
+      if (keyA > keyB) return 1
+      /* c8 ignore stop */
+
+      return 0
+    })
+
+    return responses as IGenshinDiaryDetail
   }
 }
