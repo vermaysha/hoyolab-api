@@ -3,6 +3,7 @@ import crypto from 'crypto'
 import { Headers, HTTPError, SearchParameters } from 'got'
 import { BodyType, IResponse, LanguageEnum } from './Interfaces'
 import Cache from './Cache'
+import { HoyolabError } from './HoyolabError'
 
 export class Request {
   private headers: Headers
@@ -110,7 +111,7 @@ export class Request {
 
     const main = got.extend({
       method,
-      cache: this.cache,
+      // cache: this.cache,
       retry: {
         limit: 30,
       },
@@ -138,7 +139,7 @@ export class Request {
       return result
     } catch (error) {
       if (error instanceof HTTPError) {
-        throw error
+        throw new HoyolabError(`[${error.code}] - ${error.message}`)
       } else {
         return {
           retcode: -9999,
