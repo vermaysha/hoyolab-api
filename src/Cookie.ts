@@ -1,3 +1,4 @@
+import { HoyolabError } from './HoyolabError'
 import { ICookie } from './Interfaces'
 import { toSnakeCase, toCamelCase } from './helpers'
 
@@ -31,7 +32,7 @@ export class Cookie {
     }
 
     if (!cookies.ltoken || !cookies.ltuid) {
-      throw new Error('Cookie key ltuid or ltoken doesnt exist !')
+      throw new HoyolabError('Cookie key ltuid or ltoken doesnt exist !')
     }
 
     if (!cookies.accountId) {
