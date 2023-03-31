@@ -5,5 +5,5 @@ export interface ICookie {
   ltuid: number
   cookieToken?: string | null
   accountId: number
-  mi18nLang?: LanguageEnum | null
+  mi18nLang?: LanguageEnum | string | null
 }
