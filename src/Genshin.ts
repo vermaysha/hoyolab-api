@@ -7,8 +7,12 @@ import {
   DiaryMonthEnum,
   IGenshinCharacterSummary,
   IGenshinCharacters,
+  IGenshinDailyInfo,
   IGenshinDailyNote,
+  IGenshinDailyReward,
+  IGenshinDailyRewards,
   IGenshinDiaryDetail,
+  IGenshinDailyClaim,
   IGenshinDiaryInfo,
   IGenshinOptions,
   IGenshinRecord,
@@ -24,20 +28,33 @@ export class Genshin {
   private request: Request
   public uid: number | null
   public region: string | null
+  public lang: LanguageEnum
 
   constructor(options: IGenshinOptions) {
     if (!options.lang) {
-      options.lang = LanguageEnum.ENGLISH
+      options.lang = this.parseLang(options.cookie.mi18nLang)
     }
+
     this.cookie = options.cookie
-    this.cookie.mi18nLang = options.lang
 
     this.request = new Request(Cookie.parseCookie(this.cookie))
-    this.request.setLang(this.cookie.mi18nLang)
     this.request.setReferer(Route.GENSHIN_GAME_RECORD_REFERER)
+    this.request.setLang(options.lang)
 
     this.uid = options.uid ?? null
     this.region = this.uid !== null ? genshinRegion(this.uid) : null
+    this.lang = options.lang
+  }
+
+  private parseLang(lang?: string | null): LanguageEnum {
+    if (!lang) {
+      return LanguageEnum.ENGLISH
+    }
+
+    const langKeys = Object.keys(LanguageEnum)
+    const matchingKey = langKeys.find((key) => LanguageEnum[key] === lang)
+
+    return matchingKey ? LanguageEnum[matchingKey] : LanguageEnum.ENGLISH
   }
 
   /**
@@ -298,5 +315,127 @@ export class Genshin {
     })
 
     return responses as IGenshinDiaryDetail
+  }
+
+  /**
+   * Fetch Daily login information
+   *
+   * @returns {Promise<IGenshinDailyInfo>}
+   */
+  async dailyInfo(): Promise<IGenshinDailyInfo> {
+    this.request
+      .setParams({
+        act_id: 'e202102251931481',
+        lang: this.lang,
+      })
+      .setLang(this.lang)
+
+    const res = (await this.request.send(Route.GENSHIN_DAILY_INFO)).data
+
+    return res as IGenshinDailyInfo
+  }
+
+  /**
+   * Fetch all rewards from daily login
+   *
+   * @returns {Promise<IGenshinDailyRewards>}
+   */
+  async dailyRewards(): Promise<IGenshinDailyRewards> {
+    this.request
+      .setParams({
+        act_id: 'e202102251931481',
+        lang: this.lang,
+      })
+      .setLang(this.lang)
+
+    const res = (await this.request.send(Route.GENSHIN_DAILY_REWARD)).data
+
+    return res as IGenshinDailyRewards
+  }
+
+  /**
+   * Fetch reward from daily login based on day
+   *
+   * @param day {number | null}
+   * @returns Promise<IGenshinDailyReward>
+   */
+  async dailyReward(day: number | null = null): Promise<IGenshinDailyReward> {
+    const response = await this.dailyRewards()
+
+    if (day === null) {
+      const now = new Date(Number(response.now) * 1000)
+      day = now.getDate()
+    }
+
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = date.getMonth()
+    const daysInMonth = new Date(year, month + 1, 0).getDate()
+
+    if (!(day > 0 && day <= daysInMonth)) {
+      throw new HoyolabError(`${day} is not a valid date in this month.`)
+    }
+
+    if (typeof response.awards[day - 1] !== undefined) {
+      return {
+        month: response.month,
+        now: response.now,
+        resign: response.resign,
+        award: response.awards[day - 1],
+      }
+    }
+
+    /* c8 ignore next 2 */
+    throw new HoyolabError('The selected day was not found !')
+  }
+
+  /**
+   * Claim current reward
+   *
+   * @returns {Promise<IGenshinDailyClaim>}
+   */
+  async dailyClaim(): Promise<IGenshinDailyClaim> {
+    this.request
+      .setParams({
+        act_id: 'e202102251931481',
+        lang: this.lang,
+      })
+      .setLang(this.lang)
+
+    const response = await this.request.send(Route.GENSHIN_DAILY_CLAIM, 'POST')
+
+    const info = await this.dailyInfo()
+    const reward = await this.dailyReward()
+
+    /* c8 ignore start */
+    if (response.retcode === -5003) {
+      return {
+        status: response.message,
+        code: -5003,
+        reward,
+        info,
+      }
+    }
+
+    if (
+      String((response.data as IGenshinDailyClaim).code).toLocaleLowerCase() ===
+        'ok' &&
+      response.retcode === 0
+    ) {
+      return {
+        status: response.message,
+        code: 0,
+        reward,
+        info,
+      }
+    }
+
+    return {
+      status: response.message,
+      code: response.retcode,
+      reward: null,
+      info,
+    }
+    /* c8 ignore stop */
   }
 }
