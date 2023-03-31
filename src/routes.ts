@@ -1,7 +1,7 @@
 const GENSHIN_GAME_RECORD_URL =
   'https://bbs-api-os.hoyolab.com/game_record/genshin/api'
 
-const GENSHIN_HKE_URL = 'https://sg-hk4e-api.hoyolab.com/'
+const GENSHIN_HKE_URL = 'https://sg-hk4e-api.hoyolab.com'
 
 export const GAMES_ACCOUNT =
   'https://api-account-os.hoyolab.com/account/binding/api/getUserGameRolesByCookieToken'
