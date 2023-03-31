@@ -5,3 +5,4 @@ export type * from './IGenshinDailyNote'
 export type * from './IGenshinSpiralAbyss'
 
 export * from './AbyssScheduleEnum'
+export * from './DiaryEnum'
