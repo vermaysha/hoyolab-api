@@ -104,6 +104,7 @@ export class Request {
       method === 'POST'
         ? got.extend({
             json: this.body,
+            searchParams: this.params,
           })
         : got.extend({
             searchParams: this.params,
