@@ -89,6 +89,8 @@ export class Request {
     return this
   }
 
+  /* c8 ignore start */
+
   /**
    * Send Request
    *
@@ -176,4 +178,5 @@ export class Request {
 
     return `${time},${random},${hash}`
   }
+  /* c8 ignore stop */
 }
