@@ -1,6 +1,6 @@
 import { HoyolabError } from './HoyolabError'
 import { ICookie } from './Interfaces'
-import { toSnakeCase, toCamelCase } from './helpers'
+import { toSnakeCase, toCamelCase, parseLang } from './helpers'
 
 export class Cookie {
   /**
@@ -24,19 +24,29 @@ export class Cookie {
     for (const element of cookieArr) {
       const cookie = element.trim().split('=')
       const cookieKey = cookie[0]
-      const cookieValue = decodeURIComponent(cookie[1])
+      let cookieValue: string | number = decodeURIComponent(cookie[1])
 
       if (keys.includes(cookieKey)) {
+        if (['ltuid', 'account_id'].includes(cookieKey)) {
+          cookieValue = parseInt(cookieValue)
+        }
+
+        if (cookieKey === 'mi18nLang') {
+          cookieValue = parseLang(cookieValue.toString())
+        }
+
         cookies[toCamelCase(cookieKey)] = cookieValue
       }
     }
 
-    if (!cookies.ltoken || !cookies.ltuid) {
-      throw new HoyolabError('Cookie key ltuid or ltoken doesnt exist !')
+    if (cookies.ltuid && !cookies.accountId) {
+      cookies.accountId = cookies.ltuid
+    } else if (!cookies.ltuid && cookies.accountId) {
+      cookies.ltuid = cookies.accountId
     }
 
-    if (!cookies.accountId) {
-      cookies.accountId = cookies.ltuid
+    if (!cookies.ltoken || !cookies.ltuid) {
+      throw new HoyolabError('Cookie key ltuid or ltoken doesnt exist !')
     }
 
     return cookies as ICookie
