@@ -1,4 +1,5 @@
 import { Cookie } from './Cookie'
+import { HoyolabError } from './HoyolabError'
 import { ICookie, LanguageEnum } from './Interfaces'
 import * as Interface from './Interfaces/Hoyolab'
 import { Request } from './Request'
@@ -6,8 +7,8 @@ import { parseLang } from './helpers'
 import { GAMES_ACCOUNT } from './routes'
 
 export class Hoyolab {
-  private cookie: ICookie
-  private request: Request
+  readonly cookie: ICookie
+  readonly request: Request
   public lang: LanguageEnum
 
   constructor(options: Interface.IHoyolabOptions) {
@@ -45,9 +46,13 @@ export class Hoyolab {
     const res = await this.request.send(GAMES_ACCOUNT)
     const data = res.data as Interface.IGamesList
 
+    /* c8 ignore start */
     if (!res.data || !data.list) {
-      throw Error('There is no game account on this hoyolab account !')
+      throw new HoyolabError(
+        'There is no game account on this hoyolab account !',
+      )
     }
+    /* c8 ignore stop */
 
     return data.list as Interface.IGame[]
   }
@@ -63,9 +68,13 @@ export class Hoyolab {
   ): Promise<Interface.IGame> {
     const games = await this.gamesList(game)
 
+    /* c8 ignore start */
     if (games.length < 1) {
-      throw Error('There is no game account on this hoyolab account !')
+      throw new HoyolabError(
+        'There is no game account on this hoyolab account !',
+      )
     }
+    /* c8 ignore stop */
 
     return games.reduce((first, second) => {
       return second.level > first.level ? second : first
