@@ -8,11 +8,11 @@ import { LanguageEnum } from './Interfaces'
  * @returns {string}
  */
 export function toCamelCase(str: string): string {
-  return str
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => {
-      return index === 0 ? word.toLowerCase() : word.toUpperCase()
-    })
-    .replace(/\s+|[-_]/g, '')
+  const words = str.split('_')
+  const camelCaseWords = words.map((word, index) => {
+    return index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+  })
+  return camelCaseWords.join('')
 }
 
 /**
