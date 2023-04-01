@@ -20,7 +20,7 @@ import {
 } from './Interfaces/Genshin'
 import { AbyssScheduleEnum } from './Interfaces/Genshin'
 import { Request } from './Request'
-import { genshinRegion } from './helpers'
+import { genshinRegion, parseLang } from './helpers'
 import * as Route from './routes'
 
 export class Genshin {
@@ -32,7 +32,7 @@ export class Genshin {
 
   constructor(options: IGenshinOptions) {
     if (!options.lang) {
-      options.lang = this.parseLang(options.cookie.mi18nLang)
+      options.lang = parseLang(options.cookie.mi18nLang)
     }
 
     this.cookie = options.cookie
@@ -44,17 +44,6 @@ export class Genshin {
     this.uid = options.uid ?? null
     this.region = this.uid !== null ? genshinRegion(this.uid) : null
     this.lang = options.lang
-  }
-
-  private parseLang(lang?: string | null): LanguageEnum {
-    if (!lang) {
-      return LanguageEnum.ENGLISH
-    }
-
-    const langKeys = Object.keys(LanguageEnum)
-    const matchingKey = langKeys.find((key) => LanguageEnum[key] === lang)
-
-    return matchingKey ? LanguageEnum[matchingKey] : LanguageEnum.ENGLISH
   }
 
   /**
@@ -71,7 +60,7 @@ export class Genshin {
         cookie: options.cookie,
       })
 
-      const game = await hoyolab.getGameAccount(GamesEnum.GENSHIN_IMPACT)
+      const game = await hoyolab.gameAccount(GamesEnum.GENSHIN_IMPACT)
       const uid = parseInt(game.game_uid)
 
       instance.uid = uid

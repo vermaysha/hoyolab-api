@@ -2,21 +2,25 @@ import { Cookie } from './Cookie'
 import { ICookie, LanguageEnum } from './Interfaces'
 import * as Interface from './Interfaces/Hoyolab'
 import { Request } from './Request'
+import { parseLang } from './helpers'
 import { GAMES_ACCOUNT } from './routes'
 
 export class Hoyolab {
   private cookie: ICookie
   private request: Request
+  public lang: LanguageEnum
 
   constructor(options: Interface.IHoyolabOptions) {
     if (!options.lang) {
-      options.lang = LanguageEnum.ENGLISH
+      options.lang = parseLang(options.cookie.mi18nLang)
     }
+
     this.cookie = options.cookie
-    this.cookie.mi18nLang = options.lang
 
     this.request = new Request(Cookie.parseCookie(this.cookie))
-    this.request.setLang(this.cookie.mi18nLang)
+    this.request.setLang(options.lang)
+
+    this.lang = options.lang
   }
 
   /**
@@ -25,7 +29,7 @@ export class Hoyolab {
    * @param game {GamesEnum} Selected Game
    * @returns Promise<Interface.IGame[]>
    */
-  public async getGamesList(
+  public async gamesList(
     game?: Interface.GamesEnum,
   ): Promise<Interface.IGame[]> {
     if (game) {
@@ -54,10 +58,10 @@ export class Hoyolab {
    * @param game {GameEnum} Selected Game
    * @returns Promise<Interface.IGame>
    */
-  public async getGameAccount(
+  public async gameAccount(
     game: Interface.GamesEnum,
   ): Promise<Interface.IGame> {
-    const games = await this.getGamesList(game)
+    const games = await this.gamesList(game)
 
     if (games.length < 1) {
       throw Error('There is no game account on this hoyolab account !')
