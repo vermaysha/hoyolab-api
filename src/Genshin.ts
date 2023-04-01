@@ -156,11 +156,9 @@ export class Genshin {
       throw new HoyolabError('UID parameter is missing or failed to be filled')
     }
 
-    /* c8 ignore start */
     if (Object.values(AbyssScheduleEnum).includes(scheduleType) === false) {
       throw new HoyolabError('The given scheduleType parameter is invalid !')
     }
-    /* c8 ignore stop */
 
     this.request
       .setParams({
@@ -210,11 +208,9 @@ export class Genshin {
       throw new HoyolabError('UID parameter is missing or failed to be filled')
     }
 
-    /* c8 ignore start */
     if (Object.values(DiaryMonthEnum).includes(month) === false) {
       throw new HoyolabError('The given month parameter is invalid !')
     }
-    /* c8 ignore stop */
 
     this.request
       .setParams({
@@ -244,7 +240,6 @@ export class Genshin {
       throw new HoyolabError('UID parameter is missing or failed to be filled')
     }
 
-    /* c8 ignore start */
     if (Object.values(DiaryMonthEnum).includes(month) === false) {
       throw new HoyolabError('The given month parameter is invalid !')
     }
@@ -252,7 +247,6 @@ export class Genshin {
     if (Object.values(DiaryEnum).includes(type) === false) {
       throw new HoyolabError('The given type parameter is invalid !')
     }
-    /* c8 ignore stop */
 
     const responses: Partial<IGenshinDiaryDetail> = {}
 
@@ -294,11 +288,9 @@ export class Genshin {
       const keyA = new Date(a.time)
       const keyB = new Date(b.time)
 
-      /* c8 ignore start */
       // Compare the 2 dates
       if (keyA < keyB) return -1
       if (keyA > keyB) return 1
-      /* c8 ignore stop */
 
       return 0
     })
@@ -396,7 +388,6 @@ export class Genshin {
     const info = await this.dailyInfo()
     const reward = await this.dailyReward()
 
-    /* c8 ignore start */
     if (response.retcode === -5003) {
       return {
         status: response.message,
@@ -425,6 +416,5 @@ export class Genshin {
       reward: null,
       info,
     }
-    /* c8 ignore stop */
   }
 }
