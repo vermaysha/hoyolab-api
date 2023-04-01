@@ -1,4 +1,5 @@
 import { HoyolabError } from './HoyolabError'
+import { LanguageEnum } from './Interfaces'
 
 /**
  * Convert given string to camelCase
@@ -49,4 +50,21 @@ export function genshinRegion(uid: number): string {
     default:
       throw new HoyolabError(`Given UID ${uid} is invalid !`)
   }
+}
+
+/**
+ * Parse string to LanguageEnum
+ *
+ * @param lang string | null
+ * @returns {LanguageEnum}
+ */
+export function parseLang(lang?: string | null): LanguageEnum {
+  if (!lang) {
+    return LanguageEnum.ENGLISH
+  }
+
+  const langKeys = Object.keys(LanguageEnum)
+  const matchingKey = langKeys.find((key) => LanguageEnum[key] === lang)
+
+  return matchingKey ? LanguageEnum[matchingKey] : LanguageEnum.ENGLISH
 }
