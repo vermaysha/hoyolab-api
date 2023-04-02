@@ -12,11 +12,16 @@ export class Hoyolab {
   public lang: LanguageEnum
 
   constructor(options: Interface.IHoyolabOptions) {
-    if (!options.lang) {
-      options.lang = parseLang(options.cookie.mi18nLang)
-    }
+    const cookie: ICookie =
+      typeof options.cookie === 'string'
+        ? Cookie.parseCookieString(options.cookie)
+        : options.cookie
 
-    this.cookie = options.cookie
+    this.cookie = cookie
+
+    if (!options.lang) {
+      options.lang = parseLang(cookie.mi18nLang)
+    }
 
     this.request = new Request(Cookie.parseCookie(this.cookie))
     this.request.setLang(options.lang)
