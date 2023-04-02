@@ -6,7 +6,7 @@ export class Cookie {
   /**
    * Parse Cookie string to ICookie Object
    *
-   * @param cookieString {string} String cookies sourced from the hoyolab page
+   * @param cookieString string String cookies sourced from the hoyolab page
    * @returns {ICookie}
    */
   static parseCookieString(cookieString: string): ICookie {
@@ -55,7 +55,7 @@ export class Cookie {
   /**
    * Parse Cookie object to cookie string
    *
-   * @param cookie {ICookie}
+   * @param cookie ICookie
    * @returns {string}
    */
   static parseCookie(cookie: ICookie): string {

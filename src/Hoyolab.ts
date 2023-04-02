@@ -32,8 +32,8 @@ export class Hoyolab {
   /**
    * Get games available accounts
    *
-   * @param game {GamesEnum} Selected Game
-   * @returns Promise<Interface.IGame[]>
+   * @param game GamesEnum Selected Game
+   * @returns {Promise<Interface.IGame[]>}
    */
   public async gamesList(
     game?: Interface.GamesEnum,
@@ -65,8 +65,8 @@ export class Hoyolab {
   /**
    * Select one of highest level game account
    *
-   * @param game {GameEnum} Selected Game
-   * @returns Promise<Interface.IGame>
+   * @param game GameEnum Selected Game
+   * @returns {Promise<Interface.IGame>}
    */
   public async gameAccount(
     game: Interface.GamesEnum,

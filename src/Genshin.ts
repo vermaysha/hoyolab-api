@@ -56,8 +56,8 @@ export class Genshin {
   /**
    * Create Genshin Object
    *
-   * @param options {IGenshinOptions} Options
-   * @returns Promise<Genshin>
+   * @param options IGenshinOptions Options
+   * @returns {Promise<Genshin>}
    */
   static async create(options: IGenshinOptions): Promise<Genshin> {
     const instance = new Genshin(options)
@@ -345,8 +345,8 @@ export class Genshin {
   /**
    * Fetch reward from daily login based on day
    *
-   * @param day {number | null}
-   * @returns Promise<IGenshinDailyReward>
+   * @param day number | null
+   * @returns {Promise<IGenshinDailyReward>}
    */
   async dailyReward(day: number | null = null): Promise<IGenshinDailyReward> {
     const response = await this.dailyRewards()

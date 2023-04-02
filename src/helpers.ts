@@ -4,7 +4,7 @@ import { LanguageEnum } from './Interfaces'
 /**
  * Convert given string to camelCase
  *
- * @param str {string} The string or text to convert
+ * @param str string The string or text to convert
  * @returns {string}
  */
 export function toCamelCase(str: string): string {
@@ -18,7 +18,7 @@ export function toCamelCase(str: string): string {
 /**
  * Transform camel case to snake case
  *
- * @param text {string} The string or text to convert
+ * @param text string The string or text to convert
  * @returns {string}
  */
 export function toSnakeCase(text: string): string {
@@ -32,7 +32,7 @@ export function toSnakeCase(text: string): string {
 /**
  * Get Server Region by UID
  *
- * @param uid {number} Genshin UID
+ * @param uid number Genshin UID
  * @returns {string}
  */
 export function genshinRegion(uid: number): string {

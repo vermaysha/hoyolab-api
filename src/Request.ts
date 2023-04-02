@@ -32,7 +32,7 @@ export class Request {
   /**
    * Set Referer Headers
    *
-   * @param url {string} URL string of referer
+   * @param url string URL string of referer
    * @returns {this}
    */
   public setReferer(url: string): this {
@@ -45,7 +45,7 @@ export class Request {
   /**
    * Set Body Paramter
    *
-   * @param body {Body} Body Parameters as object
+   * @param body Body Body Parameters as object
    * @returns {this}
    */
   public setBody(body: BodyType): this {
@@ -57,7 +57,7 @@ export class Request {
   /**
    * Set SearchParams or query parameter
    *
-   * @param params {SearchParameters} Object of query parameter
+   * @param params SearchParameters Object of query parameter
    * @returns {this}
    */
   public setParams(params: SearchParameters): this {
@@ -69,7 +69,7 @@ export class Request {
   /**
    * Set to used Dynamic Security or not
    *
-   * @param flag {boolean} Flag
+   * @param flag boolean Flag
    * @returns {this}
    */
   public setDs(flag = true): this {
@@ -80,7 +80,7 @@ export class Request {
   /**
    * Set Language
    *
-   * @param lang {Language} Language that used for return of API (default: Language.ENGLISH).
+   * @param lang Language Language that used for return of API (default: Language.ENGLISH).
    * @returns {this}
    */
   public setLang(lang: LanguageEnum = LanguageEnum.ENGLISH): this {
@@ -94,8 +94,8 @@ export class Request {
   /**
    * Send Request
    *
-   * @param url {string} URL String
-   * @param method {GET | POST} Method for request
+   * @param url string URL String
+   * @param method GET|POST Method for request
    * @returns {Promise<IResponse>}
    */
   public async send(
@@ -156,7 +156,7 @@ export class Request {
   /**
    * Generate Dynamic Security
    *
-   * @returns string
+   * @returns {string}
    */
   private generateDS(): string {
     const salt = '6s25p5ox5y14umn1p61aqyyvbvvl3lrt'
