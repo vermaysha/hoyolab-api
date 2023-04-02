@@ -10,7 +10,8 @@
     "lint": "npx eslint src/**/* --fix",
     "prepare": "husky install",
     "build:ts": "rimraf dist/ && tsc --build --listEmittedFiles",
-    "build": "npm run build:ts",
+    "build:docs": "typedoc",
+    "build": "npm run build:docs && npm run build:ts",
     "test": "c8 ava"
   },
   "repository": {
@@ -81,6 +82,11 @@
     "rimraf": "^4.4.1",
     "ts-node": "^10.9.1",
     "tsx": "^3.12.6",
+    "typedoc": "^0.23.28",
+    "typedoc-plugin-coverage": "^2.0.0",
+    "typedoc-plugin-extras": "^2.3.2",
+    "typedoc-plugin-mdn-links": "^3.0.3",
+    "typedoc-plugin-versions": "^0.2.3",
     "typescript": "^5.0.3"
   },
   "dependencies": {

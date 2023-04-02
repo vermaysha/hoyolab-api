@@ -1,0 +1,34 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "excludeExternals": false,
+  "requiredToBeDocumented": [
+    "Enum",
+    "EnumMember",
+    "Variable",
+    "Function",
+    "Class",
+    "Interface",
+    "Property",
+    "Method",
+    "Accessor",
+    "TypeAlias"
+  ],
+  "includeVersion": true,
+  "githubPages": true,
+  "searchInComments": true,
+  "theme": "default",
+  "plugin": [
+    "typedoc-plugin-versions",
+    "typedoc-plugin-extras",
+    "typedoc-plugin-mdn-links",
+    "typedoc-plugin-coverage"
+  ],
+  "customTitle": "HoYoLab API",
+  "customDescription": "An unofficial HoYoLab API Wrapper for getting Hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.",
+  "footerTypedocVersion": true,
+  "footerLastModified": true
+}
