@@ -25,7 +25,7 @@ export interface IGenshinDailyNote {
       Hour: number
       Minute: number
       Second: number
-      reached: true
+      reached: boolean
     }
     wiki: string
     noticed: boolean
