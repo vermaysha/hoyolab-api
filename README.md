@@ -1,12 +1,7 @@
-
-
 <div align="center">
   <h1>HoYoLab API - TypeScript/JavaScript HoYoLab API (ESM only)</h1>
 
   <p>
-        <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/build.yml">
-            <img src="https://img.shields.io/github/actions/workflow/status/vermaysha/hoyolab-api/build.yml?branch=master&amp;label=build&amp;style=flat-square" alt="GitHub Build Action Status">
-        </a>
         <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/test.yml">
             <img src="https://img.shields.io/github/actions/workflow/status/vermaysha/hoyolab-api/test.yml?branch=master&amp;label=test&amp;style=flat-square" alt="GitHub Test Action Status">
         </a>
@@ -42,15 +37,16 @@ For NPM <br>
 For Yarn <br>
 `yarn install @vermaysha/hoyolab-api`
 
-*Note: _This library only support ESM Mode_
+\*Note: _This library only support ESM Mode_
 
 ## Features
 
 ### HoYoLab API
-| Features                                                                                                    | Status                 |
-| ----------------------------------------------------------------------------------------------------------- | ---------------------- |
-| Displays a list of owned HoYoVerse game accounts                                                            |     :heavy_check_mark: |
-| Displays the exploration history of the HoYoVerse game account that is owned according to the selected game |     :heavy_check_mark: |
+
+| Features                                                                                                    | Status             |
+| ----------------------------------------------------------------------------------------------------------- | ------------------ |
+| Displays a list of owned HoYoVerse game accounts                                                            | :heavy_check_mark: |
+| Displays the exploration history of the HoYoVerse game account that is owned according to the selected game | :heavy_check_mark: |
 
 ### Genshin Impact API
 
@@ -65,7 +61,6 @@ For Yarn <br>
 | Get the history of obtaining primogems and mora through the Diary feature                                                           | :heavy_check_mark: |
 | Obtain a complete history of the results of the current and previous Spiral Abyss challenge                                         | :heavy_check_mark: |
 | Claim the redeem code provided                                                                                                      | :heavy_check_mark: |
-
 
 ## How to obtain HoYoLab Cookie
 
