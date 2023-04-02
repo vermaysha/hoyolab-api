@@ -12,7 +12,8 @@
     "build:ts": "rimraf dist/ && tsc --build --listEmittedFiles",
     "build:docs": "typedoc",
     "build": "npm run build:docs && npm run build:ts",
-    "test": "c8 ava && mv coverage/coverage-final.json coverage/report.json"
+    "test": "ava",
+    "test:coverage": "c8 ava"
   },
   "repository": {
     "type": "git",
