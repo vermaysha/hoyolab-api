@@ -13,8 +13,7 @@
     "build:docs": "typedoc",
     "build": "npm run build:docs && npm run build:ts",
     "test": "ava",
-    "test:coverage": "c8 ava",
-    "test:coverage-ci": "c8 ava && cp coverage/coverage-final.json report.json"
+    "test:coverage": "c8 ava"
   },
   "repository": {
     "type": "git",

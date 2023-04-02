@@ -49,10 +49,8 @@ jobs:
       - name: Format
         run: npm run format
 
-      - name: Running Test
-        uses: ArtiomTr/jest-coverage-report-action@v2
-        with:
-          test-script: npm run test:coverage-ci
+      - name: Test and Coverage
+        run: npm run test:coverage
 
       - name: Create Coverage Badges
         uses: jaywcjlove/coverage-badges-cli@main
