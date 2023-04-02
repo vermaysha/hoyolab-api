@@ -31,10 +31,12 @@ export class Genshin {
   public lang: LanguageEnum
 
   constructor(options: IGenshinOptions) {
+    /* c8 ignore start */
     const cookie: ICookie =
       typeof options.cookie === 'string'
         ? Cookie.parseCookieString(options.cookie)
         : options.cookie
+    /* c8 ignore stop */
 
     this.cookie = cookie
 

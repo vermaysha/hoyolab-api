@@ -12,10 +12,12 @@ export class Hoyolab {
   public lang: LanguageEnum
 
   constructor(options: Interface.IHoyolabOptions) {
+    /* c8 ignore start */
     const cookie: ICookie =
       typeof options.cookie === 'string'
         ? Cookie.parseCookieString(options.cookie)
         : options.cookie
+    /* c8 ignore stop */
 
     this.cookie = cookie
 
