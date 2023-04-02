@@ -48,7 +48,7 @@ export interface IGenshinCharacterCostume {
   icon: string
 }
 
-export interface IGenshinCharacterSummary {
+export interface IGenshinCharacterBase {
   id: number
   image: string
   icon: string
@@ -57,7 +57,7 @@ export interface IGenshinCharacterSummary {
   rarity: number
 }
 
-export interface IGenshinCharacterAvatarFull extends IGenshinCharacterSummary {
+export interface IGenshinCharacterAvatarFull extends IGenshinCharacterBase {
   fetter: number
   level: number
   weapon: IGenshinCharacterWeapon
@@ -82,7 +82,7 @@ export interface IGenshinCharacters {
 
 export interface IGenshinCharacterSummary {
   avatars: Array<
-    IGenshinCharacterSummary & {
+    IGenshinCharacterBase & {
       weapon_type: number
       weapon_type_name: string
     }
