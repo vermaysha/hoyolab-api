@@ -24,8 +24,8 @@ import { genshinRegion, parseLang } from './helpers'
 import * as Route from './routes'
 
 export class Genshin {
-  private cookie: ICookie
-  private request: Request
+  readonly cookie: ICookie
+  readonly request: Request
   public uid: number | null
   public region: string | null
   public lang: LanguageEnum
@@ -366,7 +366,6 @@ export class Genshin {
       }
     }
 
-    /* c8 ignore next 2 */
     throw new HoyolabError('The selected day was not found !')
   }
 
@@ -388,6 +387,7 @@ export class Genshin {
     const info = await this.dailyInfo()
     const reward = await this.dailyReward()
 
+    /* c8 ignore start */
     if (response.retcode === -5003) {
       return {
         status: response.message,
@@ -417,4 +417,5 @@ export class Genshin {
       info,
     }
   }
+  /* c8 ignore stop */
 }
