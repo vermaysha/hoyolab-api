@@ -52,7 +52,7 @@ jobs:
       - name: Running Test
         uses: ArtiomTr/jest-coverage-report-action@v2
         with:
-          test-script: npm test:coverage && cp coverage/coverage-final.json report.json
+          test-script: npm run test:coverage && cp coverage/coverage-final.json report.json
 
       - name: Create Coverage Badges
         uses: jaywcjlove/coverage-badges-cli@main
