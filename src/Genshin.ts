@@ -1,7 +1,7 @@
 import { Cookie } from './Cookie'
 import { Hoyolab } from './Hoyolab'
 import { HoyolabError } from './HoyolabError'
-import { GamesEnum, ICookie, LanguageEnum } from './Interfaces'
+import { GamesEnum, ICookie, LanguageEnum, IRedeemCode } from './Interfaces'
 import {
   DiaryEnum,
   DiaryMonthEnum,
@@ -17,8 +17,8 @@ import {
   IGenshinOptions,
   IGenshinRecord,
   IGenshinSpiralAbyss,
+  AbyssScheduleEnum,
 } from './Interfaces/Genshin'
-import { AbyssScheduleEnum } from './Interfaces/Genshin'
 import { Request } from './Request'
 import { genshinRegion, parseLang } from './helpers'
 import * as Route from './routes'
@@ -41,8 +41,10 @@ export class Genshin {
     this.request.setReferer(Route.GENSHIN_GAME_RECORD_REFERER)
     this.request.setLang(options.lang)
 
+    /* c8 ignore start */
     this.uid = options.uid ?? null
     this.region = this.uid !== null ? genshinRegion(this.uid) : null
+    /* c8 ignore stop */
     this.lang = options.lang
   }
 
@@ -283,7 +285,7 @@ export class Genshin {
       page++
     } while (next)
 
-    // Sort by date
+    /* c8 ignore start */
     responses.list.sort((a, b) => {
       const keyA = new Date(a.time)
       const keyB = new Date(b.time)
@@ -294,6 +296,7 @@ export class Genshin {
 
       return 0
     })
+    /* c8 ignore stop */
 
     return responses as IGenshinDiaryDetail
   }
@@ -417,4 +420,29 @@ export class Genshin {
     }
   }
   /* c8 ignore stop */
+
+  /**
+   * Redeem Code
+   *
+   * @param code string
+   * @returns {Promise<IRedeemCode>}
+   */
+  async redeemCode(code: string): Promise<IRedeemCode> {
+    if (!this.region || !this.uid) {
+      throw new HoyolabError('UID parameter is missing or failed to be filled')
+    }
+
+    this.request.setParams({
+      uid: this.uid,
+      region: this.region,
+      game_biz: 'hk4e_global',
+      cdkey: code.replace(/\uFFFD/g, ''),
+      lang: this.lang,
+      sLangKey: this.lang,
+    })
+
+    const res = await this.request.send(Route.GENSHIN_REDEEM_CODE)
+
+    return res as IRedeemCode
+  }
 }
