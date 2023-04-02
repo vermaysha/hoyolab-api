@@ -19,3 +19,5 @@ export const GENSHIN_DIARY_DETAIL = `${GENSHIN_HKE_URL}/event/ysledgeros/month_d
 export const GENSHIN_DAILY_INFO = `${GENSHIN_HKE_URL}/event/sol/info`
 export const GENSHIN_DAILY_REWARD = `${GENSHIN_HKE_URL}/event/sol/home`
 export const GENSHIN_DAILY_CLAIM = `${GENSHIN_HKE_URL}/event/sol/sign`
+
+export const GENSHIN_REDEEM_CODE = `${GENSHIN_HKE_URL}/common/apicdkey/api/webExchangeCdkey`
