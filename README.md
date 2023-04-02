@@ -19,7 +19,7 @@
       <a href="https://www.npmjs.com/package/@vermaysha/hoyolab-api">
           <img src="https://img.shields.io/npm/v/@vermaysha/hoyolab-api.svg?style=flat-square" alt="Latest Version on Packagist">
       </a>
-      <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/vermaysha/hoyolab-api?label=github">
+      <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/vermaysha/hoyolab-api/master?style=flat-square&label=github">
       <a href="https://github.com/vermaysha/hoyolab-api/releases/latest">
           <img src="https://img.shields.io/github/release-date/vermaysha/hoyolab-api?style=flat-square" alt="GitHub Release Date - Published_At">
       </a>
