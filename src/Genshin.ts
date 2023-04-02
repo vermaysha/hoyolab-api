@@ -353,20 +353,19 @@ export class Genshin {
     const month = date.getMonth()
     const daysInMonth = new Date(year, month + 1, 0).getDate()
 
-    if (!(day > 0 && day <= daysInMonth)) {
+    if (
+      !(day > 0 && day <= daysInMonth) ||
+      typeof response.awards[day - 1] === undefined
+    ) {
       throw new HoyolabError(`${day} is not a valid date in this month.`)
     }
 
-    if (typeof response.awards[day - 1] !== undefined) {
-      return {
-        month: response.month,
-        now: response.now,
-        resign: response.resign,
-        award: response.awards[day - 1],
-      }
+    return {
+      month: response.month,
+      now: response.now,
+      resign: response.resign,
+      award: response.awards[day - 1],
     }
-
-    throw new HoyolabError('The selected day was not found !')
   }
 
   /**
