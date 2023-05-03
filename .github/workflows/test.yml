@@ -2,11 +2,11 @@ name: test-package
 
 on:
   workflow_dispatch:
-#   push:
-#     branches: [master]
-#   pull_request_target:
-#     branches:
-#       - master
+  push:
+    branches: [master]
+  pull_request_target:
+    branches:
+      - master
 
 concurrency:
   group: 'test'
