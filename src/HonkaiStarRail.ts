@@ -14,7 +14,7 @@ import {
   IHsrOptions,
 } from './Interfaces/Hsr'
 
-export class StarRail {
+export class HonkaiStarRail {
   readonly cookie: ICookie
   readonly request: Request
   public uid: number | null
