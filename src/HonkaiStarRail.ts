@@ -50,10 +50,10 @@ export class HonkaiStarRail {
    * Create StarRails Object
    *
    * @param options IHsrOptions Options
-   * @returns {Promise<StarRail>}
+   * @returns {Promise<HonkaiStarRail>}
    */
-  static async create(options: IHsrOptions): Promise<StarRail> {
-    const instance = new StarRail(options)
+  static async create(options: IHsrOptions): Promise<HonkaiStarRail> {
+    const instance = new HonkaiStarRail(options)
 
     if (instance.uid === null) {
       const hoyolab = new Hoyolab({
