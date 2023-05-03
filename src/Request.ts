@@ -1,14 +1,13 @@
-import got from 'got'
-import crypto from 'crypto'
-import { Headers, HTTPError, SearchParameters } from 'got'
+import axios, { AxiosRequestConfig, AxiosError } from 'axios'
+import md5 from 'md5'
 import { BodyType, IResponse, LanguageEnum } from './Interfaces'
 import Cache from './Cache'
 import { HoyolabError } from './HoyolabError'
 
 export class Request {
-  private headers: Headers
+  private headers: BodyType
   private body: BodyType
-  private params: SearchParameters
+  private params: BodyType
   private cache: typeof Cache
   private ds: boolean
 
@@ -57,10 +56,10 @@ export class Request {
   /**
    * Set SearchParams or query parameter
    *
-   * @param params SearchParameters Object of query parameter
+   * @param params BodyType Object of query parameter
    * @returns {this}
    */
-  public setParams(params: SearchParameters): this {
+  public setParams(params: BodyType): this {
     this.params = { ...this.params, ...params }
 
     return this
@@ -102,46 +101,32 @@ export class Request {
     url: string,
     method: 'GET' | 'POST' = 'GET',
   ): Promise<IResponse> {
-    const bodyOrParam =
-      method === 'POST'
-        ? got.extend({
-            json: this.body,
-            searchParams: this.params,
-          })
-        : got.extend({
-            searchParams: this.params,
-          })
+    if (this.ds) {
+      this.headers.DS = this.generateDS()
+    }
 
-    const main = got.extend({
+    const config: AxiosRequestConfig = {
       method,
-      // cache: this.cache,
-      retry: {
-        limit: 30,
-      },
-      headers: this.headers,
+      params: this.params,
+      headers: this.headers as object,
       responseType: 'json',
-    })
+    }
 
-    const hook = got.extend({
-      hooks: {
-        beforeRequest: [
-          (options) => {
-            if (this.ds) options.headers.DS = this.generateDS()
-          },
-        ],
-      },
-    })
+    if (method === 'POST') {
+      config.data = this.body
+    }
 
     try {
-      const request = got.extend(hook, main, bodyOrParam)
+      const request = (await axios(url, config)).data
 
-      const result = (await request(url).json()) as IResponse
+      const result = (await request) as IResponse
 
       this.body = {}
 
       return result
     } catch (error) {
-      if (error instanceof HTTPError) {
+      if (error instanceof AxiosError) {
+        console.log(error)
         throw new HoyolabError(`[${error.code}] - ${error.message}`)
       } else {
         return {
@@ -171,10 +156,9 @@ export class Request {
       random += randomChar
     }
 
-    const hash = crypto
-      .createHash('md5')
-      .update(`salt=${salt}&t=${time}&r=${random}`)
-      .digest('hex')
+    const hash = md5(`salt=${salt}&t=${time}&r=${random}`, {
+      encoding: 'hex',
+    })
 
     return `${time},${random},${hash}`
   }
