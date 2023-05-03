@@ -20,7 +20,7 @@ import {
   AbyssScheduleEnum,
 } from './Interfaces/Genshin'
 import { Request } from './Request'
-import { genshinRegion, parseLang } from './helpers'
+import { getServerRegion, parseLang } from './helpers'
 import * as Route from './routes'
 
 export class Genshin {
@@ -50,7 +50,7 @@ export class Genshin {
 
     /* c8 ignore start */
     this.uid = options.uid ?? null
-    this.region = this.uid !== null ? genshinRegion(this.uid) : null
+    this.region = this.uid !== null ? getServerRegion(this.uid) : null
     /* c8 ignore stop */
     this.lang = options.lang
   }
@@ -73,7 +73,7 @@ export class Genshin {
       const uid = parseInt(game.game_uid)
 
       instance.uid = uid
-      instance.region = genshinRegion(uid)
+      instance.region = getServerRegion(uid)
     }
 
     return instance
