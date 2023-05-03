@@ -32,10 +32,10 @@ export function toSnakeCase(text: string): string {
 /**
  * Get Server Region by UID
  *
- * @param uid number Genshin UID
+ * @param uid number UID
  * @returns {string}
  */
-export function genshinRegion(uid: number): string {
+export function getServerRegion(uid: number): string {
   const server_region = Number(uid.toString().trim().slice(0, 1))
 
   switch (server_region) {
