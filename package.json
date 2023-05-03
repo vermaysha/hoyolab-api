@@ -2,6 +2,8 @@
   "name": "@vermaysha/hoyolab-api",
   "version": "3.1.1",
   "description": "Its unofficial HoYoLab API Wrapper for getting hoyoverse some in-game data, including Genshin Impact, Honkai Impact 3rd.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.esm",
@@ -60,13 +62,11 @@
       "tests/**/*.test.ts"
     ],
     "timeout": "5m",
-    "extensions": {
-      "ts": "module"
-    },
-    "nodeArguments": [
-      "--loader=ts-node/esm",
-      "--experimental-specifier-resolution=node",
-      "--no-warnings"
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
     ]
   },
   "devDependencies": {
