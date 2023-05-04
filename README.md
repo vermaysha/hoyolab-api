@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>HoYoLab API - TypeScript/JavaScript HoYoLab API (ESM only)</h1>
+  <h1>HoYoLab API - TypeScript/JavaScript HoYoLab API</h1>
 
   <p>
         <a href="https://github.com/vermaysha/hoyolab-api/actions/workflows/test.yml">
