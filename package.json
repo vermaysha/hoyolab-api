@@ -18,8 +18,9 @@
     "build:ts": "tsup",
     "build:docs": "typedoc",
     "build": "npm run build:docs && npm run build:ts",
-    "test": "ava",
-    "test:coverage": "c8 ava"
+    "test": "npm run type-check && ava",
+    "test:coverage": "npm run type-check && c8 ava",
+    "type-check": "tsc"
   },
   "repository": {
     "type": "git",
