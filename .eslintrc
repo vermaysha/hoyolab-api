@@ -12,7 +12,14 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "root": true,
-  "ignorePatterns": ["**/*.js"]
+  "ignorePatterns": [
+    "**/*.js"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off"
+  }
 }

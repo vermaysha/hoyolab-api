@@ -1,6 +1,0 @@
-export type * from './IResponse'
-export type * from './ICookie'
-export type * from './BodyType'
-export type * from './IRedeemCode'
-export * from './LanguageEnum'
-export * from './Hoyolab'
