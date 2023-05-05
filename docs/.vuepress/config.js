@@ -1,7 +1,7 @@
 const { name, description, repository } = require('../../package.json')
 
 const repo =
-  repository.url.match(/github\.com\/([\w-]+\/[\w-]+)\.git$/)[1] ?? null
+  repository.url.match(/github\.com\/([\w-]+\/[\w-]+)\.git$/)?.[1] ?? undefined
 
 module.exports = {
   /**
@@ -11,7 +11,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
-  description: description,
+  description,
 
   dest: 'docs/dist',
 
