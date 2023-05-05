@@ -6,6 +6,8 @@ dist
 .env
 coverage
 *.tgz
-docs
 *.ignore.ts
 .vscode
+.cache
+.temp
+docs/api
