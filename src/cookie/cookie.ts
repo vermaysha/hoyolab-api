@@ -3,15 +3,23 @@ import { ICookie } from './cookie.interface'
 import { toSnakeCase, toCamelCase } from './cookie.helper'
 import { Language } from '../language'
 
+/**
+ * Represents a cookie object.
+ *
+ * @class
+ * @category Main
+ */
 export class Cookie {
   /**
-   * Parse Cookie string to ICookie Object
+   * Parses a cookie string and returns a parsed ICookie object.
    *
-   * @param cookieString string String cookies sourced from the hoyolab page
-   * @returns {ICookie}
+   * @param cookieString - The cookie string to be parsed.
+   * @returns {string} - A parsed ICookie object.
+   * @throws {HoyolabError} when ltuid or ltoken keys are not found in the cookie string.
    */
   static parseCookieString(cookieString: string): ICookie {
     const cookies: Partial<ICookie> = {}
+
     const keys: string[] = [
       'ltoken',
       'ltuid',
@@ -20,25 +28,22 @@ export class Cookie {
       'mi18nLang',
     ]
 
-    const cookieArr = cookieString.split(';')
-
-    for (const element of cookieArr) {
-      const cookie = element.trim().split('=')
-      const cookieKey = cookie[0]
-      let cookieValue: string | number = decodeURIComponent(cookie[1])
-
+    cookieString.split(';').forEach((cookie) => {
+      const [cookieKey, cookieValue] = cookie.trim().split('=')
       if (keys.includes(cookieKey)) {
-        if (['ltuid', 'account_id'].includes(cookieKey)) {
-          cookieValue = parseInt(cookieValue)
+        cookies[toCamelCase(cookieKey)] = decodeURIComponent(cookieValue)
+        if (cookieKey === 'ltuid' || cookieKey === 'account_id') {
+          cookies[toCamelCase(cookieKey)] = parseInt(
+            cookies[toCamelCase(cookieKey)],
+            10,
+          )
+        } else if (cookieKey === 'mi18nLang') {
+          cookies[toCamelCase(cookieKey)] = Language.parseLang(
+            cookies[toCamelCase(cookieKey)].toString(),
+          )
         }
-
-        if (cookieKey === 'mi18nLang') {
-          cookieValue = Language.parseLang(cookieValue.toString())
-        }
-
-        cookies[toCamelCase(cookieKey)] = cookieValue
       }
-    }
+    })
 
     if (cookies.ltuid && !cookies.accountId) {
       cookies.accountId = cookies.ltuid
@@ -54,10 +59,10 @@ export class Cookie {
   }
 
   /**
-   * Parse Cookie object to cookie string
-   *
-   * @param cookie ICookie
-   * @returns {string}
+   * Converts an `ICookie` object into a cookie string.
+   * @param {ICookie} cookie - The `ICookie` object to convert.
+   * @returns {string} A string representing the cookie.
+   * @throws {HoyolabError} If the `ltuid` or `ltoken` key is missing in the `ICookie` object.
    */
   static parseCookie(cookie: ICookie): string {
     if (!cookie.accountId) {

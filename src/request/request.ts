@@ -10,13 +10,44 @@ import Cache from './request.cache'
 import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 import { generateDS } from './request.ds'
 
+/**
+ * Class for handling HTTP requests with customizable headers, body, and parameters.
+ *
+ * @class
+ * @internal
+ * @category Internal
+ */
 export class Request {
+  /*
+   * Headers for the request.
+   */
   private headers: RequestHeaderType
+
+  /**
+   * Body of the request.
+   */
   private body: RequestBodyType
+
+  /**
+   * Query parameters for the request.
+   */
   private params: RequestParamType
+
+  /**
+   * The cache used for the request
+   */
   private cache: typeof Cache
+
+  /**
+   * Flag indicating whether Dynamic Security is used.
+   */
   private ds: boolean
 
+  /**
+   * Constructor for the Request class.
+   *
+   * @param cookies - A string of cookies to be added to the request headers (default: null).
+   */
   constructor(cookies: string | null = null) {
     this.headers = {
       'Content-Type': 'application/json',
@@ -37,10 +68,10 @@ export class Request {
   /**
    * Set Referer Headers
    *
-   * @param url string URL string of referer
-   * @returns {this}
+   * @param url - The URL string of referer
+   * @returns The updated Request instance.
    */
-  public setReferer(url: string): this {
+  public setReferer(url: string): Request {
     this.headers.Referer = url
     this.headers.Origin = url
 
@@ -48,24 +79,24 @@ export class Request {
   }
 
   /**
-   * Set Body Paramter
+   * Set Body Parameter
    *
-   * @param body RequestBodyType Body Parameters as object
-   * @returns {this}
+   * @param body - RequestBodyType as object containing the body parameters.
+   * @returns This instance of Request object.
    */
-  public setBody(body: RequestBodyType): this {
+  public setBody(body: RequestBodyType): Request {
     this.body = { ...this.body, ...body }
 
     return this
   }
 
   /**
-   * Set SearchParams or query parameter
+   * Sets search parameters or query parameter.
    *
-   * @param params RequestParamType Object of query parameter
-   * @returns {this}
+   * @param params - An object of query parameter to be set.
+   * @returns {Request} - Returns this Request object.
    */
-  public setParams(params: RequestParamType): this {
+  public setParams(params: RequestParamType): Request {
     this.params = { ...this.params, ...params }
 
     return this
@@ -74,10 +105,10 @@ export class Request {
   /**
    * Set to used Dynamic Security or not
    *
-   * @param flag boolean Flag
-   * @returns {this}
+   * @param flag boolean Flag indicating whether to use dynamic security or not (default: true).
+   * @returns {this} The current Request instance.
    */
-  public setDs(flag = true): this {
+  public setDs(flag = true): Request {
     this.ds = flag
     return this
   }
@@ -88,20 +119,19 @@ export class Request {
    * @param lang Language Language that used for return of API (default: Language.ENGLISH).
    * @returns {this}
    */
-  public setLang(lang: LanguageEnum = LanguageEnum.ENGLISH): this {
+  public setLang(lang: LanguageEnum = LanguageEnum.ENGLISH): Request {
     this.headers['x-rpc-language'] = lang
 
     return this
   }
 
-  /* c8 ignore start */
-
   /**
-   * Send Request
+   * Send the HTTP request.
    *
-   * @param url string URL String
-   * @param method GET|POST Method for request
-   * @returns {Promise<IResponse>}
+   * @param url - The URL to send the request to.
+   * @param method - The HTTP method to use. Defaults to 'GET'.
+   * @returns A Promise that resolves with the response data, or rejects with a HoyolabError if an error occurs.
+   * @throws {HoyolabError} if an error occurs rejects with a HoyolabError
    */
   public async send(
     url: string,

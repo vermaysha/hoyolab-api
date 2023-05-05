@@ -1,41 +1,137 @@
+/**
+ * Interface representing the base structure of a Genshin diary.
+ */
 export interface IGenshinDiaryBase {
-  uid: number
-  region: string
-  nickname: string
-  optional_month: number[]
-  data_month: number
+  /**
+   * The unique identifier of the diary.
+   */
+  uid: number;
+  /**
+   * The region of the diary.
+   */
+  region: string;
+  /**
+   * The nickname associated with the diary.
+   */
+  nickname: string;
+  /**
+   * An array of optional months for the diary.
+   */
+  optional_month: number[];
+  /**
+   * The current month's data for the diary.
+   */
+  data_month: number;
 }
 
+
+/**
+ * Interface representing additional information for a Genshin diary.
+ * @extends {IGenshinDiaryBase}
+ */
 export interface IGenshinDiaryInfo extends IGenshinDiaryBase {
-  month: number
+  /**
+   * The month of the diary.
+   */
+  month: number;
+  /**
+   * The data for the current month.
+   */
   month_data: {
-    current_primogems: number
-    current_mora: number
-    last_primogems: number
-    last_mora: number
-    primogem_rate: number
-    mora_rate: number
+    /**
+     * The current number of primogems.
+     */
+    current_primogems: number;
+    /**
+     * The current amount of mora.
+     */
+    current_mora: number;
+    /**
+     * The number of primogems from last month.
+     */
+    last_primogems: number;
+    /**
+     * The amount of mora from last month.
+     */
+    last_mora: number;
+    /**
+     * The rate of primogems earned.
+     */
+    primogem_rate: number;
+    /**
+     * The rate of mora earned.
+     */
+    mora_rate: number;
+    /**
+     * An array of grouped actions.
+     */
     group_by: {
-      action_id: number
-      action: string
-      num: number
-      percent: number
-    }[]
-  }
+      /**
+       * The action ID.
+       */
+      action_id: number;
+      /**
+       * The action name.
+       */
+      action: string;
+      /**
+       * The number of actions performed.
+       */
+      num: number;
+      /**
+       * The percentage of actions performed.
+       */
+      percent: number;
+    }[];
+  };
+  /**
+   * The data for the current day.
+   */
   day_data: {
-    current_primogems: number
-    current_mora: number
-  }
+    /**
+     * The current number of primogems.
+     */
+    current_primogems: number;
+    /**
+     * The current amount of mora.
+     */
+    current_mora: number;
+  };
 }
 
+/**
+ * Interface representing the history of a Genshin diary.
+ */
 export interface IGenshinDiaryHistory {
-  action_id: number
-  action: string
-  time: string
-  num: number
+  /**
+   * The ID of the action.
+   */
+  action_id: number;
+  /**
+   * The name of the action.
+   */
+  action: string;
+  /**
+   * The time the action was performed.
+   */
+  time: string;
+  /**
+   * The number of times the action was performed.
+   */
+  num: number;
 }
 
+/**
+ * Interface representing detailed information for a Genshin diary.
+ * @extends {IGenshinDiaryBase}
+ */
 export interface IGenshinDiaryDetail extends IGenshinDiaryBase {
-  current_page: number
-  list: IGenshinDiaryHistory[]
+  /**
+   * The current page of the diary.
+   */
+  current_page: number;
+  /**
+   * An array of history objects.
+   */
+  list: IGenshinDiaryHistory[];
 }

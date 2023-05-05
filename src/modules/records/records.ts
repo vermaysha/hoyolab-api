@@ -11,7 +11,23 @@ import {
   IGenshinSpiralAbyss,
 } from './interface'
 
+/**
+ * RecordModule class provides methods to interact with Genshin Impact's record module endpoints.
+ *
+ * @class
+ * @internal
+ * @category Module
+ */
 export class RecordModule {
+  /**
+   * Creates an instance of RecordModule.
+   *
+   * @constructor
+   * @param {Request} request - An instance of Request class.
+   * @param {LanguageEnum} lang - The language code to be used in requests.
+   * @param {string | null} region - The server region code in which the user's account resides.
+   * @param {number | null} uid - The user ID of the Genshin Impact account.
+   */
   constructor(
     private request: Request,
     private lang: LanguageEnum,
@@ -20,9 +36,15 @@ export class RecordModule {
   ) {}
 
   /**
-   * Fetch game records
+   * Get user's Genshin Impact record
    *
-   * @returns {Promise<IGenshinRecord>}
+   * @async
+   * @function
+   * @returns {Promise<IGenshinRecord>} - User's Genshin Impact record
+   * @throws {HoyolabError} If UID parameter is missing or failed to be filled
+   * @remarks
+   * This method sends a request to the Genshin Impact API to get the daily note information for a user.
+   * The user's region and UID must be set before calling this method, otherwise an error will be thrown.
    */
   async records(): Promise<IGenshinRecord> {
     if (!this.region || !this.uid) {
@@ -43,9 +65,15 @@ export class RecordModule {
   }
 
   /**
-   * Fetch obtained genshin characters with artifact, weapon, level and constellation
    *
-   * @returns {Promise<IGenshinCharacters>}
+   * Retrieves the Genshin characters of the user.
+   *
+   * @async
+   * @returns {Promise<IGenshinCharacters>} A Promise that contains the Genshin characters object.
+   * @throws {HoyolabError} If UID parameter is missing or failed to be filled.
+   * @remarks
+   * This method sends a request to the Genshin Impact API to get the daily note information for a user.
+   * The user's region and UID must be set before calling this method, otherwise an error will be thrown.
    */
   async characters(): Promise<IGenshinCharacters> {
     if (!this.region || !this.uid) {
@@ -65,10 +93,14 @@ export class RecordModule {
   }
 
   /**
-   * Fetch characters summary detail (name, rarity, weapon, icon)
+   * Returns the summary information of Genshin Impact game characters.
    *
-   * @param characterIds number[] Characters ID
-   * @returns {Promise<IGenshinCharacterSummary>}
+   * @param characterIds - An array of character IDs to retrieve the summary information for.
+   * @returns A Promise that resolves to an object containing the summary information of the characters.
+   * @throws Throws an error if the UID parameter is missing or failed to be filled.
+   * @remarks
+   * This method sends a request to the Genshin Impact API to get the daily note information for a user.
+   * The user's region and UID must be set before calling this method, otherwise an error will be thrown.
    */
   async charactersSummary(
     characterIds: number[],
@@ -92,10 +124,14 @@ export class RecordModule {
   }
 
   /**
-   * Fetch Spiral Abyss data
+   * Retrieves information about the player's performance in the Spiral Abyss.
    *
-   * @param scheduleType AbyssScheduleEnum
-   * @returns {Promise<IGenshinSpiralAbyss>}
+   * @param scheduleType - The schedule type of the Abyss, either CURRENT or PREVIOUS.
+   * @returns A Promise that resolves with an object containing the player's Spiral Abyss data.
+   * @throws HoyolabError if UID parameter is missing or failed to be filled, or if the given scheduleType parameter is invalid.
+   * @remarks
+   * This method sends a request to the Genshin Impact API to get the daily note information for a user.
+   * The user's region and UID must be set before calling this method, otherwise an error will be thrown.
    */
   async spiralAbyss(
     scheduleType: AbyssScheduleEnum = AbyssScheduleEnum.CURRENT,
@@ -122,9 +158,12 @@ export class RecordModule {
   }
 
   /**
-   * Fetch daily note resources (resin, home coin, expeditions, and transformer)
-   *
-   * @returns {Promise<IGenshinDailyNote>}
+   * Retrieve the daily note information for a Genshin Impact user.
+   * @returns Promise<IGenshinDailyNote> The daily note information.
+   * @throws HoyolabError if the UID parameter is missing or failed to be filled.
+   * @remarks
+   * This method sends a request to the Genshin Impact API to get the daily note information for a user.
+   * The user's region and UID must be set before calling this method, otherwise an error will be thrown.
    */
   async dailyNote(): Promise<IGenshinDailyNote> {
     if (!this.region || !this.uid) {

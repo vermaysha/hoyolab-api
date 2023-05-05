@@ -10,25 +10,72 @@ import { AbyssScheduleEnum, RecordModule } from '../../modules/records'
 import { DiaryEnum, DiaryModule, DiaryMonthEnum } from '../../modules/diary'
 import { getGenshinRegion } from './gi.helper'
 
+/**
+ * The `Genshin` class provides an interface to interact with Genshin Impact-related features on the Mihoyo website.
+ * It contains references to various modules such as `DailyModule`, `RedeemModule`, `RecordModule`, and `DiaryModule` which allow you to perform various operations related to these features.
+ *
+ * @class
+ * @category Main
+ */
 export class Genshin {
+  /**
+   * The `DailyModule` object provides an interface to interact with the daily check-in feature in Genshin Impact.
+   */
   readonly daily: DailyModule
+
+  /**
+   * The `RedeemModule` object provides an interface to interact with the code redemption feature in Genshin Impact.
+   */
   readonly redeem: RedeemModule
+
+  /**
+   * The `RecordModule` object provides an interface to interact with the user record feature in Genshin Impact.
+   */
   readonly record: RecordModule
+
+  /**
+   * The `DiaryModule` object provides an interface to interact with the user diary feature in Genshin Impact.
+   */
   readonly diary: DiaryModule
 
+  /**
+   * The cookie object to be used in requests.
+   */
   readonly cookie: ICookie
+
+  /**
+   * The `Request` object used to make requests.
+   */
   readonly request: Request
+
+  /**
+   * The UID of the user, if available.
+   */
   public uid: number | null
+
+  /**
+   * The region of the user, if available.
+   */
   public region: string | null
+
+  /**
+   * The language to be used in requests.
+   */
   public lang: LanguageEnum
 
+  /**
+   * Constructs a new `Genshin` object.
+   * @param options The options object used to configure the object.
+   * @param options.cookie The cookie string or object to be used in requests.
+   * @param options.uid The UID of the user.
+   * @param options.region The region of the user.
+   * @param options.lang The language to be used in requests.
+   */
   constructor(options: IGenshinOptions) {
-    /* c8 ignore start */
     const cookie: ICookie =
       typeof options.cookie === 'string'
         ? Cookie.parseCookieString(options.cookie)
         : options.cookie
-    /* c8 ignore stop */
 
     this.cookie = cookie
 
@@ -40,10 +87,8 @@ export class Genshin {
     this.request.setReferer(Routes.referer())
     this.request.setLang(options.lang)
 
-    /* c8 ignore start */
     this.uid = options.uid ?? null
     this.region = this.uid !== null ? getGenshinRegion(this.uid) : null
-    /* c8 ignore stop */
     this.lang = options.lang
 
     this.daily = new DailyModule(
@@ -68,10 +113,14 @@ export class Genshin {
   }
 
   /**
-   * Create Genshin Impact Object but with UID and Region assigned
+   * Create a new instance of the Genshin class asynchronously.
    *
-   * @param options IGenshinOptions Options
-   * @returns {Promise<Genshin>}
+   * @param options The options object used to configure the object.
+   * @param options.cookie The cookie string or object to be used in requests.
+   * @param options.uid The UID of the user.
+   * @param options.region The region of the user.
+   * @param options.lang The language to be used in requests.
+   * @returns A promise that resolves with a new Genshin instance.
    */
   static async create(options: IGenshinOptions): Promise<Genshin> {
     if (typeof options.uid === 'undefined') {

@@ -10,6 +10,13 @@ import {
 } from './daily.interface'
 import { DailyRoute } from './daily.route'
 
+/**
+ * DailyModule class provides methods to interact with Genshin Impact's daily module endpoints.
+ *
+ * @class
+ * @internal
+ * @category Module
+ */
 export class DailyModule {
   private dailyInfoUrl: string
   private dailyRewardUrl: string
@@ -34,9 +41,9 @@ export class DailyModule {
   }
 
   /**
-   * Fetch Daily login information
+   * Retrieves daily information.
    *
-   * @returns {Promise<IDailyInfo>}
+   * @returns {Promise<IDailyInfo>} A promise that resolves to an IDailyInfo object.
    */
   async info(): Promise<IDailyInfo> {
     this.request
@@ -65,9 +72,9 @@ export class DailyModule {
   }
 
   /**
-   * Fetch all rewards from daily login
+   * Retrieve daily rewards information.
    *
-   * @returns {Promise<IDailyRewards>}
+   * @returns {Promise<IDailyRewards>} A promise that resolves to an IDailyRewards object.
    */
   async rewards(): Promise<IDailyRewards> {
     this.request
@@ -82,18 +89,25 @@ export class DailyModule {
       res.now = Math.round(new Date().getTime() / 1000).toString()
     }
 
-    if (typeof res.biz === 'undefined') {
-      res.biz = this.game === GamesEnum.HONKAI_STAR_RAIL ? 'hkrpg' : ''
+    if (this.game === GamesEnum.GENSHIN_IMPACT) {
+      res.biz = 'hk4e'
+    } else if (this.game === GamesEnum.HONKAI_IMPACT) {
+      res.biz = 'hk4e'
+    } else if (this.game === GamesEnum.HONKAI_STAR_RAIL) {
+      res.biz = 'hkrpg'
+    } else {
+      res.biz = ''
     }
 
     return res as IDailyRewards
   }
 
   /**
-   * Fetch reward from daily login based on day
+   * Get the daily reward for a specific day or the current day
    *
-   * @param day number | null
-   * @returns {Promise<IDailyReward>}
+   * @param {number | null} day - The day to retrieve the reward for. If null, retrieve the reward for the current day.
+   * @returns {Promise<IDailyReward>} - A promise that resolves with the daily reward for the specified day or the current day
+   * @throws {HoyolabError} - If the specified day is not a valid date in the current month or if the reward for the specified day is undefined.
    */
   async reward(day: number | null = null): Promise<IDailyReward> {
     const response = await this.rewards()
@@ -127,9 +141,9 @@ export class DailyModule {
   }
 
   /**
-   * Claim current reward
+   * Claim the daily rewards.
    *
-   * @returns {Promise<IDailyClaim>}
+   * @returns {Promise<IDailyClaim>} The claim information.
    */
   async claim(): Promise<IDailyClaim> {
     this.request
@@ -173,5 +187,4 @@ export class DailyModule {
       info,
     }
   }
-  /* c8 ignore stop */
 }
