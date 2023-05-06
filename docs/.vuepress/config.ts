@@ -1,9 +1,10 @@
-const { name, description, repository } = require('../../package.json')
+import { name, description, repository } from '../../package.json'
+import { defineConfig } from 'vuepress/config'
 
 const repo =
   repository.url.match(/github\.com\/([\w-]+\/[\w-]+)\.git$/)?.[1] ?? undefined
 
-module.exports = {
+export default defineConfig({
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
@@ -13,7 +14,7 @@ module.exports = {
    */
   description,
 
-  dest: 'docs/dist',
+  dest: '',
 
   /**
    * Extra tags to be injected to the page HTML `<head>`
@@ -36,19 +37,60 @@ module.exports = {
    */
   themeConfig: {
     repo,
-    repoLabel: 'Contribute !',
+    repoLabel: 'GitHub',
     editLinks: false,
     docsDir: '',
     editLinkText: '',
     lastUpdated: false,
     searchPlaceholder: 'Search...',
+    smoothScroll: true,
+    // displayAllHeaders: true,
     nav: [
+      {
+        text: 'Guide',
+        link: '/guide/get-started',
+      },
       {
         text: 'API Reference',
         link: '/api/',
       },
     ],
-    sidebar: {},
+    sidebar: {
+      '/guide/': [
+        {
+          title: 'Guide',
+          collapsable: false,
+          sidebarDepth: 2,
+          initialOpenGroupIndex: -1,
+          children: [
+            {
+              title: 'Get Started',
+              path: '/guide/get-started',
+            },
+            {
+              title: 'HoYoLab',
+              path: '/guide/hoyolab',
+            },
+            {
+              title: 'Genshin Impact',
+              path: '/guide/genshin-impact',
+            },
+            {
+              title: 'Honkai Impact 3rd',
+              path: '/guide/honkai-impact',
+            },
+            {
+              title: 'Honkai: Star Rail',
+              path: '/guide/honkai-star-rail',
+            },
+            {
+              title: 'Error Handling',
+              path: '/guide/error-handling',
+            },
+          ],
+        },
+      ],
+    },
   },
 
   /**
@@ -56,7 +98,7 @@ module.exports = {
    */
   plugins: [
     '@vuepress/plugin-back-to-top',
-    '@vuepress/plugin-medium-zoom',
+    '@vuepress/plugin-pwa',
     [
       'vuepress-plugin-typedoc',
 
@@ -64,7 +106,10 @@ module.exports = {
       {
         entryPoints: ['./src/index.ts'],
         tsconfig: './tsconfig.json',
+        sidebar: {
+          autoConfiguration: true,
+        },
       },
     ],
   ],
-}
+})
