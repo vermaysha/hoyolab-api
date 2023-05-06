@@ -17,24 +17,28 @@ import { getGenshinRegion } from './gi.helper'
  * @class
  * @category Main
  */
-export class Genshin {
+export class GenshinImpact {
   /**
    * The `DailyModule` object provides an interface to interact with the daily check-in feature in Genshin Impact.
+   *
    */
   readonly daily: DailyModule
 
   /**
    * The `RedeemModule` object provides an interface to interact with the code redemption feature in Genshin Impact.
+   *
    */
   readonly redeem: RedeemModule
 
   /**
    * The `RecordModule` object provides an interface to interact with the user record feature in Genshin Impact.
+   *
    */
   readonly record: RecordModule
 
   /**
    * The `DiaryModule` object provides an interface to interact with the user diary feature in Genshin Impact.
+   *
    */
   readonly diary: DiaryModule
 
@@ -113,16 +117,14 @@ export class Genshin {
   }
 
   /**
-   * Create a new instance of the Genshin class asynchronously.
+   * Create a new instance of the GenshinImpact class asynchronously.
    *
    * @param options The options object used to configure the object.
    * @param options.cookie The cookie string or object to be used in requests.
-   * @param options.uid The UID of the user.
-   * @param options.region The region of the user.
    * @param options.lang The language to be used in requests.
    * @returns A promise that resolves with a new Genshin instance.
    */
-  static async create(options: IGenshinOptions): Promise<Genshin> {
+  static async create(options: IGenshinOptions): Promise<GenshinImpact> {
     if (typeof options.uid === 'undefined') {
       const hoyolab = new Hoyolab({
         cookie: options.cookie,
@@ -132,38 +134,46 @@ export class Genshin {
       options.uid = parseInt(game.game_uid)
       options.region = getGenshinRegion(parseInt(game.game_uid))
     }
-    return new Genshin(options)
+    return new GenshinImpact(options)
   }
 
   /**
-   * Fetch game records
+   * Get user's Genshin Impact record
    *
+   * @alias {@link GenshinImpact.record | Genshin.record.records()}
+   * @deprecated Use through {@link GenshinImpact.record | Genshin.record.records()} instead
    */
   async records() {
     return this.record.records()
   }
 
   /**
-   * Fetch obtained genshin characters with artifact, weapon, level and constellation
+   * Retrieves the Genshin characters of the user.
    *
+   * @alias {@link GenshinImpact.record | Genshin.record.characters()}
+   * @deprecated Use through {@link GenshinImpact.record | Genshin.record.characters()} instead
    */
   async characters() {
     return this.record.characters()
   }
 
   /**
-   * Fetch characters summary detail (name, rarity, weapon, icon)
+   * Returns the summary information of Genshin Impact game characters
    *
    * @param characterIds number[] Characters ID
+   * @alias {@link GenshinImpact.record | Genshin.record.charactersSummary()}
+   * @deprecated Use through {@link GenshinImpact.record | Genshin.record.charactersSummary()} instead
    */
   async charactersSummary(characterIds: number[]) {
     return this.record.charactersSummary(characterIds)
   }
 
   /**
-   * Fetch Spiral Abyss data
+   * Retrieves information about the player's performance in the Spiral Abyss.
    *
    * @param scheduleType AbyssScheduleEnum
+   * @alias {@link GenshinImpact.record | Genshin.record.spiralAbyss()}
+   * @deprecated Use through {@link GenshinImpact.record | Genshin.record.spiralAbyss()} instead
    */
   async spiralAbyss(
     scheduleType: AbyssScheduleEnum = AbyssScheduleEnum.CURRENT,
@@ -172,52 +182,67 @@ export class Genshin {
   }
 
   /**
-   * Fetch daily note resources (resin, home coin, expeditions, and transformer)
+   * Retrieve the daily note information for a Genshin Impact user.
    *
+   * @alias {@link GenshinImpact.record | Genshin.record.dailyNote()}
+   * @deprecated Use through {@link GenshinImpact.record | Genshin.record.dailyNote()} instead
    */
   async dailyNote() {
     return this.record.dailyNote()
   }
 
   /**
-   * Fetch genshin impact diary data
+   * Returns the diary information of a given month for a user
    *
    * @param month
-   * @returns {Promise<IGenshinDiaryInfo>}
+   * @alias {@link GenshinImpact.diary | Genshin.diary.diaries()}
+   * @deprecated Use through {@link GenshinImpact.diary | Genshin.diary.diaries()} instead
    */
   async diaries(month: DiaryMonthEnum = DiaryMonthEnum.CURRENT) {
     return this.diary.diaries(month)
   }
 
   /**
-   * Fetch history of received resources (primogems and mora) from diary
+   * Returns the diary details of a given type and month for a user
    *
    * @param type DiaryEnum
    * @param month DiaryMonthEnum
+   * @alias {@link GenshinImpact.diary | Genshin.diary.detail()}
+   * @deprecated Use through {@link GenshinImpact.diary | Genshin.diary.detail()} instead
    */
   async diaryDetail(
     type: DiaryEnum,
     month: DiaryMonthEnum = DiaryMonthEnum.CURRENT,
   ) {
-    return this.diary.diaryDetail(type, month)
+    return this.diary.detail(type, month)
   }
 
+  /**
+   * Retrieves daily information.
+   *
+   * @alias {@link GenshinImpact.daily | Genshin.daily.info()}
+   * @deprecated Use through {@link GenshinImpact.daily | Genshin.daily.info()} instead
+   */
   dailyInfo() {
     return this.daily.info()
   }
 
   /**
-   * Fetch all rewards from daily login
+   * Retrieve daily rewards information.
    *
+   * @alias {@link GenshinImpact.daily | Genshin.daily.rewards()}
+   * @deprecated Use through {@link GenshinImpact.daily | Genshin.daily.rewards()} instead
    */
   dailyRewards() {
     return this.daily.rewards()
   }
 
   /**
-   * Fetch reward from daily login based on day
+   * Get the daily reward for a specific day or the current day
    *
    * @param day number | null
+   * @alias {@link GenshinImpact.daily | Genshin.daily.reward()}
+   * @deprecated Use through {@link GenshinImpact.daily | Genshin.daily.reward()} instead
    */
   dailyReward(day: number | null = null) {
     return this.daily.reward(day)
@@ -226,16 +251,19 @@ export class Genshin {
   /**
    * Claim current reward
    *
+   * @alias {@link GenshinImpact.daily | Genshin.daily.claim()}
+   * @deprecated Use through {@link GenshinImpact.daily | Genshin.daily.claim()} instead
    */
   dailyClaim() {
     return this.daily.claim()
   }
 
   /**
-   * Redeem Code
+   * Redeems a code for a specific account.
    *
    * @param code string
-   * @throws HoyolabError
+   * @alias {@link GenshinImpact.daily | Genshin.redeem.claim()}
+   * @deprecated Use through {@link GenshinImpact.daily | Genshin.redeem.claim()} instead
    */
   redeemCode(code: string) {
     return this.redeem.claim(code)
