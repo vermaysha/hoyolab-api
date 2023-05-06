@@ -1,10 +1,10 @@
 import test from 'ava'
 import { genshin, cookie } from './preloader'
-import { DiaryMonthEnum, Genshin, HoyolabError } from '../../src'
+import { DiaryMonthEnum, GenshinImpact, HoyolabError } from '../../src'
 
-test('diaries() should return be valid', async (t) => {
+test('diary.diaries() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.diaries()
+  const res = await client.diary.diaries()
 
   t.is(typeof res.uid, 'number')
   t.is(typeof res.region, 'string')
@@ -27,10 +27,47 @@ test('diaries() should return be valid', async (t) => {
     t.is(typeof group.action, 'string')
     t.is(typeof group.num, 'number')
     t.is(typeof group.percent, 'number')
+
+    t.deepEqual(
+      Object.keys(group).sort(),
+      ['action_id', 'action', 'num', 'percent'].sort(),
+    )
   })
 
   t.is(typeof res.day_data.current_primogems, 'number')
   t.is(typeof res.day_data.current_mora, 'number')
+
+  t.deepEqual(
+    Object.keys(res).sort(),
+    [
+      'uid',
+      'region',
+      'nickname',
+      'data_month',
+      'optional_month',
+      'month_data',
+      'month',
+      'day_data',
+    ].sort(),
+  )
+
+  t.deepEqual(
+    Object.keys(res.day_data).sort(),
+    ['current_primogems', 'current_mora'].sort(),
+  )
+
+  t.deepEqual(
+    Object.keys(res.month_data).sort(),
+    [
+      'current_primogems',
+      'current_mora',
+      'last_primogems',
+      'last_mora',
+      'primogem_rate',
+      'mora_rate',
+      'group_by',
+    ].sort(),
+  )
 })
 
 test('diaryDetail() should throw when type is invalid', async (t) => {
@@ -38,7 +75,7 @@ test('diaryDetail() should throw when type is invalid', async (t) => {
 
   await t.throwsAsync(
     async () => {
-      await client.diaries(4 as DiaryMonthEnum)
+      await client.diary.diaries(4 as DiaryMonthEnum)
     },
     {
       instanceOf: HoyolabError,
@@ -46,12 +83,12 @@ test('diaryDetail() should throw when type is invalid', async (t) => {
   )
 })
 
-test('diaries() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('diary.diaries() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.diaries()
+      await client.diary.diaries()
     },
     {
       instanceOf: HoyolabError,

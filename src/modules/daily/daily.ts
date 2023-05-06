@@ -68,6 +68,15 @@ export class DailyModule {
 
       res.month_last_day = today.getDate() === lastDayOfMonth
     }
+
+    if (typeof res.sign_cnt_missed === 'undefined') {
+      res.sign_cnt_missed = 0
+    }
+
+    if (typeof res.short_sign_day === 'undefined') {
+      res.short_sign_day = 0
+    }
+
     return res as IDailyInfo
   }
 

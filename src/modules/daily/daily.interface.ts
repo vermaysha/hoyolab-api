@@ -56,6 +56,10 @@ export interface IDailyInfo {
    * Whether today is the last day of the current month.
    */
   month_last_day: boolean
+
+  short_sign_day: number
+
+  sign_cnt_missed: number
 }
 
 /**
