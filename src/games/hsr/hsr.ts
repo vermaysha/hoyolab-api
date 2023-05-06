@@ -126,13 +126,20 @@ export class HonkaiStarRail {
     return new HonkaiStarRail(options)
   }
 
+  /**
+   * Retrieves daily information.
+   *
+   * @alias {@link DailyModule.info | DailyModule.info }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.info() } instead
+   */
   dailyInfo() {
     return this.daily.info()
   }
 
   /**
-   * Fetch all rewards from daily login
    *
+   * @alias {@link DailyModule.rewards | DailyModule.rewards }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.rewards() } instead
    */
   dailyRewards() {
     return this.daily.rewards()
@@ -142,6 +149,8 @@ export class HonkaiStarRail {
    * Fetch reward from daily login based on day
    *
    * @param day number | null
+   * @alias {@link DailyModule.reward | DailyModule.reward }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.reward() } instead
    */
   dailyReward(day: number | null = null) {
     return this.daily.reward(day)
@@ -150,6 +159,8 @@ export class HonkaiStarRail {
   /**
    * Claim current reward
    *
+   * @alias {@link DailyModule.claim | DailyModule.claim }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.claim() } instead
    */
   dailyClaim() {
     return this.daily.claim()
@@ -159,7 +170,8 @@ export class HonkaiStarRail {
    * Redeem Code
    *
    * @param code string
-   * @throws HoyolabError
+   * @alias {@link RedeemModule.claim | RedeemModule.claim }
+   * @deprecated Use through { @link HonkaiStarRail.redeem | HonkaiStarRail.redeem.claim() } instead
    */
   redeemCode(code: string) {
     return this.redeem.claim(code)
