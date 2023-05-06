@@ -3,7 +3,7 @@ home: true
 # heroImage: https://v1.vuepress.vuejs.org/hero.png
 tagline: "The Ultimate Data Retrieval Library for HoYoVerse Games"
 actionText: Get Started →
-actionLink: /guide/
+actionLink: /guide/get-started
 features:
 - title: Built with TypeScript
   details: The library is built with TypeScript, which means that type checking is performed during development, catching potential errors before runtime. By leveraging TypeScript, developers can ensure better code quality and maintainability
