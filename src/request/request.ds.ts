@@ -1,9 +1,9 @@
 import md5 from 'md5'
 
 /**
- * Generate Dynamic Security
+ * Generates a dynamic secret (DS) string for use in the Genshin Impact API.
  *
- * @returns {string}
+ * @returns The generated DS string.
  */
 export function generateDS(): string {
   const salt = '6s25p5ox5y14umn1p61aqyyvbvvl3lrt'
@@ -24,4 +24,3 @@ export function generateDS(): string {
 
   return `${time},${random},${hash}`
 }
-/* c8 ignore stop */

@@ -5,7 +5,22 @@ import { DiaryEnum, DiaryMonthEnum } from './diary.enum'
 import { IGenshinDiaryDetail, IGenshinDiaryInfo } from './diary.interface'
 import { DiaryRoute } from './diary.route'
 
+/**
+ * A module to interact with the Genshin Impact diary endpoints of the Hoyolab API
+ *
+ * @public
+ * @internal
+ * @category Module
+ */
 export class DiaryModule {
+  /**
+   * Constructs a DiaryModule instance
+   *
+   * @param request - An instance of the Request class to make HTTP requests
+   * @param lang - A LanguageEnum value for the language of the user
+   * @param region - A string value for the region of the user
+   * @param uid - A number value for the UID of the user
+   */
   constructor(
     private request: Request,
     private lang: LanguageEnum,
@@ -14,10 +29,14 @@ export class DiaryModule {
   ) {}
 
   /**
-   * Fetch genshin impact diary data
+   * Returns the diary information of a given month for a user
    *
-   * @param month
-   * @returns {Promise<IGenshinDiaryInfo>}
+   * @param month - A DiaryMonthEnum value for the month of the diary information requested. Default is CURRENT.
+   * @returns A promise that resolves to an IGenshinDiaryInfo object
+   * @throws {@link HoyolabError} when the uid or region parameter is missing or invalid
+   * @remarks
+   * This method sends a request to the Genshin Impact API to get the daily note information for a user.
+   * The user's region and UID must be set before calling this method, otherwise an error will be thrown.
    */
   async diaries(
     month: DiaryMonthEnum = DiaryMonthEnum.CURRENT,
@@ -44,13 +63,17 @@ export class DiaryModule {
   }
 
   /**
-   * Fetch history of received resources (primogems and mora) from diary
+   * Returns the diary details of a given type and month for a user
    *
-   * @param type DiaryEnum
-   * @param month DiaryMonthEnum
-   * @returns {IGenshinDiaryDetail}
+   * @param type - A DiaryEnum value for the type of diary details requested
+   * @param month - A DiaryMonthEnum value for the month of the diary details requested. Default is CURRENT.
+   * @returns A promise that resolves to an IGenshinDiaryDetail object
+   * @throws {@link HoyolabError} when the uid or region parameter is missing or invalid, or when the type or month parameter is invalid
+   * @remarks
+   * This method sends a request to the Genshin Impact API to get the daily note information for a user.
+   * The user's region and UID must be set before calling this method, otherwise an error will be thrown.
    */
-  async diaryDetail(
+  async detail(
     type: DiaryEnum,
     month: DiaryMonthEnum = DiaryMonthEnum.CURRENT,
   ): Promise<IGenshinDiaryDetail> {
@@ -101,7 +124,6 @@ export class DiaryModule {
       page++
     } while (next)
 
-    /* c8 ignore start */
     responses.list.sort((a, b) => {
       const keyA = new Date(a.time)
       const keyB = new Date(b.time)
@@ -112,7 +134,6 @@ export class DiaryModule {
 
       return 0
     })
-    /* c8 ignore stop */
 
     return responses as IGenshinDiaryDetail
   }

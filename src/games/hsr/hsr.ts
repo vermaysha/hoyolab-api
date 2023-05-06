@@ -8,22 +8,73 @@ import { DailyModule } from '../../modules/daily'
 import { RedeemModule } from '../../modules/redeem'
 import { getHsrRegion } from './hsr.helper'
 
+/**
+ * Class representing the Honkai Star Rail game.
+ *
+ * @public
+ * @class
+ * @category Main
+ */
 export class HonkaiStarRail {
+  /**
+   * The Daily module for the Honkai Star Rail game.
+   *
+   * @public
+   * @readonly
+   */
   readonly daily: DailyModule
+  /**
+   * The Redeem module for the Honkai Star Rail game.
+   *
+   * @public
+   * @readonly
+   */
   readonly redeem: RedeemModule
+  /**
+   * The cookie used for authentication.
+   *
+   * @public
+   * @readonly
+   */
   readonly cookie: ICookie
+  /**
+   * The request object used to make HTTP requests.
+   *
+   * @public
+   * @readonly
+   */
   readonly request: Request
+  /**
+   * The UID of the Honkai Star Rail account.
+   *
+   * @public
+   */
   public uid: number | null
+  /**
+   * The region of the Honkai Star Rail account.
+   *
+   * @public
+   */
   public region: string | null
+  /**
+   * The language of the Honkai Star Rail account.
+   *
+   * @public
+   */
   public lang: LanguageEnum
 
+  /**
+   * Create a new instance of HonkaiStarRail.
+   *
+   * @public
+   * @constructor
+   * @param {IHsrOptions} options - The options for the HonkaiStarRail instance.
+   */
   constructor(options: IHsrOptions) {
-    /* c8 ignore start */
     const cookie: ICookie =
       typeof options.cookie === 'string'
         ? Cookie.parseCookieString(options.cookie)
         : options.cookie
-    /* c8 ignore stop */
 
     this.cookie = cookie
 
@@ -35,10 +86,8 @@ export class HonkaiStarRail {
     this.request.setReferer(Routes.referer())
     this.request.setLang(options.lang)
 
-    /* c8 ignore start */
     this.uid = options.uid ?? null
     this.region = this.uid !== null ? getHsrRegion(this.uid) : null
-    /* c8 ignore stop */
     this.lang = options.lang
 
     this.daily = new DailyModule(
@@ -56,10 +105,13 @@ export class HonkaiStarRail {
   }
 
   /**
-   * Create StarRails Object
+   * Create a new instance of HonkaiStarRail using a Hoyolab account.
+   * If `uid` is not provided in the `options`, the account with the highest level will be used.
    *
-   * @param options IHsrOptions Options
-   * @returns {Promise<HonkaiStarRail>}
+   * @public
+   * @static
+   * @param {IHsrOptions} options - The options for the HonkaiStarRail instance.
+   * @returns {Promise<HonkaiStarRail>} - A promise that resolves with a new HonkaiStarRail instance.
    */
   static async create(options: IHsrOptions): Promise<HonkaiStarRail> {
     if (typeof options.uid === 'undefined') {
@@ -74,13 +126,20 @@ export class HonkaiStarRail {
     return new HonkaiStarRail(options)
   }
 
+  /**
+   * Retrieves daily information.
+   *
+   * @alias {@link DailyModule.info | DailyModule.info }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.info() } instead
+   */
   dailyInfo() {
     return this.daily.info()
   }
 
   /**
-   * Fetch all rewards from daily login
    *
+   * @alias {@link DailyModule.rewards | DailyModule.rewards }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.rewards() } instead
    */
   dailyRewards() {
     return this.daily.rewards()
@@ -90,6 +149,8 @@ export class HonkaiStarRail {
    * Fetch reward from daily login based on day
    *
    * @param day number | null
+   * @alias {@link DailyModule.reward | DailyModule.reward }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.reward() } instead
    */
   dailyReward(day: number | null = null) {
     return this.daily.reward(day)
@@ -98,6 +159,8 @@ export class HonkaiStarRail {
   /**
    * Claim current reward
    *
+   * @alias {@link DailyModule.claim | DailyModule.claim }
+   * @deprecated Use through { @link HonkaiStarRail.daily | HonkaiStarRail.daily.claim() } instead
    */
   dailyClaim() {
     return this.daily.claim()
@@ -107,7 +170,8 @@ export class HonkaiStarRail {
    * Redeem Code
    *
    * @param code string
-   * @throws HoyolabError
+   * @alias {@link RedeemModule.claim | RedeemModule.claim }
+   * @deprecated Use through { @link HonkaiStarRail.redeem | HonkaiStarRail.redeem.claim() } instead
    */
   redeemCode(code: string) {
     return this.redeem.claim(code)

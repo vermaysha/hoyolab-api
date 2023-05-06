@@ -2,10 +2,11 @@ import { HoyolabError } from '../../utils'
 import { GenshinRegion } from './gi.enum'
 
 /**
- * Get Server Region by UID
+ * Get Genshin Impact region based on UID.
  *
- * @param uid number UID
- * @returns {string}
+ * @param uid User ID.
+ * @returns Region for the UID.
+ * @throws `HoyolabError` when the UID is invalid.
  */
 export function getGenshinRegion(uid: number): GenshinRegion {
   const server_region = Number(uid.toString().trim().slice(0, 1))
