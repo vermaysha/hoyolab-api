@@ -40,7 +40,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build:docs
+        run: npm run docs:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'docs'
+          path: 'docs/.vuepress/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
