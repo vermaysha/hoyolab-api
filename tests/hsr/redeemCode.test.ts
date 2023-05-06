@@ -12,6 +12,8 @@ test('redeem.claim() should return be valid', async (t) => {
 
   t.is(typeof res.message, 'string')
   t.is(typeof res.retcode, 'number')
+
+  t.deepEqual(Object.keys(res).sort(), ['data', 'message', 'retcode'].sort())
 })
 
 test('redeem.claim() should throw when UID is nullable', async (t) => {
