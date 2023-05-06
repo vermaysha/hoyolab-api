@@ -27,10 +27,47 @@ test('diary.diaries() should return be valid', async (t) => {
     t.is(typeof group.action, 'string')
     t.is(typeof group.num, 'number')
     t.is(typeof group.percent, 'number')
+
+    t.deepEqual(
+      Object.keys(group).sort(),
+      ['action_id', 'action', 'num', 'percent'].sort(),
+    )
   })
 
   t.is(typeof res.day_data.current_primogems, 'number')
   t.is(typeof res.day_data.current_mora, 'number')
+
+  t.deepEqual(
+    Object.keys(res).sort(),
+    [
+      'uid',
+      'region',
+      'nickname',
+      'data_month',
+      'optional_month',
+      'month_data',
+      'month',
+      'day_data',
+    ].sort(),
+  )
+
+  t.deepEqual(
+    Object.keys(res.day_data).sort(),
+    ['current_primogems', 'current_mora'].sort(),
+  )
+
+  t.deepEqual(
+    Object.keys(res.month_data).sort(),
+    [
+      'current_primogems',
+      'current_mora',
+      'last_primogems',
+      'last_mora',
+      'primogem_rate',
+      'mora_rate',
+      'group_by',
+    ].sort(),
+  )
 })
 
 test('diaryDetail() should throw when type is invalid', async (t) => {

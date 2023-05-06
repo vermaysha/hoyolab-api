@@ -12,6 +12,11 @@ test('record.dailyNote() should return be valid', async (t) => {
     t.is(typeof expe.remained_time, 'string')
 
     t.regex(expe.status, /Finished|Ongoing/)
+
+    t.deepEqual(
+      Object.keys(expe).sort(),
+      ['avatar_side_icon', 'status', 'remained_time'].sort(),
+    )
   })
 
   t.is(typeof res.current_resin, 'number')
@@ -37,6 +42,38 @@ test('record.dailyNote() should return be valid', async (t) => {
   t.is(typeof res.transformer.wiki, 'string')
   t.is(typeof res.transformer.noticed, 'boolean')
   t.is(typeof res.transformer.latest_job_id, 'string')
+
+  t.deepEqual(
+    Object.keys(res).sort(),
+    [
+      'expeditions',
+      'current_resin',
+      'max_resin',
+      'resin_recovery_time',
+      'finished_task_num',
+      'total_task_num',
+      'is_extra_task_reward_received',
+      'remain_resin_discount_num',
+      'resin_discount_num_limit',
+      'current_expedition_num',
+      'max_expedition_num',
+      'current_home_coin',
+      'max_home_coin',
+      'home_coin_recovery_time',
+      'calendar_url',
+      'transformer',
+    ].sort(),
+  )
+
+  t.deepEqual(
+    Object.keys(res.transformer).sort(),
+    ['obtained', 'recovery_time', 'wiki', 'noticed', 'latest_job_id'].sort(),
+  )
+
+  t.deepEqual(
+    Object.keys(res.transformer.recovery_time).sort(),
+    ['Day', 'Hour', 'Minute', 'Second', 'reached'].sort(),
+  )
 })
 
 test('record.dailyNote() should throw when UID is nullable', async (t) => {
