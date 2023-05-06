@@ -1,10 +1,10 @@
 import test from 'ava'
 import { genshin, cookie } from './preloader'
-import { Genshin, HoyolabError } from '../../src'
+import { GenshinImpact, HoyolabError } from '../../src'
 
-test('characters() should return be valid', async (t) => {
+test('record.characters() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.characters()
+  const res = await client.record.characters()
 
   res.avatars.forEach((avatar) => {
     t.is(typeof avatar.id, 'number')
@@ -63,12 +63,12 @@ test('characters() should return be valid', async (t) => {
   })
 })
 
-test('characters() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('record.characters() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.characters()
+      await client.record.characters()
     },
     {
       instanceOf: HoyolabError,
@@ -76,9 +76,9 @@ test('characters() should throw when UID is nullable', async (t) => {
   )
 })
 
-test('charactersSummary() should return be valid', async (t) => {
+test('record.charactersSummary() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.charactersSummary([10000007])
+  const res = await client.record.charactersSummary([10_000_007])
 
   res.avatars.forEach((avatar) => {
     t.is(typeof avatar.id, 'number')
@@ -92,12 +92,12 @@ test('charactersSummary() should return be valid', async (t) => {
   })
 })
 
-test('charactersSummary() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('record.charactersSummary() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.charactersSummary([10000007])
+      await client.record.charactersSummary([10_000_007])
     },
     {
       instanceOf: HoyolabError,
