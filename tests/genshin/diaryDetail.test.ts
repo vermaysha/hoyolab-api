@@ -1,10 +1,15 @@
 import test from 'ava'
 import { cookie, genshin } from './preloader'
-import { DiaryEnum, DiaryMonthEnum, Genshin, HoyolabError } from '../../src'
+import {
+  DiaryEnum,
+  DiaryMonthEnum,
+  GenshinImpact,
+  HoyolabError,
+} from '../../src'
 
-test('diaryDetail() should return be valid', async (t) => {
+test('diary.detail() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.diaryDetail(DiaryEnum.PRIMOGEMS)
+  const res = await client.diary.detail(DiaryEnum.PRIMOGEMS)
 
   t.is(typeof res.uid, 'number')
   t.is(typeof res.region, 'string')
@@ -20,12 +25,12 @@ test('diaryDetail() should return be valid', async (t) => {
   })
 })
 
-test('diaryDetail() should throw when type is invalid', async (t) => {
+test('diary.detail() should throw when type is invalid', async (t) => {
   const client = await genshin()
 
   await t.throwsAsync(
     async () => {
-      await client.diaryDetail(5 as DiaryEnum)
+      await client.diary.detail(5 as DiaryEnum)
     },
     {
       instanceOf: HoyolabError,
@@ -33,12 +38,12 @@ test('diaryDetail() should throw when type is invalid', async (t) => {
   )
 })
 
-test('diaryDetail() should throw month type is invalid', async (t) => {
+test('diary.detail() should throw month type is invalid', async (t) => {
   const client = await genshin()
 
   await t.throwsAsync(
     async () => {
-      await client.diaryDetail(DiaryEnum.PRIMOGEMS, 10 as DiaryMonthEnum)
+      await client.diary.detail(DiaryEnum.PRIMOGEMS, 10 as DiaryMonthEnum)
     },
     {
       instanceOf: HoyolabError,
@@ -46,12 +51,12 @@ test('diaryDetail() should throw month type is invalid', async (t) => {
   )
 })
 
-test('diaryDetail() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('diary.detail() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.diaryDetail(DiaryEnum.MORA)
+      await client.diary.detail(DiaryEnum.MORA)
     },
     {
       instanceOf: HoyolabError,

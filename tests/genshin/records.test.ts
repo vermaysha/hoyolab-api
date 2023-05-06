@@ -1,10 +1,10 @@
 import test from 'ava'
 import { genshin, cookie } from './preloader'
-import { Genshin, HoyolabError } from '../../src'
+import { GenshinImpact, HoyolabError } from '../../src'
 
-test('records() should return be valid', async (t) => {
+test('record.records() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.records()
+  const res = await client.record.records()
 
   res.avatars.forEach((avatar) => {
     t.is(typeof avatar.id, 'number')
@@ -73,12 +73,12 @@ test('records() should return be valid', async (t) => {
   t.is(typeof res.stats.dendroculus_number, 'number')
 })
 
-test('records() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('record.records() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.records()
+      await client.record.records()
     },
     {
       instanceOf: HoyolabError,

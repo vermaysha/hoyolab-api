@@ -1,10 +1,10 @@
 import test from 'ava'
 import { genshin, cookie } from './preloader'
-import { Genshin, HoyolabError } from '../../src'
+import { GenshinImpact, HoyolabError } from '../../src'
 
-test('dailyNote() should return be valid', async (t) => {
+test('record.dailyNote() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.dailyNote()
+  const res = await client.record.dailyNote()
 
   res.expeditions.forEach((expe) => {
     t.is(typeof expe.avatar_side_icon, 'string')
@@ -39,12 +39,12 @@ test('dailyNote() should return be valid', async (t) => {
   t.is(typeof res.transformer.latest_job_id, 'string')
 })
 
-test('dailyNote() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('record.dailyNote() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.dailyNote()
+      await client.record.dailyNote()
     },
     {
       instanceOf: HoyolabError,

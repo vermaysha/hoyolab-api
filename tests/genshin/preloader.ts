@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import { Genshin, ICookie, LanguageEnum } from '../../src'
+import { GenshinImpact, ICookie, LanguageEnum } from '../../src'
 dotenv.config()
 
 export const cookie: ICookie = {
@@ -10,7 +10,7 @@ export const cookie: ICookie = {
 }
 
 export const genshin = async () => {
-  return await Genshin.create({
+  return await GenshinImpact.create({
     cookie,
     lang: LanguageEnum.ENGLISH,
   })

@@ -2,9 +2,9 @@ import test from 'ava'
 import { genshin } from './preloader'
 import { HoyolabError } from '../../src'
 
-test('dailyInfo() return should be valid', async (t) => {
+test('daily.info() return should be valid', async (t) => {
   const client = await genshin()
-  const res = await client.dailyInfo()
+  const res = await client.daily.info()
 
   t.is(typeof res.total_sign_day, 'number')
   t.is(typeof res.today, 'string')
@@ -15,9 +15,9 @@ test('dailyInfo() return should be valid', async (t) => {
   t.is(typeof res.month_last_day, 'boolean')
 })
 
-test('dailyRewards() return should be valid', async (t) => {
+test('daily.rewards() return should be valid', async (t) => {
   const client = await genshin()
-  const res = await client.dailyRewards()
+  const res = await client.daily.rewards()
 
   t.is(typeof res.month, 'number')
   t.is(typeof res.resign, 'boolean')
@@ -30,11 +30,11 @@ test('dailyRewards() return should be valid', async (t) => {
   })
 })
 
-test('dailyReward() should throw error', async (t) => {
+test('daily.reward() should throw error', async (t) => {
   await t.throwsAsync(
     async () => {
       const client = await genshin()
-      await client.dailyReward(33)
+      await client.daily.reward(33)
     },
     {
       instanceOf: HoyolabError,
@@ -42,9 +42,9 @@ test('dailyReward() should throw error', async (t) => {
   )
 })
 
-test('dailyReward() return should be valid', async (t) => {
+test('daily.reward() return should be valid', async (t) => {
   const client = await genshin()
-  const res = await client.dailyReward()
+  const res = await client.daily.reward()
 
   t.is(typeof res.month, 'number')
   t.is(typeof res.resign, 'boolean')
@@ -55,9 +55,9 @@ test('dailyReward() return should be valid', async (t) => {
   t.is(typeof res.award.cnt, 'number')
 })
 
-test('dailyClaim() return should be valid', async (t) => {
+test('daily.claim() return should be valid', async (t) => {
   const client = await genshin()
-  const res = await client.dailyClaim()
+  const res = await client.daily.claim()
 
   t.is(typeof res.status, 'string')
   t.is(typeof res.code, 'number')

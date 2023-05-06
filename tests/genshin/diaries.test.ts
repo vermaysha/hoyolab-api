@@ -1,10 +1,10 @@
 import test from 'ava'
 import { genshin, cookie } from './preloader'
-import { DiaryMonthEnum, Genshin, HoyolabError } from '../../src'
+import { DiaryMonthEnum, GenshinImpact, HoyolabError } from '../../src'
 
-test('diaries() should return be valid', async (t) => {
+test('diary.diaries() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.diaries()
+  const res = await client.diary.diaries()
 
   t.is(typeof res.uid, 'number')
   t.is(typeof res.region, 'string')
@@ -38,7 +38,7 @@ test('diaryDetail() should throw when type is invalid', async (t) => {
 
   await t.throwsAsync(
     async () => {
-      await client.diaries(4 as DiaryMonthEnum)
+      await client.diary.diaries(4 as DiaryMonthEnum)
     },
     {
       instanceOf: HoyolabError,
@@ -46,12 +46,12 @@ test('diaryDetail() should throw when type is invalid', async (t) => {
   )
 })
 
-test('diaries() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('diary.diaries() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.diaries()
+      await client.diary.diaries()
     },
     {
       instanceOf: HoyolabError,

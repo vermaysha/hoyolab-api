@@ -1,10 +1,10 @@
 import test from 'ava'
 import { genshin, cookie } from './preloader'
-import { AbyssScheduleEnum, Genshin, HoyolabError } from '../../src'
+import { AbyssScheduleEnum, GenshinImpact, HoyolabError } from '../../src'
 
-test('spiralAbyss() should return be valid', async (t) => {
+test('record.spiralAbyss() should return be valid', async (t) => {
   const client = await genshin()
-  const res = await client.spiralAbyss()
+  const res = await client.record.spiralAbyss()
 
   t.is(typeof res.schedule_id, 'number')
   t.is(typeof res.start_time, 'string')
@@ -85,12 +85,12 @@ test('spiralAbyss() should return be valid', async (t) => {
   })
 })
 
-test('spiralAbyss() should throw when schedule is invalid', async (t) => {
+test('record.spiralAbyss() should throw when schedule is invalid', async (t) => {
   const client = await genshin()
 
   await t.throwsAsync(
     async () => {
-      await client.spiralAbyss(10 as AbyssScheduleEnum)
+      await client.record.spiralAbyss(10 as AbyssScheduleEnum)
     },
     {
       instanceOf: HoyolabError,
@@ -98,12 +98,12 @@ test('spiralAbyss() should throw when schedule is invalid', async (t) => {
   )
 })
 
-test('spiralAbyss() should throw when UID is nullable', async (t) => {
-  const client = new Genshin({ cookie })
+test('record.spiralAbyss() should throw when UID is nullable', async (t) => {
+  const client = new GenshinImpact({ cookie })
 
   await t.throwsAsync(
     async () => {
-      await client.spiralAbyss(AbyssScheduleEnum.CURRENT)
+      await client.record.spiralAbyss(AbyssScheduleEnum.CURRENT)
     },
     {
       instanceOf: HoyolabError,
