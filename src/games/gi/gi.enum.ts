@@ -9,7 +9,7 @@
  */
 export enum GenshinRegion {
   /** United States */
-  USA = 'os_asia',
+  USA = 'os_usa',
   /** Europe */
   EUROPE = 'os_euro',
   /** Asia */
