@@ -1,4 +1,4 @@
-import md5 from 'md5'
+import { createHash } from 'crypto'
 
 /**
  * Generates a dynamic secret (DS) string for use in the Genshin Impact API.
@@ -18,9 +18,20 @@ export function generateDS(): string {
     random += randomChar
   }
 
-  const hash = md5(`salt=${salt}&t=${time}&r=${random}`, {
-    encoding: 'hex',
-  })
+  const hash = createHash('md5')
+    .update(`salt=${salt}&t=${time}&r=${random}`)
+    .digest('hex')
 
   return `${time},${random},${hash}`
+}
+
+/**
+ * Delays the execution of the code for a specified number of seconds.
+ * @param second - The number of seconds to delay.
+ * @returns A Promise that resolves after the specified number of seconds.
+ */
+export function delay(second: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, second * 1000)
+  })
 }
