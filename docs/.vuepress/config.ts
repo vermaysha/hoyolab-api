@@ -1,8 +1,21 @@
 import { name, description, repository } from '../../package.json'
 import { defineConfig } from 'vuepress/config'
+import { Dirent, readdirSync } from 'fs'
+import { join, parse } from 'path'
 
 const repo =
   repository.url.match(/github\.com\/([\w-]+\/[\w-]+)\.git$/)?.[1] ?? undefined
+
+function getFiles(dir: string) {
+  const files = readdirSync(dir, { withFileTypes: true })
+
+  return files.map((file: Dirent) => {
+    return {
+      title: parse(file.name).name,
+      path: `/${join(dir.replace('docs', ''), file.name)}`,
+    }
+  })
+}
 
 export default defineConfig({
   /**
@@ -90,6 +103,81 @@ export default defineConfig({
           ],
         },
       ],
+      '/api/': [
+        {
+          title: 'Main',
+          collapsable: true,
+          sidebarDepth: 4,
+          initialOpenGroupIndex: -1,
+          children: [
+            {
+              title: 'Hoyolab',
+              path: '/api/classes/Hoyolab',
+            },
+            {
+              title: 'Genshin Impact',
+              path: '/api/classes/GenshinImpact',
+            },
+            {
+              title: 'Honkai: Star Rail',
+              path: '/api/classes/HonkaiStarRail',
+            },
+          ],
+        },
+        {
+          title: 'Utilites',
+          collapsable: true,
+          sidebarDepth: 4,
+          children: [
+            {
+              title: 'Cookie',
+              path: '/api/classes/Cookie',
+            },
+            {
+              title: 'Language',
+              path: '/api/classes/Language',
+            },
+            {
+              title: 'HoyolabError',
+              path: '/api/classes/HoyolabError',
+            },
+          ],
+        },
+        {
+          title: 'Modules',
+          // collapsable: false,
+          sidebarDepth: 4,
+          // initialOpenGroupIndex: -1,
+          children: [
+            {
+              title: 'DailyModule',
+              path: '/api/classes/DailyModule',
+            },
+            {
+              title: 'DiaryModule',
+              path: '/api/classes/DiaryModule',
+            },
+            {
+              title: 'RecordModule',
+              path: '/api/classes/RecordModule',
+            },
+            {
+              title: 'RedeemModule',
+              path: '/api/classes/RedeemModule',
+            },
+          ],
+        },
+        {
+          title: 'Enums',
+          sidebarDepth: 4,
+          children: getFiles('./docs/api/enums'),
+        },
+        {
+          title: 'Interfaces',
+          sidebarDepth: 4,
+          children: getFiles('./docs/api/interfaces'),
+        },
+      ],
     },
   },
 
@@ -107,7 +195,7 @@ export default defineConfig({
         entryPoints: ['./src/index.ts'],
         tsconfig: './tsconfig.json',
         sidebar: {
-          autoConfiguration: true,
+          autoConfiguration: false,
         },
       },
     ],
