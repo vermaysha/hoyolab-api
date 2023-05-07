@@ -5,6 +5,7 @@ const repo =
   repository.url.match(/github\.com\/([\w-]+\/[\w-]+)\.git$/)?.[1] ?? undefined
 
 export default defineConfig({
+  base: '/hoyolab-api/',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
