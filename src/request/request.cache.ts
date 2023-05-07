@@ -10,6 +10,10 @@ export type CacheKey = {
 
 /**
  * Represents a cache object for storing and retrieving data using a key-value pair.
+ *
+ * @class
+ * @internal
+ * @category Internal
  */
 export class Cache {
   /**
