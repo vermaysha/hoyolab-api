@@ -35,8 +35,12 @@ export class DailyModule {
       this.dailyInfoUrl = DailyRoute.hsrDailyInfo()
       this.dailyRewardUrl = DailyRoute.hsrDailyReward()
       this.dailySignUrl = DailyRoute.hsrDailyClaim()
+    } else if (this.game === GamesEnum.HONKAI_IMPACT) {
+      this.dailyInfoUrl = DailyRoute.hiDailyInfo()
+      this.dailyRewardUrl = DailyRoute.hiDailyReward()
+      this.dailySignUrl = DailyRoute.hiDailyClaim()
     } else {
-      throw new HoyolabError('Game Paramter is invalid')
+      throw new HoyolabError('Game Paramater is invalid')
     }
   }
 
@@ -108,6 +112,10 @@ export class DailyModule {
       res.biz = ''
     }
 
+    if (typeof res.resign === 'undefined') {
+      res.resign = false
+    }
+
     return res as IDailyRewards
   }
 
@@ -166,7 +174,6 @@ export class DailyModule {
     const info = await this.info()
     const reward = await this.reward()
 
-    /* c8 ignore start */
     if (response.retcode === -5003) {
       return {
         status: response.message,
@@ -177,8 +184,9 @@ export class DailyModule {
     }
 
     if (
-      String((response.data as IDailyClaim).code).toLocaleLowerCase() ===
-        'ok' &&
+      (response.data as IDailyClaim | undefined)?.code
+        .toString()
+        .toLowerCase() === 'ok' &&
       response.retcode === 0
     ) {
       return {
