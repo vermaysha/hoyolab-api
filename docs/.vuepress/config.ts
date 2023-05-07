@@ -1,20 +1,29 @@
 import { name, description, repository } from '../../package.json'
 import { defineConfig } from 'vuepress/config'
 import { Dirent, readdirSync } from 'fs'
-import { join, parse } from 'path'
+import { join, parse, resolve } from 'path'
 
 const repo =
   repository.url.match(/github\.com\/([\w-]+\/[\w-]+)\.git$/)?.[1] ?? undefined
 
 function getFiles(dir: string) {
-  const files = readdirSync(dir, { withFileTypes: true })
+  dir = resolve(process.cwd(), dir)
+  try {
+    const files = readdirSync(dir, { withFileTypes: true })
 
-  return files.map((file: Dirent) => {
-    return {
-      title: parse(file.name).name,
-      path: `/${join(dir.replace('docs', ''), file.name)}`,
-    }
-  })
+    return files.map((file: Dirent) => {
+      return {
+        title: parse(file.name).name,
+        path: `${join(
+          dir.replace(resolve(process.cwd(), 'docs'), ''),
+          file.name,
+        )}`,
+      }
+    })
+  } catch (ex) {
+    console.error()
+    throw new Error(ex)
+  }
 }
 
 export default defineConfig({
