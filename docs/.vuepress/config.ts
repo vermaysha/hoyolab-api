@@ -119,6 +119,10 @@ export default defineConfig({
               path: '/api/classes/GenshinImpact',
             },
             {
+              title: 'Honkai Impact 3rd',
+              path: '/api/classes/HonkaiImpact',
+            },
+            {
               title: 'Honkai: Star Rail',
               path: '/api/classes/HonkaiStarRail',
             },
