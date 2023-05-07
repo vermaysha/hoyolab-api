@@ -1,30 +1,8 @@
 import { name, description, repository } from '../../package.json'
 import { defineConfig } from 'vuepress/config'
-import { Dirent, readdirSync } from 'fs'
-import { join, parse, resolve } from 'path'
 
 const repo =
   repository.url.match(/github\.com\/([\w-]+\/[\w-]+)\.git$/)?.[1] ?? undefined
-
-function getFiles(dir: string) {
-  dir = resolve(process.cwd(), dir)
-  try {
-    const files = readdirSync(dir, { withFileTypes: true })
-
-    return files.map((file: Dirent) => {
-      return {
-        title: parse(file.name).name,
-        path: `${join(
-          dir.replace(resolve(process.cwd(), 'docs'), ''),
-          file.name,
-        )}`,
-      }
-    })
-  } catch (ex) {
-    console.error(process.cwd(), dir, readdirSync(process.cwd()))
-    throw new Error(ex)
-  }
-}
 
 export default defineConfig({
   /**
@@ -183,12 +161,210 @@ export default defineConfig({
         {
           title: 'Enums',
           sidebarDepth: 4,
-          children: getFiles('./docs/api/enums'),
+          children: [
+            {
+              title: 'AbyssScheduleEnum',
+              path: '/api/enums/AbyssScheduleEnum.md',
+            },
+            {
+              title: 'DiaryEnum',
+              path: '/api/enums/DiaryEnum.md',
+            },
+            {
+              title: 'DiaryMonthEnum',
+              path: '/api/enums/DiaryMonthEnum.md',
+            },
+            {
+              title: 'GamesEnum',
+              path: '/api/enums/GamesEnum.md',
+            },
+            {
+              title: 'GenshinRegion',
+              path: '/api/enums/GenshinRegion.md',
+            },
+            {
+              title: 'HonkaiRegion',
+              path: '/api/enums/HonkaiRegion.md',
+            },
+            {
+              title: 'HsrRegion',
+              path: '/api/enums/HsrRegion.md',
+            },
+            {
+              title: 'LanguageEnum',
+              path: '/api/enums/LanguageEnum.md',
+            },
+          ],
         },
         {
           title: 'Interfaces',
           sidebarDepth: 4,
-          children: getFiles('./docs/api/interfaces'),
+          children: [
+            {
+              title: 'ICookie',
+              path: '/api/interfaces/ICookie.md',
+            },
+            {
+              title: 'IDailyAwardItem',
+              path: '/api/interfaces/IDailyAwardItem.md',
+            },
+            {
+              title: 'IDailyClaim',
+              path: '/api/interfaces/IDailyClaim.md',
+            },
+            {
+              title: 'IDailyInfo',
+              path: '/api/interfaces/IDailyInfo.md',
+            },
+            {
+              title: 'IDailyReward',
+              path: '/api/interfaces/IDailyReward.md',
+            },
+            {
+              title: 'IDailyRewards',
+              path: '/api/interfaces/IDailyRewards.md',
+            },
+            {
+              title: 'IGame',
+              path: '/api/interfaces/IGame.md',
+            },
+            {
+              title: 'IGamesList',
+              path: '/api/interfaces/IGamesList.md',
+            },
+            {
+              title: 'IGenshinCharacterAvatarFull',
+              path: '/api/interfaces/IGenshinCharacterAvatarFull.md',
+            },
+            {
+              title: 'IGenshinCharacterBase',
+              path: '/api/interfaces/IGenshinCharacterBase.md',
+            },
+            {
+              title: 'IGenshinCharacterConstellation',
+              path: '/api/interfaces/IGenshinCharacterConstellation.md',
+            },
+            {
+              title: 'IGenshinCharacterCostume',
+              path: '/api/interfaces/IGenshinCharacterCostume.md',
+            },
+            {
+              title: 'IGenshinCharacterReliquaries',
+              path: '/api/interfaces/IGenshinCharacterReliquaries.md',
+            },
+            {
+              title: 'IGenshinCharacterReliquariesAffix',
+              path: '/api/interfaces/IGenshinCharacterReliquariesAffix.md',
+            },
+            {
+              title: 'IGenshinCharacterReliquariesSet',
+              path: '/api/interfaces/IGenshinCharacterReliquariesSet.md',
+            },
+            {
+              title: 'IGenshinCharacterRole',
+              path: '/api/interfaces/IGenshinCharacterRole.md',
+            },
+            {
+              title: 'IGenshinCharacterSummary',
+              path: '/api/interfaces/IGenshinCharacterSummary.md',
+            },
+            {
+              title: 'IGenshinCharacterWeapon',
+              path: '/api/interfaces/IGenshinCharacterWeapon.md',
+            },
+            {
+              title: 'IGenshinCharacters',
+              path: '/api/interfaces/IGenshinCharacters.md',
+            },
+            {
+              title: 'IGenshinDailyNote',
+              path: '/api/interfaces/IGenshinDailyNote.md',
+            },
+            {
+              title: 'IGenshinDiaryBase',
+              path: '/api/interfaces/IGenshinDiaryBase.md',
+            },
+            {
+              title: 'IGenshinDiaryDetail',
+              path: '/api/interfaces/IGenshinDiaryDetail.md',
+            },
+            {
+              title: 'IGenshinDiaryHistory',
+              path: '/api/interfaces/IGenshinDiaryHistory.md',
+            },
+            {
+              title: 'IGenshinDiaryInfo',
+              path: '/api/interfaces/IGenshinDiaryInfo.md',
+            },
+            {
+              title: 'IGenshinOptions',
+              path: '/api/interfaces/IGenshinOptions.md',
+            },
+            {
+              title: 'IGenshinRecord',
+              path: '/api/interfaces/IGenshinRecord.md',
+            },
+            {
+              title: 'IGenshinRecordAvatar',
+              path: '/api/interfaces/IGenshinRecordAvatar.md',
+            },
+            {
+              title: 'IGenshinRecordHome',
+              path: '/api/interfaces/IGenshinRecordHome.md',
+            },
+            {
+              title: 'IGenshinRecordStat',
+              path: '/api/interfaces/IGenshinRecordStat.md',
+            },
+            {
+              title: 'IGenshinRecordWorldExploration',
+              path: '/api/interfaces/IGenshinRecordWorldExploration.md',
+            },
+            {
+              title: 'IGenshinSpiralAbyss',
+              path: '/api/interfaces/IGenshinSpiralAbyss.md',
+            },
+            {
+              title: 'IGenshinSpiralAbyssAvatar',
+              path: '/api/interfaces/IGenshinSpiralAbyssAvatar.md',
+            },
+            {
+              title: 'IGenshinSpiralAbyssBattle',
+              path: '/api/interfaces/IGenshinSpiralAbyssBattle.md',
+            },
+            {
+              title: 'IGenshinSpiralAbyssFloor',
+              path: '/api/interfaces/IGenshinSpiralAbyssFloor.md',
+            },
+            {
+              title: 'IGenshinSpiralAbyssLevel',
+              path: '/api/interfaces/IGenshinSpiralAbyssLevel.md',
+            },
+            {
+              title: 'IGenshinSpiralAbyssRank',
+              path: '/api/interfaces/IGenshinSpiralAbyssRank.md',
+            },
+            {
+              title: 'IHi3Options',
+              path: '/api/interfaces/IHi3Options.md',
+            },
+            {
+              title: 'IHoyolabOptions',
+              path: '/api/interfaces/IHoyolabOptions.md',
+            },
+            {
+              title: 'IHsrOptions',
+              path: '/api/interfaces/IHsrOptions.md',
+            },
+            {
+              title: 'IRedeemCode',
+              path: '/api/interfaces/IRedeemCode.md',
+            },
+            {
+              title: 'IResponse',
+              path: '/api/interfaces/IResponse.md',
+            },
+          ],
         },
       ],
     },
