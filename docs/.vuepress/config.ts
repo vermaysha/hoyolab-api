@@ -21,7 +21,7 @@ function getFiles(dir: string) {
       }
     })
   } catch (ex) {
-    console.error()
+    console.error(process.cwd(), dir, readdirSync(process.cwd()))
     throw new Error(ex)
   }
 }
