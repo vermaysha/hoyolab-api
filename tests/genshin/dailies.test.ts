@@ -109,42 +109,46 @@ test('daily.claim() return should be valid', async (t) => {
   if (res.reward) {
     t.is(typeof res.reward.month, 'number')
     t.is(typeof res.reward.resign, 'boolean')
-    t.is(typeof res.reward.now, 'string')
+    t.is(typeof res.reward.biz, 'string')
 
     t.is(typeof res.reward.award.icon, 'string')
     t.is(typeof res.reward.award.name, 'string')
     t.is(typeof res.reward.award.cnt, 'number')
+
+    t.deepEqual(
+      Object.keys(res.reward).sort(),
+      ['month', 'resign', 'biz', 'award', 'now'].sort(),
+    )
+
+    t.deepEqual(
+      Object.keys(res.reward.award).sort(),
+      ['icon', 'name', 'cnt'].sort(),
+    )
   }
 
   t.is(typeof res.info.total_sign_day, 'number')
   t.is(typeof res.info.today, 'string')
   t.is(typeof res.info.is_sign, 'boolean')
-  t.is(typeof res.info.first_bind, 'boolean')
   t.is(typeof res.info.is_sub, 'boolean')
   t.is(typeof res.info.region, 'string')
-  t.is(typeof res.info.month_last_day, 'boolean')
 
   t.deepEqual(
-    flattenObjectKeys(res).sort(),
+    Object.keys(res.info).sort(),
     [
-      'code',
-      'info.first_bind',
-      'info.is_sign',
-      'info.is_sub',
-      'info.month_last_day',
-      'info.region',
-      'info.short_sign_day',
-      'info.sign_cnt_missed',
-      'info.today',
-      'info.total_sign_day',
-      'reward.award.cnt',
-      'reward.award.icon',
-      'reward.award.name',
-      'reward.biz',
-      'reward.month',
-      'reward.now',
-      'reward.resign',
-      'status',
+      'total_sign_day',
+      'today',
+      'is_sign',
+      'first_bind',
+      'is_sub',
+      'region',
+      'month_last_day',
+      'short_sign_day',
+      'sign_cnt_missed',
     ].sort(),
+  )
+
+  t.deepEqual(
+    Object.keys(res).sort(),
+    ['code', 'status', 'info', 'reward'].sort(),
   )
 })
