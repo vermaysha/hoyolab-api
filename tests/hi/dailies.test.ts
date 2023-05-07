@@ -1,19 +1,17 @@
 import test from 'ava'
-import { genshin } from './preloader'
+import { hi } from './preloader'
 import { HoyolabError } from '../../src'
 import { flattenObjectKeys } from '../helper'
 
 test('daily.info() return should be valid', async (t) => {
-  const client = await genshin()
+  const client = await hi()
   const res = await client.daily.info()
 
   t.is(typeof res.total_sign_day, 'number')
   t.is(typeof res.today, 'string')
   t.is(typeof res.is_sign, 'boolean')
-  t.is(typeof res.first_bind, 'boolean')
   t.is(typeof res.is_sub, 'boolean')
   t.is(typeof res.region, 'string')
-  t.is(typeof res.month_last_day, 'boolean')
   t.is(typeof res.short_sign_day, 'number')
   t.is(typeof res.sign_cnt_missed, 'number')
 
@@ -34,12 +32,12 @@ test('daily.info() return should be valid', async (t) => {
 })
 
 test('daily.rewards() return should be valid', async (t) => {
-  const client = await genshin()
+  const client = await hi()
   const res = await client.daily.rewards()
 
   t.is(typeof res.month, 'number')
   t.is(typeof res.resign, 'boolean')
-  t.is(typeof res.now, 'string')
+  t.is(typeof res.biz, 'string')
 
   res.awards.forEach((award) => {
     t.is(typeof award.icon, 'string')
@@ -64,7 +62,7 @@ test('daily.rewards() return should be valid', async (t) => {
 test('daily.reward() should throw error', async (t) => {
   await t.throwsAsync(
     async () => {
-      const client = await genshin()
+      const client = await hi()
       await client.daily.reward(33)
     },
     {
@@ -74,12 +72,12 @@ test('daily.reward() should throw error', async (t) => {
 })
 
 test('daily.reward() return should be valid', async (t) => {
-  const client = await genshin()
+  const client = await hi()
   const res = await client.daily.reward()
 
   t.is(typeof res.month, 'number')
   t.is(typeof res.resign, 'boolean')
-  t.is(typeof res.now, 'string')
+  t.is(typeof res.biz, 'string')
 
   t.is(typeof res.award.icon, 'string')
   t.is(typeof res.award.name, 'string')
@@ -100,7 +98,7 @@ test('daily.reward() return should be valid', async (t) => {
 })
 
 test('daily.claim() return should be valid', async (t) => {
-  const client = await genshin()
+  const client = await hi()
   const res = await client.daily.claim()
 
   t.is(typeof res.status, 'string')
