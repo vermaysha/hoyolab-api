@@ -6,9 +6,9 @@ import {
 } from './request.inteface'
 import { LanguageEnum } from '../language'
 import { HoyolabError } from '../utils'
-import Cache from './request.cache'
+import { Cache, CacheKey } from './request.cache'
 import axios, { AxiosRequestConfig, AxiosError } from 'axios'
-import { generateDS } from './request.ds'
+import { delay, generateDS } from './request.helper'
 
 /**
  * Class for handling HTTP requests with customizable headers, body, and parameters.
@@ -36,12 +36,17 @@ export class Request {
   /**
    * The cache used for the request
    */
-  private cache: typeof Cache
+  private cache: Cache
 
   /**
    * Flag indicating whether Dynamic Security is used.
    */
   private ds: boolean
+
+  /**
+   * The number of request attempts made.
+   */
+  private retries = 1
 
   /**
    * Constructor for the Request class.
@@ -59,7 +64,7 @@ export class Request {
     }
     this.body = {}
     this.params = {}
-    this.cache = Cache
+    this.cache = new Cache()
     this.ds = false
 
     if (cookies) this.headers.Cookie = cookies
@@ -130,13 +135,27 @@ export class Request {
    *
    * @param url - The URL to send the request to.
    * @param method - The HTTP method to use. Defaults to 'GET'.
+   * @param ttl - The TTL value for the cached data in seconds.
    * @returns A Promise that resolves with the response data, or rejects with a HoyolabError if an error occurs.
    * @throws {HoyolabError} if an error occurs rejects with a HoyolabError
    */
   public async send(
     url: string,
     method: 'GET' | 'POST' = 'GET',
+    ttl?: number,
   ): Promise<IResponse> {
+    const cacheKey: CacheKey = {
+      url,
+      method,
+      body: this.body,
+      params: this.params,
+    }
+    const cachedResult = this.cache.get(cacheKey)
+    if (cachedResult) {
+      console.log('Requet Cached')
+      return cachedResult as IResponse
+    }
+
     if (this.ds) {
       this.headers.DS = generateDS()
     }
@@ -153,16 +172,32 @@ export class Request {
     }
 
     try {
-      const request = (await axios(url, config)).data
+      const request = await axios(url, config)
 
-      const result = (await request) as IResponse
+      const result = request.data as IResponse
 
+      if ([200, 201].includes(request.status) === false) {
+        throw new AxiosError(
+          request.statusText ?? result.data,
+          request.status.toString(),
+        )
+      }
+
+      if (result.retcode === -2016 && this.retries <= 60) {
+        this.retries++
+        await delay(1)
+        return this.send(url, method)
+      }
+
+      this.cache.set(cacheKey, result, ttl)
+      this.retries = 1
       this.body = {}
-
       return result
     } catch (error) {
       if (error instanceof AxiosError) {
-        throw new HoyolabError(`[${error.code}] - ${error.message}`)
+        throw new HoyolabError(
+          `Request Error: [${error.code}] - ${error.message}`,
+        )
       } else {
         return {
           retcode: -9999,
