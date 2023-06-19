@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1.3
+        uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_DEBUG: true
           envkey_LTOKEN: ${{ secrets.LTOKEN }}
