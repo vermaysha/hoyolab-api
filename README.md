@@ -1,3 +1,12 @@
+## Warning: This Library has been Deprecated
+
+⚠️ **Attention: This library has been deprecated and is no longer actively maintained.** ⚠️
+
+We recommend that you switch to a newer or alternative library that is relevant to ensure compatibility and receive necessary support. Here are some options you may consider:
+-  [HoyoAPI](https://github.com/wavyflow/hoyoapi)
+
+<br/>
+
 <div align="center">
   <h1>HoYoLab API - TypeScript/JavaScript HoYoLab API</h1>
 
